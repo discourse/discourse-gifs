@@ -1,0 +1,9 @@
+{
+  "name": "discourse gifs",
+  "about_url": null,
+  "license_url": null,
+  "component": true,
+  "modifiers": {
+    "svg_icons": ["video"]
+  }
+}
