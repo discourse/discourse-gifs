@@ -20,7 +20,7 @@ function initializePlugin(api) {
         title: themePrefix("gif.composer_title"),
         id: "gif_button",
         group: "extras",
-        icon: "video",
+        icon: "discourse-gifs-gif-icon",
         action: "showGifModal"
       });
     });

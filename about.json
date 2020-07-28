@@ -5,5 +5,8 @@
   "component": true,
   "modifiers": {
     "svg_icons": ["video"]
-  }
+  },
+  "assets": {
+    "icons-sprite": "/assets/gif.svg"
+ }
 }
