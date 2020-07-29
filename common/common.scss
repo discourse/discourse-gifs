@@ -5,3 +5,7 @@ html.ios-device div[data-theme-discourse-gifs="container"] video {
 html:not(.ios-device) div[data-theme-discourse-gifs="container"] img {
     display: none;
 }
+
+.gif-modal .gif-box div[data-theme-discourse-gifs="container"] {
+    display: inline-block;
+}
