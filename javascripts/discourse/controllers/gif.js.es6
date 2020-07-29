@@ -10,7 +10,7 @@ export default Ember.Controller.extend(ModalFunctionality, {
 
   actions: {
     pick: function(content) {
-      const markdownImg = `\n<video muted loop autoplay width="${content.medium.dims[0]}" height="${content.medium.dims[1]}" poster="${content.medium.preview}"  alt="${content.title}" title="${content.title}"><source src="${content.medium.url}"></video>\n`;
+      const markdownImg = `\n<div data-theme-discourse-gifs="container"><video muted loop autoplay playsinline width="${content.medium.dims[0]}" height="${content.medium.dims[1]}" poster="${content.medium.preview}"  alt="${content.title}" title="${content.title}"><source src="${content.medium.url}"></video><img src="${content.medium.url}" width="${content.medium.dims[0]}" height="${content.medium.dims[1]}"></div>\n`;
 
       if (this.composerViewOld) {
         this.composerViewOld.addMarkdown(markdownImg);
