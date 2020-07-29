@@ -1,9 +1,10 @@
-export default Ember.Component.extend({
+import Component from "@ember/component";
+
+export default Component.extend({
   tagName: "span",
   classNames: ["gif-imgwrap"],
-  style: "display:inline-block;margin-bottom:3px;",
 
-  click: function() {
-    this.sendAction("pick", this.get("content"));
+  click() {
+    this.pick(this.content);
   }
 });

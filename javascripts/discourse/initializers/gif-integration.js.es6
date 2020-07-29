@@ -3,32 +3,31 @@ import Composer from "discourse/components/d-editor";
 import showModal from "discourse/lib/show-modal";
 
 function initializePlugin(api) {
-  const siteSettings = api.container.lookup("site-settings:main");
-
-    Composer.reopen({
-      actions: {
-        showGifModal: function() {
-          showModal("gif", { title: themePrefix("gif.modal_title") }).setProperties({
-            composerView: this
-          });
-        }
+  Composer.reopen({
+    actions: {
+      showGifModal() {
+        showModal("gif", {
+          title: themePrefix("gif.modal_title")
+        }).set("composerView", this);
       }
-    });
+    }
+  });
 
-    api.onToolbarCreate(toolbar => {
-      toolbar.addButton({
-        title: themePrefix("gif.composer_title"),
-        id: "gif_button",
-        group: "extras",
-        icon: "discourse-gifs-gif-icon",
-        action: "showGifModal"
-      });
+  api.onToolbarCreate(toolbar => {
+    toolbar.addButton({
+      title: themePrefix("gif.composer_title"),
+      id: "gif_button",
+      group: "extras",
+      icon: "discourse-gifs-gif-icon",
+      action: () => toolbar.context.send("showGifModal")
     });
+  });
 }
 
 export default {
-  name: "gif",
-  initialize(container) {
+  name: "discourse-gifs",
+
+  initialize() {
     withPluginApi("0.1", initializePlugin);
   }
 };
