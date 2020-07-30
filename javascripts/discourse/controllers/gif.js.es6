@@ -32,7 +32,7 @@ export default Controller.extend(ModalFunctionality, {
   @action
   refresh(query) {
     this.set("query", query);
-    Ember.run.debounce(this, this.search, 300);
+    Ember.run.debounce(this, this.search, 700);
   },
 
   search() {

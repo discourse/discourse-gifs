@@ -1,13 +1,16 @@
 <div data-theme-discourse-gifs="container">
-  <video muted loop autoplay playsinline
-    class="gif-img"
-    width="{{content.preview.dims.[0]}}"
-    height="{{content.preview.dims.[1]}}"
-    poster="{{content.preview.preview}}"
-    alt="{{content.title}}"
-    title="{{content.title}}"
-  >
-    <source src="{{content.preview.url}}">
-  </video>
-  <img src="{{content.preview.url}}" width="{{content.preview.dims.[0]}}" height="{{content.preview.dims.[1]}}">
+  {{#if isiOS}}
+    <img src="{{content.preview.url}}" width="{{content.preview.dims.[0]}}" height="{{content.preview.dims.[1]}}">
+  {{else}}
+    <video muted loop autoplay playsinline
+      class="gif-img"
+      width="{{content.preview.dims.[0]}}"
+      height="{{content.preview.dims.[1]}}"
+      poster="{{content.preview.preview}}"
+      alt="{{content.title}}"
+      title="{{content.title}}"
+    >
+      <source src="{{content.preview.url}}">
+    </video>
+  {{/if}}
 </div>
