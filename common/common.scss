@@ -1,8 +1,8 @@
-html.ios-device div[data-theme-discourse-gifs="container"] video {
+html.discourse-gifs-with-img div[data-theme-discourse-gifs="container"] video {
   display: none;
 }
 
-html:not(.ios-device) div[data-theme-discourse-gifs="container"] img {
+html:not(.discourse-gifs-with-img) div[data-theme-discourse-gifs="container"] img {
   display: none;
 }
 

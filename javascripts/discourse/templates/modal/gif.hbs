@@ -5,12 +5,12 @@
       name="query"
       key-up=(action "refresh")
     }}
-
-  </div>
-  <div class="gif-content">
     {{#if loading}}
       {{i18n "loading"}}
     {{/if}}
+  </div>
+  <div class="gif-content">
+
     <div class="gif-box">
       {{#each currentGifs as |result|}}
         {{gif-result content=result pick=(action "pick")}}
