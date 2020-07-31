@@ -6,6 +6,12 @@ html:not(.discourse-gifs-with-img) div[data-theme-discourse-gifs="container"] im
   display: none;
 }
 
-.gif-modal .gif-box div[data-theme-discourse-gifs="container"] {
-  display: inline-block;
+.gif-modal {
+  .gif-box div[data-theme-discourse-gifs="container"] {
+    display: inline-block;
+  }
+  .modal-footer {
+    display: flex;
+    flex-flow: row-reverse;
+  }
 }
