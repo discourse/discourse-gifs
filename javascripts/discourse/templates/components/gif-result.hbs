@@ -2,7 +2,7 @@
   {{#if isiOS}}
     <img src="{{content.preview.url}}" width="{{content.preview.dims.[0]}}" height="{{content.preview.dims.[1]}}">
   {{else}}
-    <video muted loop autoplay playsinline
+    <video muted loop autoplay playsinline disableRemotePlayback disablePictureInPicture
       class="gif-img"
       width="{{content.preview.dims.[0]}}"
       height="{{content.preview.dims.[1]}}"
