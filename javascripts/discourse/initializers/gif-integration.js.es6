@@ -31,6 +31,18 @@ export default {
       if (caps.isSafari || caps.isIOS) {
         document.documentElement.classList.add("discourse-gifs-with-img");
       }
+
+      const gifsSelector = 'div[data-theme-discourse-gifs="container"] video';
+      window.addEventListener("blur", () => {
+        document
+          .querySelectorAll(gifsSelector)
+          .forEach((video) => video.pause());
+      });
+      window.addEventListener("focus", () => {
+        document
+          .querySelectorAll(gifsSelector)
+          .forEach((video) => video.play());
+      });
     });
   },
 };
