@@ -45,17 +45,16 @@ export default Controller.extend(ModalFunctionality, {
         this.get("currentGifs").setObjects(cache[query]);
         this.set("loading", false);
       } else {
-        $.ajax({ url: this.getEndpoint(query) }).done(response => {
-          const images = response.results.map(gif => ({
-            title: gif.title,
-            preview: gif.media[0].nanomp4,
-            medium: gif.media[0].mp4
-          }));
+        $.ajax({ url: this.getEndpoint(query) }).done((response) => {
+          const images = response.results
+            .filter((gif) => !gif.hasaudio)
+            .map((gif) => ({
+              title: gif.title,
+              preview: gif.media[0].nanomp4,
+              medium: gif.media[0].mp4,
+            }));
 
-          // save it
           cache[query] = images;
-
-          // and send it
           this.get("currentGifs").setObjects(images);
           this.set("loading", false);
         });
@@ -66,7 +65,7 @@ export default Controller.extend(ModalFunctionality, {
   onShow() {
     this.setProperties({
       loading: false,
-      query: ""
+      query: "",
     });
   },
 
@@ -75,8 +74,8 @@ export default Controller.extend(ModalFunctionality, {
       "https://api.tenor.com/v1/search?" +
       $.param({
         limit: 8,
-        q: query
+        q: query,
       })
     );
-  }
+  },
 });
