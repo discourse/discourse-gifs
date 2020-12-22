@@ -2,13 +2,12 @@ import Controller from "@ember/controller";
 import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
 
-const cache = {};
-
 export default Controller.extend(ModalFunctionality, {
   loading: false,
   currentGifs: null,
   query: "",
   next_key: "",
+  offset: 0,
 
   init() {
     this._super(...arguments);
@@ -18,7 +17,7 @@ export default Controller.extend(ModalFunctionality, {
 
   @action
   pick(content) {
-    const markdownImg = `\n<div data-theme-discourse-gifs="container"><video muted loop autoplay playsinline disableRemotePlayback disablePictureInPicture width="${content.medium.dims[0]}" height="${content.medium.dims[1]}" poster="${content.medium.preview}"  alt="${content.title}" title="${content.title}"><source src="${content.medium.url}"></video><img src="${content.medium.url}" width="${content.medium.dims[0]}" height="${content.medium.dims[1]}"></div>\n`;
+    const markdownImg = `\n![${content.title}|${content.original.width}x${content.original.height}](${content.original.webp})\n`;
 
     if (this.composerViewOld) {
       this.composerViewOld.addMarkdown(markdownImg);
@@ -30,6 +29,13 @@ export default Controller.extend(ModalFunctionality, {
   },
 
   @action
+  loadMore() {
+    if (!this.loading) {
+      this.search();
+    }
+  },
+
+  @action
   refresh(query) {
     this.set("query", query);
     Ember.run.debounce(this, this.search, 700);
@@ -37,28 +43,23 @@ export default Controller.extend(ModalFunctionality, {
 
   search() {
     const query = this.query;
+    const offset = this.offset;
 
     if (query && query.length > 2) {
       this.set("loading", true);
 
-      if (query in cache) {
-        this.get("currentGifs").setObjects(cache[query]);
-        this.set("loading", false);
-      } else {
-        $.ajax({ url: this.getEndpoint(query) }).done((response) => {
-          const images = response.results
-            .filter((gif) => !gif.hasaudio)
-            .map((gif) => ({
-              title: gif.title,
-              preview: gif.media[0].nanomp4,
-              medium: gif.media[0].mp4,
-            }));
+      $.ajax({ url: this.getEndpoint(query, offset) }).done((response) => {
+        const images = response.data
+          .map((gif) => ({
+            title: gif.title,
+            preview: gif.images.fixed_width_small,
+            original: gif.images.original,
+          }));
 
-          cache[query] = images;
-          this.get("currentGifs").setObjects(images);
-          this.set("loading", false);
-        });
-      }
+        this.set("offset", response.pagination.count+response.pagination.offset);
+        this.get("currentGifs").addObjects(images);
+        this.set("loading", false);
+      });
     }
   },
 
@@ -66,15 +67,19 @@ export default Controller.extend(ModalFunctionality, {
     this.setProperties({
       loading: false,
       query: "",
+      offset: 0,
+      currentGifs: []
     });
   },
 
-  getEndpoint(query) {
+  getEndpoint(query, offset) {
     return (
-      "https://api.tenor.com/v1/search?" +
+      "https://api.giphy.com/v1/gifs/search?" +
       $.param({
-        limit: 8,
+        limit: 24,
         q: query,
+        offset: offset,
+        api_key: settings.giphy_api_key
       })
     );
   },

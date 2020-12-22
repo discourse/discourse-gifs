@@ -1,16 +1,8 @@
-<div data-theme-discourse-gifs="container">
-  {{#if isiOS}}
-    <img src="{{content.preview.url}}" width="{{content.preview.dims.[0]}}" height="{{content.preview.dims.[1]}}">
-  {{else}}
-    <video muted loop autoplay playsinline disableRemotePlayback disablePictureInPicture
-      class="gif-img"
-      width="{{content.preview.dims.[0]}}"
-      height="{{content.preview.dims.[1]}}"
-      poster="{{content.preview.preview}}"
-      alt="{{content.title}}"
-      title="{{content.title}}"
-    >
-      <source src="{{content.preview.url}}">
-    </video>
-  {{/if}}
+<div data-theme-discourse-gifs="webp-container">
+  <img
+    class="gif-img"
+    alt="{{content.title}}"
+    title="{{content.title}}"
+    src="{{content.preview.webp}}"
+  />
 </div>

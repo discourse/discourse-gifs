@@ -1,0 +1,4 @@
+giphy_api_key:
+  type: string
+  default: ""
+  description: "The GIPHY API key"

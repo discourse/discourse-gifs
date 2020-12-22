@@ -2,13 +2,25 @@ html.discourse-gifs-with-img div[data-theme-discourse-gifs="container"] video {
   display: none;
 }
 
-html:not(.discourse-gifs-with-img) div[data-theme-discourse-gifs="container"] img {
+html:not(.discourse-gifs-with-img)
+  div[data-theme-discourse-gifs="container"]
+  img {
   display: none;
 }
 
 .gif-modal {
-  .gif-box div[data-theme-discourse-gifs="container"] {
-    display: inline-block;
+  .gif-box {
+    > div {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: masonry;
+      grid-gap: 10px;
+      max-height: 350px;
+    }
+    div[data-theme-discourse-gifs="container"],
+    div[data-theme-discourse-gifs="webp-container"] {
+      display: inline-block;
+    }
   }
   .modal-footer {
     display: flex;

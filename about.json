@@ -7,6 +7,7 @@
     "svg_icons": ["video"]
   },
   "assets": {
-    "icons-sprite": "/assets/gif.svg"
+    "icons-sprite": "/assets/gif.svg",
+    "giphy-logo": "/assets/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif"
  }
 }

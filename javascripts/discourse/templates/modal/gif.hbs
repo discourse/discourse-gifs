@@ -12,12 +12,16 @@
   <div class="gif-content">
 
     <div class="gif-box">
-      {{#each currentGifs as |result|}}
-        {{gif-result content=result pick=(action "pick")}}
-      {{/each}}
+      {{#load-more selector="div[data-theme-discourse-gifs='container']" action=(action "loadMore")}}
+        {{#each currentGifs as |result|}}
+          {{gif-result content=result pick=(action "pick")}}
+        {{/each}}
+        {{#conditional-loading-spinner condition=loading }}
+        {{/conditional-loading-spinner}}
+      {{/load-more}}
     </div>
   </div>
 {{/d-modal-body}}
 <div class="modal-footer gif-modal">
-  <img src="https://www.gstatic.com/tenor/web/attribution/PB_tenor_logo_blue_horizontal.svg" height="14px">
+  <img src="{{theme-setting "theme_uploads.giphy-logo"}}">
 </div>
