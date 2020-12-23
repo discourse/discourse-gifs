@@ -31,7 +31,7 @@ export default Controller.extend(ModalFunctionality, {
   @action
   loadMore() {
     if (!this.loading) {
-      this.search();
+      this.search(false);
     }
   },
 
@@ -41,14 +41,16 @@ export default Controller.extend(ModalFunctionality, {
     Ember.run.debounce(this, this.search, 700);
   },
 
-  search() {
-    const query = this.query;
-    const offset = this.offset;
+  search(clearResults = true) {
+    if(clearResults) {
+      this.set("currentGifs", []);
+      this.set("offset", 0);
+    }
 
-    if (query && query.length > 2) {
+    if (this.query && this.query.length > 2) {
       this.set("loading", true);
 
-      $.ajax({ url: this.getEndpoint(query, offset) }).done((response) => {
+      $.ajax({ url: this.getEndpoint(this.query, this.offset) }).done((response) => {
         const images = response.data
           .map((gif) => ({
             title: gif.title,
