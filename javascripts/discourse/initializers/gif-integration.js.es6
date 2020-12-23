@@ -27,5 +27,11 @@ export default {
         });
       });
     });
+
+    // for old tenor gifs compat
+    const caps = container.lookup("capabilities:main");
+    if (caps.isSafari || caps.isIOS) {
+      document.documentElement.classList.add("discourse-gifs-with-img");
+    }
   },
 };
