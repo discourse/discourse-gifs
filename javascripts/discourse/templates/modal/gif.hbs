@@ -12,7 +12,7 @@
   <div class="gif-content">
 
     <div class="gif-box">
-      {{#load-more selector="div[data-theme-discourse-gifs='container']" action=(action "loadMore")}}
+      {{#load-more selector="div[data-theme-discourse-gifs='webp-container']" action=(action "loadMore")}}
         {{#each currentGifs as |result|}}
           {{gif-result content=result pick=(action "pick")}}
         {{/each}}
