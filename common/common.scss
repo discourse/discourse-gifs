@@ -21,6 +21,10 @@ html:not(.discourse-gifs-with-img)
     div[data-theme-discourse-gifs="webp-container"] {
       display: inline-block;
     }
+    div.loading-container {
+      display: block;
+      height: 10px;
+    }
   }
   .modal-footer {
     display: flex;

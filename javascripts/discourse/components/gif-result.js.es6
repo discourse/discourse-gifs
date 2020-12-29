@@ -6,6 +6,6 @@ export default Component.extend({
   classNames: ["gif-imgwrap"],
 
   click() {
-    this.pick(this.content);
+    this.pick(this.gif);
   }
 });

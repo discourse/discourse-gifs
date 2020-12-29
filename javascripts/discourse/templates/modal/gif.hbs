@@ -12,13 +12,7 @@
   <div class="gif-content">
 
     <div class="gif-box">
-      {{#load-more selector="div[data-theme-discourse-gifs='webp-container']" action=(action "loadMore")}}
-        {{#each currentGifs as |result|}}
-          {{gif-result content=result pick=(action "pick")}}
-        {{/each}}
-        {{#conditional-loading-spinner condition=loading }}
-        {{/conditional-loading-spinner}}
-      {{/load-more}}
+      {{gif-result-list content=currentGifs pick=(action "pick") loadMore=(action "loadMore")}}
     </div>
   </div>
 {{/d-modal-body}}
