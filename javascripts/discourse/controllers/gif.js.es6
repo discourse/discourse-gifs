@@ -1,6 +1,8 @@
 import Controller from "@ember/controller";
 import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
+import { popupAjaxError } from "discourse/lib/ajax-error";
+import bootbox from "bootbox";
 
 export default Controller.extend(ModalFunctionality, {
   loading: false,
@@ -42,7 +44,7 @@ export default Controller.extend(ModalFunctionality, {
   },
 
   search(clearResults = true) {
-    if(clearResults) {
+    if (clearResults) {
       this.set("currentGifs", []);
       this.set("offset", 0);
     }
@@ -50,18 +52,30 @@ export default Controller.extend(ModalFunctionality, {
     if (this.query && this.query.length > 2) {
       this.set("loading", true);
 
-      $.ajax({ url: this.getEndpoint(this.query, this.offset) }).done((response) => {
-        const images = response.data
-          .map((gif) => ({
+      $.ajax({ url: this.getEndpoint(this.query, this.offset) })
+        .done((response) => {
+          const images = response.data.map((gif) => ({
             title: gif.title,
             preview: gif.images.fixed_width_small,
             original: gif.images.original,
           }));
 
-        this.set("offset", response.pagination.count+response.pagination.offset);
-        this.get("currentGifs").addObjects(images);
-        this.set("loading", false);
-      });
+          this.set(
+            "offset",
+            response.pagination.count + response.pagination.offset
+          );
+          this.get("currentGifs").addObjects(images);
+        })
+        .catch((error) => {
+          if (error.status === 403) {
+            bootbox.alert(I18n.t(themePrefix("gif.bad_api_key")));
+          } else {
+            popupAjaxError(error);
+          }
+        })
+        .always(() => {
+          this.set("loading", false);
+        });
     }
   },
 
@@ -70,7 +84,7 @@ export default Controller.extend(ModalFunctionality, {
       loading: false,
       query: "",
       offset: 0,
-      currentGifs: []
+      currentGifs: [],
     });
   },
 
@@ -81,7 +95,7 @@ export default Controller.extend(ModalFunctionality, {
         limit: 24,
         q: query,
         offset: offset,
-        api_key: settings.giphy_api_key
+        api_key: settings.giphy_api_key,
       })
     );
   },
