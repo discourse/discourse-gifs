@@ -29,5 +29,8 @@ html:not(.discourse-gifs-with-img)
   .modal-footer {
     display: flex;
     flex-flow: row-reverse;
+    img {
+      height: 42px;
+    }
   }
 }
