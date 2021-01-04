@@ -96,6 +96,7 @@ export default Controller.extend(ModalFunctionality, {
         q: query,
         offset: offset,
         api_key: settings.giphy_api_key,
+        lang: settings.giphy_locale,
       })
     );
   },

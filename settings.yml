@@ -2,3 +2,40 @@ giphy_api_key:
   type: string
   default: ""
   description: "The GIPHY API key"
+giphy_locale:
+  type: enum
+  default: en
+  description: "Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
+  choices:
+    - ar
+    - bn
+    - cs
+    - da
+    - de
+    - en
+    - es
+    - fa
+    - fi
+    - fr
+    - hi
+    - hu
+    - id
+    - it
+    - iw
+    - ja
+    - ko
+    - ms
+    - nl
+    - no
+    - pl
+    - pt
+    - ro
+    - ru
+    - sv
+    - th
+    - tl
+    - tr
+    - uk
+    - vi
+    - zh-CN
+    - zh-TW
