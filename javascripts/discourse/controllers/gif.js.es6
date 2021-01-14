@@ -19,7 +19,7 @@ export default Controller.extend(ModalFunctionality, {
 
   @action
   pick(content) {
-    const markdownImg = `\n![${content.title}|${content.original.width}x${content.original.height}](${content.original.webp})\n`;
+    const markdownImg = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
 
     if (this.composerViewOld) {
       this.composerViewOld.addMarkdown(markdownImg);
@@ -56,8 +56,10 @@ export default Controller.extend(ModalFunctionality, {
         .done((response) => {
           const images = response.data.map((gif) => ({
             title: gif.title,
-            preview: gif.images.fixed_width_small,
-            original: gif.images.original,
+            preview: settings.giphy_file_format === 'webp' ? gif.images.fixed_width_small.webp : gif.images.fixed_width_small.url,
+            original: settings.giphy_file_format === 'webp' ? gif.images.original.webp : gif.images.original.url,
+            width: gif.images.original.width,
+            height: gif.images.original.height,
           }));
 
           this.set(

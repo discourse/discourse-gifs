@@ -39,3 +39,10 @@ giphy_locale:
     - vi
     - zh-CN
     - zh-TW
+giphy_file_format:
+  type: enum
+  default: webp
+  description: "Image format to use for Giphys. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
+  choices:
+    - webp
+    - gif
