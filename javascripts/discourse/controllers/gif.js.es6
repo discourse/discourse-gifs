@@ -19,14 +19,10 @@ export default Controller.extend(ModalFunctionality, {
 
   @action
   pick(content) {
-    const markdownImg = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
-
-    if (this.composerViewOld) {
-      this.composerViewOld.addMarkdown(markdownImg);
-    } else if (this.composerView) {
-      this.composerView._addText(this.composerView._getSelected(), markdownImg);
-    }
-
+    this.appEvents.trigger(
+      "composer:insert-text",
+      `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`
+    );
     this.send("closeModal");
   },
 
