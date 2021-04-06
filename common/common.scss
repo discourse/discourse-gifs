@@ -8,6 +8,10 @@ html:not(.discourse-gifs-with-img)
   display: none;
 }
 
+.mobile-gif-insert {
+  margin-right: 0.25rem;
+}
+
 .gif-modal {
   .gif-box {
     > div {
