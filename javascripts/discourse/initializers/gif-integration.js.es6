@@ -1,5 +1,4 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import Composer from "discourse/components/d-editor";
 import { showGifModal } from "discourse/helpers/gif-modal";
 
 export default {
