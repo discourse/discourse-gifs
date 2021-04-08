@@ -1,5 +1,5 @@
 import Component from "@ember/component";
-import { showGifModal } from "discourse/helpers/gif-modal";
+import { showGifModal } from "../helpers/gif-modal";
 
 export default Component.extend({
   tagName: "",

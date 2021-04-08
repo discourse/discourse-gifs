@@ -1,6 +1,6 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import Composer from "discourse/components/d-editor";
-import { showGifModal } from "discourse/helpers/gif-modal";
+import { showGifModal } from "../helpers/gif-modal";
 
 export default {
   name: "discourse-gifs",
