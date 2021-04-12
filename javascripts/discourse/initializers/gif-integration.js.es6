@@ -1,5 +1,5 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { showGifModal } from "discourse/helpers/gif-modal";
+import { showGifModal } from "../helpers/gif-modal";
 
 export default {
   name: "discourse-gifs",
