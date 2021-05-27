@@ -1,5 +1,5 @@
 {{#d-modal-body id="gif-modal"}}
-  <div>
+  <div class="gif-input">
     {{input
       type="text"
       name="query"
@@ -7,13 +7,16 @@
       key-up=(action "refresh")
     }}
     {{#if loading}}
-      {{i18n "loading"}}
+      {{loading-spinner size="small"}}
     {{/if}}
   </div>
   <div class="gif-content">
-
     <div class="gif-box">
-      {{gif-result-list content=currentGifs pick=(action "pick") loadMore=(action "loadMore")}}
+      {{#if currentGifs}}
+        {{gif-result-list content=currentGifs pick=(action "pick") loadMore=(action "loadMore")}}
+      {{else}}
+        <div class="gif-no-results">{{theme-i18n "gif.no_results"}}</div>
+      {{/if}}
     </div>
   </div>
 {{/d-modal-body}}

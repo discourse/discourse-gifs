@@ -52,8 +52,14 @@ export default Controller.extend(ModalFunctionality, {
         .done((response) => {
           const images = response.data.map((gif) => ({
             title: gif.title,
-            preview: settings.giphy_file_format === 'webp' ? gif.images.fixed_width_small.webp : gif.images.fixed_width_small.url,
-            original: settings.giphy_file_format === 'webp' ? gif.images.original.webp : gif.images.original.url,
+            preview:
+              settings.giphy_file_format === "webp"
+                ? gif.images.fixed_width.webp
+                : gif.images.fixed_width.url,
+            original:
+              settings.giphy_file_format === "webp"
+                ? gif.images.original.webp
+                : gif.images.original.url,
             width: gif.images.original.width,
             height: gif.images.original.height,
           }));
