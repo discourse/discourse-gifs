@@ -1,7 +1,8 @@
 en:
   gif:
-    modal_title: "Search Gif"
+    modal_title: "Search GIFs"
     query: "Term"
     insert: "Insert Selected Images"
-    composer_title: "Search Gif"
+    composer_title: "Search GIFs"
     bad_api_key: "Missing or wrong Giphy API Key set. Ask the site admin to follow the install instructions at <a href='https://meta.discourse.org/t/discourse-gifs-component/158738'>https://meta.discourse.org/t/discourse-gifs-component/158738</a>."
+    no_results: "Enter a keyword in the input box above to search for GIFs."
