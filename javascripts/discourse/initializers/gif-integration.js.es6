@@ -12,7 +12,7 @@ export default {
             title: themePrefix("gif.composer_title"),
             id: "gif_button",
             group: "extras",
-            icon: "discourse-gifs-gif-icon",
+            icon: "discourse-gifs-gif",
             action: showGifModal,
           });
         });
