@@ -46,3 +46,13 @@ giphy_file_format:
   choices:
     - webp
     - gif
+giphy_content_rating:
+  type: enum
+  default: r
+  description: |
+    Content rating for gif search results, more info at <a href="https://developers.giphy.com/docs/optional-settings#rating">https://developers.giphy.com/docs/optional-settings#rating</a>
+  choices:
+    - g
+    - pg
+    - pg-13
+    - r
