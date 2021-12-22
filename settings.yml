@@ -6,7 +6,7 @@ gifs_api_provider:
   choices:
     - giphy
     - tenor
-gifs_giphy_api_key:
+giphy_api_key:
   type: string
   default: ""
   description:

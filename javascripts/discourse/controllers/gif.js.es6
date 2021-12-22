@@ -133,7 +133,7 @@ export default Controller.extend(ModalFunctionality, {
           limit: 24,
           q: query,
           offset: offset,
-          api_key: settings.gifs_giphy_api_key,
+          api_key: settings.giphy_api_key,
           lang: settings.gifs_locale,
           rating: settings.gifs_giphy_content_rating,
         })
