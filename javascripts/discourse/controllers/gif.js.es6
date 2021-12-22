@@ -76,7 +76,7 @@ export default Controller.extend(ModalFunctionality, {
           // Tenor
           images = response.results.map((gif) => ({
             title: gif.title,
-            preview: gif.media[0].mediumgif.preview,
+            preview: gif.media[0].tinygif.url,
             original: gif.media[0][`${settings.gifs_tenor_file_detail}`].url,
             width: gif.media[0][`${settings.gifs_tenor_file_detail}`].dims[0],
             height: gif.media[0][`${settings.gifs_tenor_file_detail}`].dims[1],
