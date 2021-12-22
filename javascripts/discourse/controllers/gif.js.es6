@@ -3,6 +3,7 @@ import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import bootbox from "bootbox";
+import { default as computed } from 'discourse-common/utils/decorators';
 
 export default Controller.extend(ModalFunctionality, {
   loading: false,
@@ -15,6 +16,11 @@ export default Controller.extend(ModalFunctionality, {
     this._super(...arguments);
 
     this.set("currentGifs", []);
+  },
+
+  @computed
+  providerLogo() {
+    return settings.theme_uploads.[`${settings.gifs_api_provider}-logo`];
   },
 
   @action
@@ -50,23 +56,37 @@ export default Controller.extend(ModalFunctionality, {
 
       $.ajax({ url: this.getEndpoint(this.query, this.offset) })
         .done((response) => {
-          const images = response.data.map((gif) => ({
+          let images;
+          if (settings.gifs_api_provider === "giphy") {
+          // Giphy
+          images = response.data.map((gif) => ({
             title: gif.title,
             preview:
-              settings.giphy_file_format === "webp"
+              settings.gifs_giphy_file_format === "webp"
                 ? gif.images.fixed_width.webp
                 : gif.images.fixed_width.url,
             original:
-              settings.giphy_file_format === "webp"
+              settings.gifs_giphy_file_format === "webp"
                 ? gif.images.original.webp
                 : gif.images.original.url,
             width: gif.images.original.width,
             height: gif.images.original.height,
           }));
-
+        } else {
+          // Tenor
+          images = response.results.map((gif) => ({
+            title: gif.title,
+            preview: gif.media[0].mediumgif.preview,
+            original: gif.media[0][`${settings.gifs_tenor_file_detail}`].url,
+            width: gif.media[0][`${settings.gifs_tenor_file_detail}`].dims[0],
+            height: gif.media[0][`${settings.gifs_tenor_file_detail}`].dims[1],
+          }));
+        }
           this.set(
             "offset",
-            response.pagination.count + response.pagination.offset
+            settings.gifs_api_provider === "giphy" ?
+            response.pagination.count + response.pagination.offset :
+            response.next
           );
           this.get("currentGifs").addObjects(images);
         })
@@ -93,16 +113,31 @@ export default Controller.extend(ModalFunctionality, {
   },
 
   getEndpoint(query, offset) {
-    return (
-      "https://api.giphy.com/v1/gifs/search?" +
-      $.param({
-        limit: 24,
-        q: query,
-        offset: offset,
-        api_key: settings.giphy_api_key,
-        lang: settings.giphy_locale,
-        rating: settings.giphy_content_rating,
-      })
-    );
+    if (settings.gifs_api_provider == "tenor") {
+      return (
+        "https://api.tenor.com/v1/search?" +
+        $.param({
+          limit: 24,
+          q: query,
+          pos: offset,
+          media_filter: 'default',
+          key: settings.gifs_tenor_api_key,
+          locale: settings.gifs_locale,
+          contentfilter: settings.gifs_tenor_content_filter,
+        })
+      );
+    } else {
+      return (
+        "https://api.giphy.com/v1/gifs/search?" +
+        $.param({
+          limit: 24,
+          q: query,
+          offset: offset,
+          api_key: settings.gifs_giphy_api_key,
+          lang: settings.gifs_locale,
+          rating: settings.gifs_giphy_content_rating,
+        })
+      );
+    }
   },
 });

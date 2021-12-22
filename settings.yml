@@ -1,11 +1,26 @@
-giphy_api_key:
+gifs_api_provider:
+  default: 'giphy'
+  type: 'enum'
+  description:
+    en: "Which gifs provider should we use"
+  choices:
+    - giphy
+    - tenor
+gifs_giphy_api_key:
   type: string
   default: ""
-  description: "The GIPHY API key"
-giphy_locale:
+  description:
+    en: "GIPHY API key"
+gifs_tenor_api_key:
+  type: string
+  default: ""
+  description:
+    en: "TENOR API key"
+gifs_locale:
   type: enum
   default: en
-  description: "Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
+  description:
+    en: "Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
   choices:
     - ar
     - bn
@@ -39,20 +54,41 @@ giphy_locale:
     - vi
     - zh-CN
     - zh-TW
-giphy_file_format:
+gifs_giphy_file_format:
   type: enum
   default: webp
-  description: "Image format to use for Giphys. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
+  description:
+    en: "GIPHY: Image format to use for Giphys. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
   choices:
     - webp
     - gif
-giphy_content_rating:
+gifs_tenor_file_detail:
+  type: enum
+  default: gif
+  description:
+    en: "TENOR: Image detail to use for Tenors."
+  choices:
+    - gif
+    - mediumgif
+    - tinygif
+    - nanogif
+gifs_giphy_content_rating:
   type: enum
   default: r
-  description: |
-    Content rating for gif search results, more info at <a href="https://developers.giphy.com/docs/optional-settings#rating">https://developers.giphy.com/docs/optional-settings#rating</a>
+  description:
+    en: 'GIPHY: Content rating for Giphy search results, more info at <a href="https://developers.giphy.com/docs/optional-settings#rating">https://developers.giphy.com/docs/optional-settings#rating</a>'
   choices:
     - g
     - pg
     - pg-13
     - r
+gifs_tenor_content_filter:
+  type: 'enum'
+  default: high
+  description:
+    en: "TENOR: Content safety level for Tenor results"
+  choices:
+    - high
+    - medium
+    - low
+    - 'off'
