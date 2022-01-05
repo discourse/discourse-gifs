@@ -58,30 +58,30 @@ export default Controller.extend(ModalFunctionality, {
         .done((response) => {
           let images;
           if (settings.api_provider === "giphy") {
-          // Giphy
-          images = response.data.map((gif) => ({
-            title: gif.title,
-            preview:
-              settings.giphy_file_format === "webp"
-                ? gif.images.fixed_width.webp
-                : gif.images.fixed_width.url,
-            original:
-              settings.giphy_file_format === "webp"
-                ? gif.images.original.webp
-                : gif.images.original.url,
-            width: gif.images.original.width,
-            height: gif.images.original.height,
-          }));
-        } else {
-          // Tenor
-          images = response.results.map((gif) => ({
-            title: gif.title,
-            preview: gif.media[0].tinygif.url,
-            original: gif.media[0][`${settings.tenor_file_detail}`].url,
-            width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
-            height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
-          }));
-        }
+            // Giphy
+            images = response.data.map((gif) => ({
+              title: gif.title,
+              preview:
+                settings.giphy_file_format === "webp"
+                  ? gif.images.fixed_width.webp
+                  : gif.images.fixed_width.url,
+              original:
+                settings.giphy_file_format === "webp"
+                  ? gif.images.original.webp
+                  : gif.images.original.url,
+              width: gif.images.original.width,
+              height: gif.images.original.height,
+            }));
+          } else {
+            // Tenor
+            images = response.results.map((gif) => ({
+              title: gif.title,
+              preview: gif.media[0].tinygif.url,
+              original: gif.media[0][`${settings.tenor_file_detail}`].url,
+              width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
+              height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
+            }));
+          }
           this.set(
             "offset",
             settings.api_provider === "giphy" ?
