@@ -58,7 +58,7 @@ giphy_file_format:
   type: enum
   default: webp
   description:
-    en: "GIPHY: Image format to use for Giphys. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
+    en: "GIPHY: Image format to use. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
   choices:
     - webp
     - gif
