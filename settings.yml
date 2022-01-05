@@ -1,4 +1,4 @@
-gifs_api_provider:
+api_provider:
   default: 'giphy'
   type: 'enum'
   description:
@@ -11,12 +11,12 @@ giphy_api_key:
   default: ""
   description:
     en: "GIPHY API key"
-gifs_tenor_api_key:
+tenor_api_key:
   type: string
   default: ""
   description:
     en: "TENOR API key"
-gifs_locale:
+giphy_locale:
   type: enum
   default: en
   description:
@@ -54,7 +54,7 @@ gifs_locale:
     - vi
     - zh-CN
     - zh-TW
-gifs_giphy_file_format:
+giphy_file_format:
   type: enum
   default: webp
   description:
@@ -62,7 +62,7 @@ gifs_giphy_file_format:
   choices:
     - webp
     - gif
-gifs_tenor_file_detail:
+tenor_file_detail:
   type: enum
   default: gif
   description:
@@ -72,7 +72,7 @@ gifs_tenor_file_detail:
     - mediumgif
     - tinygif
     - nanogif
-gifs_giphy_content_rating:
+giphy_content_rating:
   type: enum
   default: r
   description:
@@ -82,7 +82,7 @@ gifs_giphy_content_rating:
     - pg
     - pg-13
     - r
-gifs_tenor_content_filter:
+tenor_content_filter:
   type: 'enum'
   default: high
   description:

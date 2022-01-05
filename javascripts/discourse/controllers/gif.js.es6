@@ -20,7 +20,7 @@ export default Controller.extend(ModalFunctionality, {
 
   @computed
   providerLogo() {
-    return settings.theme_uploads.[`${settings.gifs_api_provider}-logo`];
+    return settings.theme_uploads.[`${settings.api_provider}-logo`];
   },
 
   @action
@@ -57,16 +57,16 @@ export default Controller.extend(ModalFunctionality, {
       $.ajax({ url: this.getEndpoint(this.query, this.offset) })
         .done((response) => {
           let images;
-          if (settings.gifs_api_provider === "giphy") {
+          if (settings.api_provider === "giphy") {
           // Giphy
           images = response.data.map((gif) => ({
             title: gif.title,
             preview:
-              settings.gifs_giphy_file_format === "webp"
+              settings.giphy_file_format === "webp"
                 ? gif.images.fixed_width.webp
                 : gif.images.fixed_width.url,
             original:
-              settings.gifs_giphy_file_format === "webp"
+              settings.giphy_file_format === "webp"
                 ? gif.images.original.webp
                 : gif.images.original.url,
             width: gif.images.original.width,
@@ -77,14 +77,14 @@ export default Controller.extend(ModalFunctionality, {
           images = response.results.map((gif) => ({
             title: gif.title,
             preview: gif.media[0].tinygif.url,
-            original: gif.media[0][`${settings.gifs_tenor_file_detail}`].url,
-            width: gif.media[0][`${settings.gifs_tenor_file_detail}`].dims[0],
-            height: gif.media[0][`${settings.gifs_tenor_file_detail}`].dims[1],
+            original: gif.media[0][`${settings.tenor_file_detail}`].url,
+            width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
+            height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
           }));
         }
           this.set(
             "offset",
-            settings.gifs_api_provider === "giphy" ?
+            settings.api_provider === "giphy" ?
             response.pagination.count + response.pagination.offset :
             response.next
           );
@@ -113,7 +113,7 @@ export default Controller.extend(ModalFunctionality, {
   },
 
   getEndpoint(query, offset) {
-    if (settings.gifs_api_provider == "tenor") {
+    if (settings.api_provider == "tenor") {
       return (
         "https://api.tenor.com/v1/search?" +
         $.param({
@@ -121,9 +121,9 @@ export default Controller.extend(ModalFunctionality, {
           q: query,
           pos: offset,
           media_filter: 'default',
-          key: settings.gifs_tenor_api_key,
-          locale: settings.gifs_locale,
-          contentfilter: settings.gifs_tenor_content_filter,
+          key: settings.tenor_api_key,
+          locale: settings.giphy_locale,
+          contentfilter: settings.tenor_content_filter,
         })
       );
     } else {
@@ -134,8 +134,8 @@ export default Controller.extend(ModalFunctionality, {
           q: query,
           offset: offset,
           api_key: settings.giphy_api_key,
-          lang: settings.gifs_locale,
-          rating: settings.gifs_giphy_content_rating,
+          lang: settings.giphy_locale,
+          rating: settings.giphy_content_rating,
         })
       );
     }
