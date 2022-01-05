@@ -76,7 +76,7 @@ giphy_content_rating:
   type: enum
   default: r
   description:
-    en: 'GIPHY: Content rating for Giphy search results, more info at <a href="https://developers.giphy.com/docs/optional-settings#rating">https://developers.giphy.com/docs/optional-settings#rating</a>'
+    en: 'GIPHY: Content rating for search results, more info at <a href="https://developers.giphy.com/docs/optional-settings#rating">https://developers.giphy.com/docs/optional-settings#rating</a>.'
   choices:
     - g
     - pg
