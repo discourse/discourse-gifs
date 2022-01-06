@@ -8,6 +8,7 @@
   },
   "assets": {
     "icons-sprite": "/assets/gif.svg",
-    "giphy-logo": "/assets/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif"
+    "giphy-logo": "/assets/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif",
+    "tenor-logo": "/assets/PB_tenor_logo_white_horizontal.png"
  }
 }
