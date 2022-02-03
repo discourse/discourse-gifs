@@ -6,6 +6,7 @@ import bootbox from "bootbox";
 import { default as computed } from 'discourse-common/utils/decorators';
 
 export default Controller.extend(ModalFunctionality, {
+  customPickHandler: null,
   loading: false,
   currentGifs: null,
   query: "",
@@ -25,10 +26,16 @@ export default Controller.extend(ModalFunctionality, {
 
   @action
   pick(content) {
-    this.appEvents.trigger(
-      "composer:insert-text",
-      `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`
-    );
+    let markup = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
+
+    if (this.customPickHandler) {
+      this.customPickHandler(markup);
+    } else {
+      this.appEvents.trigger(
+        "composer:insert-text",
+        markup
+      );
+    }
     this.send("closeModal");
   },
 
