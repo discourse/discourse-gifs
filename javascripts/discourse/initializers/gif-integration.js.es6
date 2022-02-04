@@ -33,7 +33,9 @@ export default {
           pluginId: "discourse-gifs",
           actions: {
             showChatGifModal() {
-              const insertGif = this.addText.bind(this);
+              const insertGif = (content) => {
+                this.sendMessage(content).then(this.reset);
+              }
               showModal("gif").setProperties({
                 customPickHandler: insertGif,
               });
