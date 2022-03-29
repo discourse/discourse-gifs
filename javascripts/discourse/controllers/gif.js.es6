@@ -122,7 +122,7 @@ export default Controller.extend(ModalFunctionality, {
   getEndpoint(query, offset) {
     if (settings.api_provider == "tenor") {
       return (
-        "https://api.tenor.com/v1/search?" +
+        "https://g.tenor.com/v1/search?" +
         $.param({
           limit: 24,
           q: query,
