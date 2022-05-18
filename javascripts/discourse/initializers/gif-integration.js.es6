@@ -24,9 +24,17 @@ export default {
       if (chat) {
         api.registerChatComposerButton?.({
           title: themePrefix("gif.composer_title"),
+          translatedLabel() {
+            return this.site.mobileView
+              ? themePrefix("gif.composer_title")
+              : null;
+          },
           id: "gif_button",
           icon: "discourse-gifs-gif",
           action: "showChatGifModal",
+          position() {
+            return this.site.mobileView ? "dropdown" : "inline";
+          },
         });
 
         api.modifyClass("component:chat-composer", {
