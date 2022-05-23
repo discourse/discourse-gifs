@@ -23,18 +23,11 @@ export default {
       const chat = api.container.lookup("service:chat");
       if (chat) {
         api.registerChatComposerButton?.({
-          title: themePrefix("gif.composer_title"),
-          translatedLabel() {
-            return this.site.mobileView
-              ? themePrefix("gif.composer_title")
-              : null;
-          },
+          translatedLabel: themePrefix("gif.composer_title"),
           id: "gif_button",
           icon: "discourse-gifs-gif",
           action: "showChatGifModal",
-          position() {
-            return this.site.mobileView ? "dropdown" : "inline";
-          },
+          position: "dropdown",
         });
 
         api.modifyClass("component:chat-composer", {
