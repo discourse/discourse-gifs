@@ -62,7 +62,7 @@ export default Controller.extend(ModalFunctionality, {
       this.set("loading", true);
 
       ajax({ url: this.getEndpoint(this.query, this.offset) })
-        .done((response) => {
+        .then((response) => {
           let images;
           if (settings.api_provider === "giphy") {
             // Giphy
@@ -104,7 +104,7 @@ export default Controller.extend(ModalFunctionality, {
             popupAjaxError(error);
           }
         })
-        .always(() => {
+        .finally(() => {
           this.set("loading", false);
         });
     }
