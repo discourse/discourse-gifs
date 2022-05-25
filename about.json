@@ -1,8 +1,8 @@
 {
-  "name": "discourse gifs",
+  "name": "discourse-gifs",
+  "component": true,
   "about_url": null,
   "license_url": null,
-  "component": true,
   "modifiers": {
     "svg_icons": ["video"]
   },
@@ -10,5 +10,5 @@
     "icons-sprite": "/assets/gif.svg",
     "giphy-logo": "/assets/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif",
     "tenor-logo": "/assets/PB_tenor_logo_white_horizontal.png"
- }
+  }
 }

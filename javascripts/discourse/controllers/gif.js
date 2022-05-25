@@ -3,7 +3,10 @@ import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import bootbox from "bootbox";
-import { default as computed } from 'discourse-common/utils/decorators';
+import discourseComputed from "discourse-common/utils/decorators";
+import discourseDebounce from "discourse-common/lib/debounce";
+import I18n from "I18n";
+import { ajax } from "discourse/lib/ajax";
 
 export default Controller.extend(ModalFunctionality, {
   customPickHandler: null,
@@ -19,9 +22,9 @@ export default Controller.extend(ModalFunctionality, {
     this.set("currentGifs", []);
   },
 
-  @computed
+  @discourseComputed
   providerLogo() {
-    return settings.theme_uploads.[`${settings.api_provider}-logo`];
+    return settings.theme_uploads[`${settings.api_provider}-logo`];
   },
 
   @action
@@ -31,10 +34,7 @@ export default Controller.extend(ModalFunctionality, {
     if (this.customPickHandler) {
       this.customPickHandler(markup);
     } else {
-      this.appEvents.trigger(
-        "composer:insert-text",
-        markup
-      );
+      this.appEvents.trigger("composer:insert-text", markup);
     }
     this.send("closeModal");
   },
@@ -49,7 +49,7 @@ export default Controller.extend(ModalFunctionality, {
   @action
   refresh(query) {
     this.set("query", query);
-    Ember.run.debounce(this, this.search, 700);
+    discourseDebounce(this, this.search, 700);
   },
 
   search(clearResults = true) {
@@ -61,7 +61,7 @@ export default Controller.extend(ModalFunctionality, {
     if (this.query && this.query.length > 2) {
       this.set("loading", true);
 
-      $.ajax({ url: this.getEndpoint(this.query, this.offset) })
+      ajax({ url: this.getEndpoint(this.query, this.offset) })
         .done((response) => {
           let images;
           if (settings.api_provider === "giphy") {
@@ -91,9 +91,9 @@ export default Controller.extend(ModalFunctionality, {
           }
           this.set(
             "offset",
-            settings.api_provider === "giphy" ?
-            response.pagination.count + response.pagination.offset :
-            response.next
+            settings.api_provider === "giphy"
+              ? response.pagination.count + response.pagination.offset
+              : response.next
           );
           this.get("currentGifs").addObjects(images);
         })
@@ -120,14 +120,14 @@ export default Controller.extend(ModalFunctionality, {
   },
 
   getEndpoint(query, offset) {
-    if (settings.api_provider == "tenor") {
+    if (settings.api_provider === "tenor") {
       return (
         "https://g.tenor.com/v1/search?" +
         $.param({
           limit: 24,
           q: query,
           pos: offset,
-          media_filter: 'default',
+          media_filter: "default",
           key: settings.tenor_api_key,
           locale: settings.giphy_locale,
           contentfilter: settings.tenor_content_filter,
@@ -139,7 +139,7 @@ export default Controller.extend(ModalFunctionality, {
         $.param({
           limit: 24,
           q: query,
-          offset: offset,
+          offset,
           api_key: settings.giphy_api_key,
           lang: settings.giphy_locale,
           rating: settings.giphy_content_rating,

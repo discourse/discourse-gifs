@@ -6,13 +6,13 @@ export default Component.extend({
   observer: null,
 
   _setupInfiniteScrolling() {
-     this.observer = new IntersectionObserver(() => {
+    this.observer = new IntersectionObserver(() => {
       if (this.content && this.content.length > 0) {
         this.loadMore();
       }
     });
 
-    let target = document.querySelector('div.gif-box div.loading-container');
+    let target = document.querySelector("div.gif-box div.loading-container");
     this.observer.observe(target);
   },
 
@@ -20,14 +20,13 @@ export default Component.extend({
     this._setupInfiniteScrolling();
   },
 
-  willDestroyElement(){
+  willDestroyElement() {
     this.observer.disconnect();
   },
 
   actions: {
     pick(gif) {
       this.pick(gif);
-    }
+    },
   },
-
 });
