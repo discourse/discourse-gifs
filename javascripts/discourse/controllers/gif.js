@@ -21,7 +21,7 @@ export default Controller.extend(ModalFunctionality, {
 
   @discourseComputed
   providerLogo() {
-    return settings.theme_uploads.[`${settings.api_provider}-logo`];
+    return settings.theme_uploads[`${settings.api_provider}-logo`];
   },
 
   @action
