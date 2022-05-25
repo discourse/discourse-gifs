@@ -1,12 +1,10 @@
 import Controller from "@ember/controller";
 import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
-import { popupAjaxError } from "discourse/lib/ajax-error";
 import bootbox from "bootbox";
 import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
-import { ajax } from "discourse/lib/ajax";
 
 export default Controller.extend(ModalFunctionality, {
   customPickHandler: null,
@@ -52,7 +50,7 @@ export default Controller.extend(ModalFunctionality, {
     discourseDebounce(this, this.search, 700);
   },
 
-  search(clearResults = true) {
+  async search(clearResults = true) {
     if (clearResults) {
       this.set("currentGifs", []);
       this.set("offset", 0);
@@ -61,52 +59,57 @@ export default Controller.extend(ModalFunctionality, {
     if (this.query && this.query.length > 2) {
       this.set("loading", true);
 
-      ajax({ url: this.getEndpoint(this.query, this.offset) })
-        .then((response) => {
-          let images;
-          if (settings.api_provider === "giphy") {
-            // Giphy
-            images = response.data.map((gif) => ({
-              title: gif.title,
-              preview:
-                settings.giphy_file_format === "webp"
-                  ? gif.images.fixed_width.webp
-                  : gif.images.fixed_width.url,
-              original:
-                settings.giphy_file_format === "webp"
-                  ? gif.images.original.webp
-                  : gif.images.original.url,
-              width: gif.images.original.width,
-              height: gif.images.original.height,
-            }));
-          } else {
-            // Tenor
-            images = response.results.map((gif) => ({
-              title: gif.title,
-              preview: gif.media[0].tinygif.url,
-              original: gif.media[0][`${settings.tenor_file_detail}`].url,
-              width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
-              height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
-            }));
-          }
-          this.set(
-            "offset",
-            settings.api_provider === "giphy"
-              ? response.pagination.count + response.pagination.offset
-              : response.next
-          );
-          this.get("currentGifs").addObjects(images);
-        })
-        .catch((error) => {
-          if (error.status === 403) {
-            bootbox.alert(I18n.t(themePrefix("gif.bad_api_key")));
-          } else {
-            popupAjaxError(error);
-          }
-        })
-        .finally(() => {
-          this.set("loading", false);
-        });
+      try {
+        const response = await fetch(this.getEndpoint(this.query, this.offset));
+
+        if (response.status === 403) {
+          throw new Error(I18n.t(themePrefix("gif.bad_api_key")));
+        } else if (!response.ok) {
+          throw new Error(await response.text());
+        }
+
+        const data = await response.json();
+        let images;
+
+        if (settings.api_provider === "giphy") {
+          // Giphy
+          images = data.data.map((gif) => ({
+            title: gif.title,
+            preview:
+              settings.giphy_file_format === "webp"
+                ? gif.images.fixed_width.webp
+                : gif.images.fixed_width.url,
+            original:
+              settings.giphy_file_format === "webp"
+                ? gif.images.original.webp
+                : gif.images.original.url,
+            width: gif.images.original.width,
+            height: gif.images.original.height,
+          }));
+        } else {
+          // Tenor
+          images = data.results.map((gif) => ({
+            title: gif.title,
+            preview: gif.media[0].tinygif.url,
+            original: gif.media[0][`${settings.tenor_file_detail}`].url,
+            width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
+            height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
+          }));
+        }
+
+        this.set(
+          "offset",
+          settings.api_provider === "giphy"
+            ? data.pagination.count + data.pagination.offset
+            : data.next
+        );
+
+        this.currentGifs.addObjects(images);
+      } catch (error) {
+        bootbox.alert(error);
+      } finally {
+        this.set("loading", false);
+      }
     }
   },
 
