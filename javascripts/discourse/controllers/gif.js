@@ -4,6 +4,8 @@ import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import bootbox from "bootbox";
 import discourseComputed from 'discourse-common/utils/decorators';
+import discourseDebounce from "discourse-common/lib/debounce";
+import I18n from "I18n";
 
 export default Controller.extend(ModalFunctionality, {
   customPickHandler: null,
@@ -49,7 +51,7 @@ export default Controller.extend(ModalFunctionality, {
   @action
   refresh(query) {
     this.set("query", query);
-    Ember.run.debounce(this, this.search, 700);
+    discourseDebounce(this, this.search, 700);
   },
 
   search(clearResults = true) {
@@ -120,7 +122,7 @@ export default Controller.extend(ModalFunctionality, {
   },
 
   getEndpoint(query, offset) {
-    if (settings.api_provider == "tenor") {
+    if (settings.api_provider === "tenor") {
       return (
         "https://g.tenor.com/v1/search?" +
         $.param({
@@ -139,7 +141,7 @@ export default Controller.extend(ModalFunctionality, {
         $.param({
           limit: 24,
           q: query,
-          offset: offset,
+          offset,
           api_key: settings.giphy_api_key,
           lang: settings.giphy_locale,
           rating: settings.giphy_content_rating,
