@@ -6,6 +6,7 @@ import bootbox from "bootbox";
 import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
+import { ajax } from "discourse/lib/ajax";
 
 export default Controller.extend(ModalFunctionality, {
   customPickHandler: null,
@@ -60,7 +61,7 @@ export default Controller.extend(ModalFunctionality, {
     if (this.query && this.query.length > 2) {
       this.set("loading", true);
 
-      $.ajax({ url: this.getEndpoint(this.query, this.offset) })
+      ajax({ url: this.getEndpoint(this.query, this.offset) })
         .done((response) => {
           let images;
           if (settings.api_provider === "giphy") {
