@@ -6,20 +6,27 @@
       autofocus="true"
       key-up=(action "refresh")
     }}
+
     {{#if loading}}
       {{loading-spinner size="small"}}
     {{/if}}
   </div>
+
   <div class="gif-content">
     {{#if currentGifs}}
       <div class="gif-box">
-        {{gif-result-list content=currentGifs pick=(action "pick") loadMore=(action "loadMore")}}
+        {{gif-result-list
+          content=currentGifs
+          pick=(action "pick")
+          loadMore=(action "loadMore")
+        }}
       </div>
     {{else}}
       <div class="gif-no-results">{{theme-i18n "gif.no_results"}}</div>
     {{/if}}
   </div>
 {{/d-modal-body}}
+
 <div class="modal-footer gif-modal">
   <img src="{{providerLogo}}">
 </div>

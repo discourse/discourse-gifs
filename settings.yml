@@ -1,6 +1,6 @@
 api_provider:
-  default: 'giphy'
-  type: 'enum'
+  default: "giphy"
+  type: "enum"
   description:
     en: "Which gifs provider should we use"
   choices:
@@ -83,7 +83,7 @@ giphy_content_rating:
     - pg-13
     - r
 tenor_content_filter:
-  type: 'enum'
+  type: "enum"
   default: high
   description:
     en: "TENOR: Content safety level for Tenor results"
@@ -91,4 +91,4 @@ tenor_content_filter:
     - high
     - medium
     - low
-    - 'off'
+    - "off"

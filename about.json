@@ -4,9 +4,7 @@
   "about_url": null,
   "license_url": null,
   "modifiers": {
-    "svg_icons": [
-      "video"
-    ]
+    "svg_icons": ["video"]
   },
   "assets": {
     "icons-sprite": "/assets/gif.svg",

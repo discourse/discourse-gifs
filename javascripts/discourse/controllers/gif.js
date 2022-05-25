@@ -3,7 +3,7 @@ import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import bootbox from "bootbox";
-import discourseComputed from 'discourse-common/utils/decorators';
+import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
 
@@ -33,10 +33,7 @@ export default Controller.extend(ModalFunctionality, {
     if (this.customPickHandler) {
       this.customPickHandler(markup);
     } else {
-      this.appEvents.trigger(
-        "composer:insert-text",
-        markup
-      );
+      this.appEvents.trigger("composer:insert-text", markup);
     }
     this.send("closeModal");
   },
@@ -93,9 +90,9 @@ export default Controller.extend(ModalFunctionality, {
           }
           this.set(
             "offset",
-            settings.api_provider === "giphy" ?
-            response.pagination.count + response.pagination.offset :
-            response.next
+            settings.api_provider === "giphy"
+              ? response.pagination.count + response.pagination.offset
+              : response.next
           );
           this.get("currentGifs").addObjects(images);
         })
@@ -129,7 +126,7 @@ export default Controller.extend(ModalFunctionality, {
           limit: 24,
           q: query,
           pos: offset,
-          media_filter: 'default',
+          media_filter: "default",
           key: settings.tenor_api_key,
           locale: settings.giphy_locale,
           contentfilter: settings.tenor_content_filter,
