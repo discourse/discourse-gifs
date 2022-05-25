@@ -3,7 +3,7 @@ import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import bootbox from "bootbox";
-import { default as computed } from 'discourse-common/utils/decorators';
+import discourseComputed from 'discourse-common/utils/decorators';
 
 export default Controller.extend(ModalFunctionality, {
   customPickHandler: null,
@@ -19,7 +19,7 @@ export default Controller.extend(ModalFunctionality, {
     this.set("currentGifs", []);
   },
 
-  @computed
+  @discourseComputed
   providerLogo() {
     return settings.theme_uploads.[`${settings.api_provider}-logo`];
   },
