@@ -93,10 +93,7 @@ html:not(.discourse-gifs-with-img)
     display: flex;
     flex-flow: row-reverse;
     img {
-      height: 42px;
-      background-color: black;
-      border-radius: 3px;
-      padding: 4px;
+      height: 30px;
     }
   }
 }
