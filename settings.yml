@@ -69,26 +69,14 @@ giphy_file_format:
     - gif
 tenor_file_detail:
   type: enum
-  default: webp_transparent
+  default: mediumgif
   description:
-    en: "TENOR: Image format to use. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
+    en: "TENOR: Image format to use. gif = High-quality GIF format | mediumgif = small reduction, same size | tinygif = up to 220px wide | nanogif = up to 90 pixels tall"
   choices:
     - gif
     - mediumgif
     - tinygif
     - nanogif
-    - gif_transparent
-    - tinygif_transparent
-    - nanogif_transparent
-    - webp_transparent
-    - tinywebp_transparent
-    - nanowebp_transparent
-    - mp4
-    - loopedmp4
-    - tinymp4
-    - webm
-    - tinywebm
-    - nanowebm
 giphy_content_rating:
   type: enum
   default: r

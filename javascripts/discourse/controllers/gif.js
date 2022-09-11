@@ -65,6 +65,13 @@ export default Controller.extend(ModalFunctionality, {
         if (response.status === 403) {
           throw new Error(I18n.t(themePrefix("gif.bad_api_key")));
         } else if (!response.ok) {
+          if (settings.api_provider === "tenor" && response.status === 400) {
+            const errorResponse = await response.json();
+            if (errorResponse.error.details.find((e) => e.reason === "API_KEY_INVALID") !== undefined) {
+              throw new Error(I18n.t(themePrefix("gif.bad_api_key")));
+            }
+          }
+          
           throw new Error(await response.text());
         }
 
@@ -90,10 +97,10 @@ export default Controller.extend(ModalFunctionality, {
           // Tenor
           images = data.results.map((gif) => ({
             title: gif.title,
-            preview: gif.media_formats.preview.url,
-            original: gif.media_formats[`${settings.tenor_file_detail}`].url,
-            width: gif.media_formats[`${settings.tenor_file_detail}`].dims[0],
-            height: gif.media_formats[`${settings.tenor_file_detail}`].dims[1],
+            preview: "tinygif" in gif.media_formats ? gif.media_formats.tinygif.url : gif.media_formats.preview.url,
+            original: `${settings.tenor_file_detail}` in gif.media_formats ? gif.media_formats[`${settings.tenor_file_detail}`].url : gif.media_formats.preview.url,
+            width: `${settings.tenor_file_detail}` in gif.media_formats ?  gif.media_formats[`${settings.tenor_file_detail}`].dims[0] : gif.media_formats.preview.dims[0],
+            height: `${settings.tenor_file_detail}` in gif.media_formats ? gif.media_formats[`${settings.tenor_file_detail}`].dims[1] : gif.media_formats.preview.dims[1],
           }));
         }
 
@@ -130,7 +137,7 @@ export default Controller.extend(ModalFunctionality, {
           limit: 24,
           q: query,
           pos: offset,
-          media_filter: settings.tenor_file_detail + ",preview",
+          media_filter: settings.tenor_file_detail + (settings.tenor_file_detail !== "tinygif" ? ",tinygif,preview" : ",preview"),
           key: settings.tenor_api_key,
           locale: settings.giphy_locale,
           contentfilter: settings.tenor_content_filter,
