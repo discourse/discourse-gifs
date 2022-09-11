@@ -90,10 +90,10 @@ export default Controller.extend(ModalFunctionality, {
           // Tenor
           images = data.results.map((gif) => ({
             title: gif.title,
-            preview: gif.media[0].tinygif.url,
-            original: gif.media[0][`${settings.tenor_file_detail}`].url,
-            width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
-            height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
+            preview: gif.media_formats.preview.url,
+            original: gif.media_formats[`${settings.tenor_file_detail}`].url,
+            width: gif.media_formats[`${settings.tenor_file_detail}`].dims[0],
+            height: gif.media_formats[`${settings.tenor_file_detail}`].dims[1],
           }));
         }
 
@@ -101,7 +101,7 @@ export default Controller.extend(ModalFunctionality, {
           "offset",
           settings.api_provider === "giphy"
             ? data.pagination.count + data.pagination.offset
-            : data.next
+            : data.next === "" ? 0 : data.next
         );
 
         this.currentGifs.addObjects(images);
@@ -125,15 +125,16 @@ export default Controller.extend(ModalFunctionality, {
   getEndpoint(query, offset) {
     if (settings.api_provider === "tenor") {
       return (
-        "https://g.tenor.com/v1/search?" +
+        "https://tenor.googleapis.com/v2/search?" +
         $.param({
           limit: 24,
           q: query,
           pos: offset,
-          media_filter: "default",
+          media_filter: settings.tenor_file_detail + ",preview",
           key: settings.tenor_api_key,
           locale: settings.giphy_locale,
           contentfilter: settings.tenor_content_filter,
+          client_key: settings.tenor_client_key
         })
       );
     } else {
