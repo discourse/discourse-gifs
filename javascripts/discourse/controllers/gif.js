@@ -93,7 +93,7 @@ export default Controller.extend(ModalFunctionality, {
           if (
             !errorMsg &&
             settings.api_provider === "tenor" &&
-            response.headers["content-type"].includes("application/json")
+            response.headers.get("content-type")?.includes("application/json")
           ) {
             const errorResponse = await response.json();
             switch (settings.tenor_api_version) {
