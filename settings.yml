@@ -121,7 +121,7 @@ tenor_content_filter:
   default: high
   description:
     en: >
-      TENOR: Content safety level for Tenor results. Find more info at 
+      TENOR: Content safety level for Tenor results. Find more info in 
       <a href="https://developers.google.com/tenor/guides/content-filtering">Tenor API Guides</a>.
   choices:
     - high
@@ -140,7 +140,7 @@ tenor_v2_locale:
   default: "en_US"
   description:
     en: >
-      TENOR V2: Language to use on the search. Country code (optional) can be provided to differentiate between dialects. 
+      TENOR V2: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
       Format must be in "xx_YY" where "xx" is the <b>required</b> 
       <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">language code</a> 
       and "_YY" is the <b>optional</b> 
@@ -150,13 +150,17 @@ tenor_v2_locale:
 use_additional_error_handling:
   type: bool
   default: false
-  description: "Show custom error messages for Rate Limits & Search Query Too Long to users instead of the response from the API."
+  description: 'Show custom error messages for "Rate Limits - gif.error_rate_limit" & "Search Query Too Long - gif.error_search_too_long" to users instead of the response from the API.'
 allow_unlimited_search:
   type: bool
   default: true
   description:
-    en: "When set to true, we will search every time the user reaches the end of the results with no limits set. When set to false, we will continue searching similarly until we hit the Max Results Limit."
+    en: >
+      When enabled, we will search every time the user reaches the end of the results with no limits set.<br/>
+      When disabled, we will continue searching similarly until we hit the Max Results Limit.
 max_results_limit:
   type: integer
   min: 24
   default: 100
+  description:
+    en: 'When "allow unlimited search" is enabled, we will search until we get this number of maximum GIF results.'

@@ -11,6 +11,6 @@ en:
       <a href='https://meta.discourse.org/t/discourse-gifs-component/158738'>
         https://meta.discourse.org/t/discourse-gifs-component/158738
       </a>.
-    error_rate_limit: "We have reached our API Rate Limits. Please wait and try again later. If this issues persists, contact your site admin."
+    error_rate_limit: "We have reached our API Rate Limits. Please wait and try again later. If this issue persists, contact your site admin."
     error_search_too_long: "Please shorten your search query to under 50 characters and try again."
       
