@@ -6,7 +6,7 @@ en:
     composer_title: "Search GIFs"
     no_results: "Enter a keyword in the input box above to search for GIFs."
     bad_api_key: >
-      Missing or Invalid {{api_provider}} API Key set. 
+      Missing or Invalid $api_provider API Key set. 
       Ask the site admin to follow the install instructions at 
       <a href='https://meta.discourse.org/t/discourse-gifs-component/158738'>
         https://meta.discourse.org/t/discourse-gifs-component/158738

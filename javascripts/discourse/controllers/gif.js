@@ -70,7 +70,7 @@ export default Controller.extend(ModalFunctionality, {
         const response = await fetch(this.getEndpoint(this.query, this.offset));
 
         if (!response.ok) {
-          // Use the same errorMsg variable to handle variable replacement at the end for API Provider Display Name {{api_provider}}.
+          // Use the same errorMsg variable to handle variable replacement at the end for API Provider Display Name $api_provider.
           let errorMsg;
 
           // Only check for certain errors if setting is configured to do so.
@@ -136,7 +136,7 @@ export default Controller.extend(ModalFunctionality, {
           // If error message is set, check if the API Provider variable was used.
           // Replace if needed - throw at the end of it.
           if (errorMsg) {
-            if (errorMsg.indexOf("{{api_provider}}") > -1) {
+            if (errorMsg.indexOf("$api_provider") > -1) {
               let providerName;
               switch (settings.api_provider) {
                 case "giphy":
@@ -150,7 +150,7 @@ export default Controller.extend(ModalFunctionality, {
               }
 
               throw new Error(
-                errorMsg.replaceAll("{{api_provider}}", providerName)
+                errorMsg.replaceAll("$api_provider", providerName)
               );
             } else {
               throw new Error(errorMsg);
