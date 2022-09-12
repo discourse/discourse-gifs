@@ -93,7 +93,7 @@ export default Controller.extend(ModalFunctionality, {
           if (
             !errorMsg &&
             settings.api_provider === "tenor" &&
-            response.headers["Content-Type"] === "application/json"
+            response.headers["content-type"].includes("application/json")
           ) {
             const errorResponse = await response.json();
             switch (settings.tenor_api_version) {
@@ -101,12 +101,12 @@ export default Controller.extend(ModalFunctionality, {
                 // Error Message should include `code` and `error`
                 if (errorResponse.code && errorResponse.error) {
                   throw new Error(
-                    `Tenor API Error ${errorResponse.code}: ${errorResponse.error}`
+                    `Tenor Status ${errorResponse.code}: ${errorResponse.error}`
                   );
                 } else {
                   // Fallback as Error Response does not match what was expected.
                   throw new Error(
-                    `Tenor API Error ${response.status}: ${JSON.stringify(
+                    `Tenor Status ${response.status}: ${JSON.stringify(
                       errorResponse
                     )}`
                   );
@@ -123,7 +123,7 @@ export default Controller.extend(ModalFunctionality, {
                 } else {
                   // Map Error Message according to default Google API standards
                   throw new Error(
-                    `Tenor API Error ${errorResponse.error.code}: ${
+                    `Tenor Error Code ${errorResponse.error.code}: ${
                       errorResponse.error.message
                     } [${errorResponse.error.details
                       .map((e) => e.reason)
@@ -158,7 +158,7 @@ export default Controller.extend(ModalFunctionality, {
           } else {
             // Fallback to returning the entire response along with a status code.
             throw new Error(
-              `API Error ${response.status}: ${await response.text()}`
+              `${settings.api_provider.toUpperCase()} Status ${response.status}: ${await response.text()}`
             );
           }
         }
