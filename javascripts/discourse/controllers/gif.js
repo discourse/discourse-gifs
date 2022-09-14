@@ -60,13 +60,22 @@ export default Controller.extend(ModalFunctionality, {
     if (
       this.query &&
       this.query.length > 2 &&
-      (settings.allow_unlimited_search ||
+      settings.allow_unlimited_search ||
         (!settings.allow_unlimited_search &&
-          this.currentGifs.length < settings.max_results_limit))
+          this.currentGifs.length < settings.max_results_limit)
     ) {
       this.set("loading", true);
 
       try {
+        if (
+          (settings.api_provider === "tenor" && settings.tenor_api_key === "") ||
+          (settings.api_provider === "giphy" && settings.giphy_api_key === "")
+        ) {
+          throw new Error(`${settings.api_provider} API key is not set. Site Admins, \
+            please visit <a href="https://meta.discourse.org/t/discourse-gifs/158738">Discourse Meta</a> \
+            for setup instructions.`);
+        }
+
         const response = await fetch(this.getEndpoint(this.query, this.offset));
 
         if (!response.ok) {
@@ -75,15 +84,9 @@ export default Controller.extend(ModalFunctionality, {
 
           // Only check for certain errors if setting is configured to do so.
           // This is to allow server admins time & the choice to update the custom messages. Existing Plugin users will have this setting disabled by default.
-          if (
-            response.status === 429 &&
-            settings.use_additional_error_handling
-          ) {
+          if (response.status === 429) {
             errorMsg = I18n.t(themePrefix("gif.error_rate_limit"));
-          } else if (
-            response.status === 414 &&
-            settings.use_additional_error_handling
-          ) {
+          } else if (response.status === 414) {
             errorMsg = I18n.t(themePrefix("gif.error_search_too_long"));
           } else if (response.status === 403 || response.status === 401) {
             errorMsg = I18n.t(themePrefix("gif.bad_api_key"));
@@ -96,40 +99,22 @@ export default Controller.extend(ModalFunctionality, {
             response.headers.get("content-type")?.includes("application/json")
           ) {
             const errorResponse = await response.json();
-            switch (settings.tenor_api_version) {
-              case "v1-legacy":
-                // Error Message should include `code` and `error`
-                if (errorResponse.code && errorResponse.error) {
-                  throw new Error(
-                    `Tenor Status ${errorResponse.code}: ${errorResponse.error}`
-                  );
-                } else {
-                  // Fallback as Error Response does not match what was expected.
-                  throw new Error(
-                    `Tenor Status ${response.status}: ${JSON.stringify(
-                      errorResponse
-                    )}`
-                  );
-                }
-                break;
-              case "v2-gcp":
-                // Check for API Key Errors first
-                if (
-                  errorResponse.error.details.find(
-                    (e) => e.reason === "API_KEY_INVALID"
-                  ) !== undefined
-                ) {
-                  errorMsg = I18n.t(themePrefix("gif.bad_api_key"));
-                } else {
-                  // Map Error Message according to default Google API standards
-                  throw new Error(
-                    `Tenor Error Code ${errorResponse.error.code}: ${
-                      errorResponse.error.message
-                    } [${errorResponse.error.details
-                      .map((e) => e.reason)
-                      .join(", ")}]`
-                  );
-                }
+            // Check for API Key Errors first
+            if (
+              errorResponse.error.details.find(
+                (e) => e.reason === "API_KEY_INVALID"
+              ) !== undefined
+            ) {
+              errorMsg = I18n.t(themePrefix("gif.bad_api_key"));
+            } else {
+              // Map Error Message according to default Google API standards
+              throw new Error(
+                `Tenor Error Code ${errorResponse.error.code}: ${
+                  errorResponse.error.message
+                } [${errorResponse.error.details
+                  .map((e) => e.reason)
+                  .join(", ")}]`
+              );
             }
           }
 
@@ -158,7 +143,9 @@ export default Controller.extend(ModalFunctionality, {
           } else {
             // Fallback to returning the entire response along with a status code.
             throw new Error(
-              `${settings.api_provider.toUpperCase()} Status ${response.status}: ${await response.text()}`
+              `${settings.api_provider.toUpperCase()} Status ${
+                response.status
+              }: ${await response.text()}`
             );
           }
         }
@@ -183,61 +170,37 @@ export default Controller.extend(ModalFunctionality, {
           }));
         } else {
           // Tenor
-          switch (settings.tenor_api_version) {
-            case "v1-legacy":
-              images = data.results.map((gif) => ({
-                title: gif.title,
-                preview: gif.media[0].tinygif.url,
-                original: gif.media[0][`${settings.tenor_file_detail}`].url,
-                width: gif.media[0][`${settings.tenor_file_detail}`].dims[0],
-                height: gif.media[0][`${settings.tenor_file_detail}`].dims[1],
-              }));
-              break;
-            case "v2-gcp":
-              // Using tinygif for GIF previews. "Preview" returns static png image.
-              // User Defined Media Format may not always be in the response. Fallback to Preview Image.
-              images = data.results.map((gif) => {
-                const hasTinyGif = "tinygif" in gif.media_formats;
-                const media_format =
-                  settings.tenor_file_detail in gif.media_formats
-                    ? gif.media_formats[`${settings.tenor_file_detail}`]
-                    : gif.media_formats.preview;
+          images = data.results.map((gif) => {
+            // Use tinygif as default for previews and "preview" as a backup
+            const hasTinyGif = "tinygif" in gif.media_formats;
 
-                return {
-                  title: gif.title,
-                  preview: hasTinyGif
-                    ? gif.media_formats.tinygif.url
-                    : gif.media_formats.preview.url,
-                  original: media_format.url,
-                  width: media_format.dims[0],
-                  height: media_format.dims[1],
-                };
-              });
-              break;
-            default:
-              throw new Error(
-                `Unsupported Tenor API Version: ${settings.tenor_api_version}`
-              );
-          }
+            // Use user-defined file format for attached GIFS and "preview" as a backup
+            const media_format =
+              settings.tenor_file_detail in gif.media_formats
+                ? gif.media_formats[`${settings.tenor_file_detail}`]
+                : gif.media_formats.preview;
+
+            return {
+              title: gif.title,
+              preview: hasTinyGif
+                ? gif.media_formats.tinygif.url
+                : gif.media_formats.preview.url,
+              original: media_format.url,
+              width: media_format.dims[0],
+              height: media_format.dims[1],
+            };
+          });
         }
 
-        // Handle offset differences between Giphy and Tenor V1/V2
-        let nextOffset = 0;
-        if (settings.api_provider === "giphy") {
-          nextOffset = data.pagination.offset + data.pagination.count;
-        } else {
-          switch (settings.tenor_api_version) {
-            case "v1-legacy":
-              nextOffset = data.next;
-              break;
-            case "v2-gcp":
-              // Tenor API V2 will return an empty string when there are no more results.
-              nextOffset = data.next === "" ? 0 : data.next;
-              break;
-          }
-        }
-
-        this.set("offset", nextOffset);
+        // Handle offset differences between Giphy and Tenor
+        this.set(
+          "offset",
+          settings.api_provider === "giphy"
+            ? data.pagination.offset + data.pagination.count
+            : data.next === ""
+            ? 0
+            : data.next
+        );
         this.currentGifs.addObjects(images);
       } catch (error) {
         bootbox.alert(error);
@@ -258,45 +221,31 @@ export default Controller.extend(ModalFunctionality, {
 
   getEndpoint(query, offset) {
     if (settings.api_provider === "tenor") {
-      switch (settings.tenor_api_version) {
-        case "v1-legacy":
-          return (
-            "https://g.tenor.com/v1/search?" +
-            $.param({
-              limit: 24,
-              q: query,
-              pos: offset,
-              media_filter: "default",
-              key: settings.tenor_api_key,
-              locale: settings.giphy_locale,
-              contentfilter: settings.tenor_content_filter,
-            })
-          );
-        case "v2-gcp":
-          return (
-            "https://tenor.googleapis.com/v2/search?" +
-            $.param({
-              key: settings.tenor_api_key,
-              q: query,
-              client_key: settings.tenor_client_key,
-              country: settings.tenor_v2_country,
-              locale: settings.tenor_v2_locale,
-              contentfilter: settings.tenor_content_filter,
-              media_filter:
-                settings.tenor_file_detail +
-                (settings.tenor_file_detail !== "tinygif"
-                  ? ",tinygif,preview"
-                  : ",preview"),
-              limit: 24,
-              pos: offset,
-            })
-          );
-        default:
-          throw new Error(
-            `Unsupported Tenor API Version: ${settings.tenor_api_version}`
-          );
+      var params = {
+        key: settings.tenor_api_key,
+        q: query,
+        country: settings.tenor_country,
+        locale: settings.tenor_locale,
+        contentfilter: settings.tenor_content_filter,
+        media_filter: settings.tenor_file_detail,
+        limit: 24,
+        pos: offset,
+      };
+
+      // Optional Parameter
+      if (settings.tenor_client_key !== "") {
+        params.client_key = settings.tenor_client_key;
       }
+
+      // Include tinygif for preview and "preview" for backup.
+      params.media_filter +=
+        settings.tenor_file_detail !== "tinygif"
+          ? ",tinygif,preview"
+          : ",preview";
+
+      return "https://tenor.googleapis.com/v2/search?" + $.param(params);
     } else {
+      // GIPHY
       return (
         "https://api.giphy.com/v1/gifs/search?" +
         $.param({
