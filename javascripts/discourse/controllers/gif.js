@@ -73,7 +73,8 @@ export default Controller.extend(ModalFunctionality, {
           (settings.api_provider === "giphy" && settings.giphy_api_key === "")
         ) {
           throw new Error(`${settings.api_provider.toUpperCase()} API key is not set. Site Admins, \
-            please visit <a href="https://meta.discourse.org/t/discourse-gifs/158738">Discourse Meta</a> \
+            please visit <a target="_blank" rel="noreferrer noopener" \
+            href="https://meta.discourse.org/t/discourse-gifs/158738">Discourse Meta</a> \
             for setup instructions.`);
         }
 
