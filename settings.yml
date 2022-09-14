@@ -24,8 +24,8 @@ giphy_content_rating:
   default: r
   description:
     en: >
-      GIPHY: Content rating for search results, more info at 
-      <a href="https://developers.giphy.com/docs/optional-settings#rating">
+      GIPHY: Content rating for search results. Find more info at 
+      <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating">
         https://developers.giphy.com/docs/optional-settings#rating
       </a>.
   choices:
@@ -71,30 +71,28 @@ giphy_locale:
     - vi
     - zh-CN
     - zh-TW
-allow_unlimited_search:
+limit_infinite_search_results:
   type: bool
-  default: true
+  default: false
   description:
-    en: >
-      Tenor & GIPHY: When enabled, we will run a continuous search with infinite scrolling every time the user reaches the end of the results with no limits set.<br/>
-      When disabled, we will continue searching similarly until we hit the Max Results Limit.
+    en: "Limit the number of GIF results returned as the user scrolls infinitely to prevent API Rate Limiting."
 max_results_limit:
   type: integer
   min: 24
   default: 240
   description:
-    en: 'Tenor & GIPHY: When "allow unlimited search" is enabled, we will search until we get this number of maximum GIF results. Each API call retrieves 24 results, e.g. 240 Max Limit: 240 / 24 = 10 API Calls.'
+    en: 'Tenor & GIPHY: When "limit infinite search results" is enabled, we will search until we get this number of maximum GIF results. Each API call retrieves 24 results, <i>e.g. 240 Max Limit: 240 / 24 = 10 API Calls</i>.'
 tenor_api_key:
   type: string
   default: ""
   description:
     en: >
       Tenor: V2 API Key. Instructions to get one can be found in
-        <a href='https://meta.discourse.org/t/discourse-gifs-component/158738'>
+        <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'>
           Discourse Meta - Discourse Gifs
         </a>.
       <br/><br/>
-      <b><i>Attention: Legacy Tenor V1 API users - please generate a V2 API Key</i><b>
+      <b>Attention: Legacy Tenor V1 API users - please generate a new V2 API Key</b>
 tenor_client_key:
   type: string
   default: "discourse"
@@ -123,7 +121,9 @@ tenor_content_filter:
   description:
     en: >
       Tenor: Content safety level for Tenor results. Find more info in 
-      <a href="https://developers.google.com/tenor/guides/content-filtering">Tenor API Guides</a>.
+      <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering">
+        Tenor API Guides
+      </a>.
   choices:
     - high
     - medium
@@ -135,7 +135,9 @@ tenor_country:
   description:
     en: >
       Tenor: Two-Letter Country of Origin for the request. Find your country code in 
-      <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">Wikipedia - ISO_3166-1</a>.
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+        Wikipedia - ISO_3166-1
+      </a>.
 tenor_locale:
   type: string
   default: "en_US"
@@ -143,8 +145,14 @@ tenor_locale:
     en: >
       Tenor: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
       Format must be in "xx_YY" where "xx" is the <b>required</b> 
-      <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">language code</a> 
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
+        language code
+      </a> 
       and "_YY" is the <b>optional</b> 
-      <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">country code</a>. 
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+        country code
+      </a>. 
       Find info on Tenor localization in 
-      <a href="https://developers.google.com/tenor/guides/localization">Tenor API Guides</a>.
+      <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">
+        Tenor API Guides
+      </a>.

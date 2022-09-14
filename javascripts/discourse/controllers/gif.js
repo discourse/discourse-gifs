@@ -58,20 +58,21 @@ export default Controller.extend(ModalFunctionality, {
 
     // Check for minimum search query and if search result limit was set & reached
     if (
-      this.query &&
-      this.query.length > 2 &&
-      settings.allow_unlimited_search ||
-        (!settings.allow_unlimited_search &&
-          this.currentGifs.length < settings.max_results_limit)
+      (this.query &&
+        this.query.length > 2 &&
+        !settings.limit_infinite_search_results) ||
+      (settings.limit_infinite_search_results &&
+        this.currentGifs.length < settings.max_results_limit)
     ) {
       this.set("loading", true);
 
       try {
         if (
-          (settings.api_provider === "tenor" && settings.tenor_api_key === "") ||
+          (settings.api_provider === "tenor" &&
+            settings.tenor_api_key === "") ||
           (settings.api_provider === "giphy" && settings.giphy_api_key === "")
         ) {
-          throw new Error(`${settings.api_provider} API key is not set. Site Admins, \
+          throw new Error(`${settings.api_provider.toUpperCase()} API key is not set. Site Admins, \
             please visit <a href="https://meta.discourse.org/t/discourse-gifs/158738">Discourse Meta</a> \
             for setup instructions.`);
         }
@@ -121,25 +122,12 @@ export default Controller.extend(ModalFunctionality, {
           // If error message is set, check if the API Provider variable was used.
           // Replace if needed - throw at the end of it.
           if (errorMsg) {
-            if (errorMsg.indexOf("$api_provider") > -1) {
-              let providerName;
-              switch (settings.api_provider) {
-                case "giphy":
-                  providerName = "GIPHY";
-                  break;
-                case "tenor":
-                  providerName = "Tenor";
-                  break;
-                default:
-                  providerName = settings.api_provider;
-              }
-
-              throw new Error(
-                errorMsg.replaceAll("$api_provider", providerName)
-              );
-            } else {
-              throw new Error(errorMsg);
-            }
+            throw new Error(
+              errorMsg.replaceAll(
+                "$api_provider",
+                settings.api_provider.toUpperCase()
+              )
+            );
           } else {
             // Fallback to returning the entire response along with a status code.
             throw new Error(
