@@ -37,7 +37,7 @@ giphy_locale:
   type: enum
   default: en
   description:
-    en: "GIPHY & Tenor V1: Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
+    en: "GIPHY: Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
   choices:
     - ar
     - bn
