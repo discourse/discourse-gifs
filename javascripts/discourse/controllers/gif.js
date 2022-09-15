@@ -210,7 +210,7 @@ export default Controller.extend(ModalFunctionality, {
 
   getEndpoint(query, offset) {
     if (settings.api_provider === "tenor") {
-      var params = {
+      let params = {
         key: settings.tenor_api_key,
         q: query,
         country: settings.tenor_country,
