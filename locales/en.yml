@@ -4,5 +4,8 @@ en:
     query: "Term"
     insert: "Insert Selected Images"
     composer_title: "Search GIFs"
-    bad_api_key: "Missing or wrong Giphy API Key set. Ask the site admin to follow the install instructions at <a href='https://meta.discourse.org/t/discourse-gifs-component/158738'>https://meta.discourse.org/t/discourse-gifs-component/158738</a>."
     no_results: "Enter a keyword in the input box above to search for GIFs."
+    bad_api_key: "Invalid $api_provider API Key. Site admins, please check your key and/or your $api_provider account."
+    error_rate_limit: "We have reached our $api_provider API Rate Limits. Please wait and try again later. If this issue persists, contact your site admin."
+    error_search_too_long: "Please shorten your search query to under 50 characters and try again."
+      

@@ -2,7 +2,7 @@ api_provider:
   default: "giphy"
   type: "enum"
   description:
-    en: "Which gifs provider should we use"
+    en: "Which GIF provider should we use?"
   choices:
     - giphy
     - tenor
@@ -10,17 +10,34 @@ giphy_api_key:
   type: string
   default: ""
   description:
-    en: "GIPHY API key"
-tenor_api_key:
-  type: string
-  default: ""
+    en: "GIPHY: API key"
+giphy_file_format:
+  type: enum
+  default: webp
   description:
-    en: "TENOR API key"
+    en: "GIPHY: Image format to use. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
+  choices:
+    - webp
+    - gif
+giphy_content_rating:
+  type: enum
+  default: r
+  description:
+    en: >
+      GIPHY: Content rating for search results. Find more info at 
+      <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating">
+        https://developers.giphy.com/docs/optional-settings#rating
+      </a>.
+  choices:
+    - g
+    - pg
+    - pg-13
+    - r
 giphy_locale:
   type: enum
   default: en
   description:
-    en: "Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
+    en: "GIPHY: Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
   choices:
     - ar
     - bn
@@ -54,41 +71,88 @@ giphy_locale:
     - vi
     - zh-CN
     - zh-TW
-giphy_file_format:
-  type: enum
-  default: webp
+limit_infinite_search_results:
+  type: bool
+  default: false
   description:
-    en: "GIPHY: Image format to use. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
-  choices:
-    - webp
-    - gif
+    en: "Limit the number of GIF results returned as the user scrolls infinitely to prevent API Rate Limiting."
+max_results_limit:
+  type: integer
+  min: 24
+  default: 240
+  description:
+    en: 'Tenor & GIPHY: When "limit infinite search results" is enabled, we will search until we get this number of maximum GIF results. Each API call retrieves 24 results, <i>e.g. 240 Max Limit: 240 / 24 = 10 API Calls</i>.'
+tenor_api_key:
+  type: string
+  default: ""
+  description:
+    en: >
+      Tenor: V2 API Key. Instructions to get one can be found in
+        <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'>
+          Discourse Meta - Discourse Gifs
+        </a>.
+      <br/><br/>
+      <b>Attention: Legacy Tenor V1 API users - please generate a new V2 API Key</b>
+tenor_client_key:
+  type: string
+  default: "discourse"
+  description:
+    en: "Tenor: (optional) client-specified string that represents the integration"
 tenor_file_detail:
   type: enum
   default: gif
   description:
-    en: "TENOR: Image detail to use for Tenors."
+    en: >
+      Tenor: Image format to use 
+      <ul>
+        <li>gif = High-quality GIF format</li>
+        <li>mediumgif = same height/width with small size reduction</li>
+        <li>tinygif = up to 220px wide</li>
+        <li>nanogif = up to 90 pixels tall</li>
+      <ul>
   choices:
     - gif
     - mediumgif
     - tinygif
     - nanogif
-giphy_content_rating:
-  type: enum
-  default: r
-  description:
-    en: 'GIPHY: Content rating for search results, more info at <a href="https://developers.giphy.com/docs/optional-settings#rating">https://developers.giphy.com/docs/optional-settings#rating</a>.'
-  choices:
-    - g
-    - pg
-    - pg-13
-    - r
 tenor_content_filter:
   type: "enum"
   default: high
   description:
-    en: "TENOR: Content safety level for Tenor results"
+    en: >
+      Tenor: Content safety level for Tenor results. Find more info in 
+      <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering">
+        Tenor API Guides
+      </a>.
   choices:
     - high
     - medium
     - low
     - "off"
+tenor_country:
+  type: string
+  default: "US"
+  description:
+    en: >
+      Tenor: Two-Letter Country of Origin for the request. Find your country code in 
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+        Wikipedia - ISO_3166-1
+      </a>.
+tenor_locale:
+  type: string
+  default: "en_US"
+  description:
+    en: >
+      Tenor: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
+      Format must be in "xx_YY" where "xx" is the <b>required</b> 
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
+        language code
+      </a> 
+      and "_YY" is the <b>optional</b> 
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+        country code
+      </a>. 
+      Find info on Tenor localization in 
+      <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">
+        Tenor API Guides
+      </a>.
