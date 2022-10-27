@@ -1,8 +1,8 @@
 <a
   href
   class="btn btn-default no-text mobile-gif-insert"
-  aria-label={{i18n "gif.composer_title"}}
-  {{action "showGifModal"}}
+  aria-label={{theme-i18n "gif.composer_title"}}
+  {{on "click" this.showGifModal}}
 >
   {{d-icon "discourse-gifs-gif"}}
 </a>
