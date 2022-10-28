@@ -1,12 +1,15 @@
 import Controller from "@ember/controller";
 import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
-import bootbox from "bootbox";
+import { inject as service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
+
 import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
 
 export default Controller.extend(ModalFunctionality, {
+  dialog: service(),
   customPickHandler: null,
   loading: false,
   currentGifs: null,
@@ -192,7 +195,9 @@ export default Controller.extend(ModalFunctionality, {
         );
         this.currentGifs.addObjects(images);
       } catch (error) {
-        bootbox.alert(error);
+        this.dialog.alert({
+          message: htmlSafe(error),
+        });
       } finally {
         this.set("loading", false);
       }
