@@ -2,7 +2,6 @@ import Controller from "@ember/controller";
 import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
-import { htmlSafe } from "@ember/template";
 
 import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
@@ -76,8 +75,7 @@ export default Controller.extend(ModalFunctionality, {
           (settings.api_provider === "giphy" && settings.giphy_api_key === "")
         ) {
           throw new Error(`${settings.api_provider.toUpperCase()} API key is not set. Site Admins, \
-            please visit <a target="_blank" rel="noreferrer noopener" \
-            href="https://meta.discourse.org/t/discourse-gifs/158738">Discourse Meta</a> \
+            please visit the "Discourse Gifs" theme-component topic on Discourse Meta \
             for setup instructions.`);
         }
 
@@ -196,7 +194,7 @@ export default Controller.extend(ModalFunctionality, {
         this.currentGifs.addObjects(images);
       } catch (error) {
         this.dialog.alert({
-          message: htmlSafe(error),
+          message: error,
         });
       } finally {
         this.set("loading", false);
