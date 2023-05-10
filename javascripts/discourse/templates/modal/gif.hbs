@@ -12,8 +12,8 @@
     {{/if}}
   </div>
 
-  <div class="gif-content">
-    {{#if currentGifs}}
+  {{#if currentGifs}}
+    <div class="gif-content">
       <div class="gif-box">
         {{gif-result-list
           content=currentGifs
@@ -21,10 +21,10 @@
           loadMore=(action "loadMore")
         }}
       </div>
-    {{else}}
-      <div class="gif-no-results">{{theme-i18n "gif.no_results"}}</div>
-    {{/if}}
-  </div>
+    </div>
+  {{else}}
+    <div class="gif-no-results">{{theme-i18n "gif.no_results"}}</div>
+  {{/if}}
 {{/d-modal-body}}
 
 <div class="modal-footer gif-modal">

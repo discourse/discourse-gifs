@@ -18,6 +18,10 @@ html:not(.discourse-gifs-with-img)
 }
 
 .gif-modal {
+  .modal-inner-container {
+    --modal-max-width: 90vw; // overrides core
+  }
+
   .gif-input {
     background: var(--primary-very-low);
     padding: 0.5em;
@@ -35,39 +39,22 @@ html:not(.discourse-gifs-with-img)
   }
 
   .gif-content {
-    height: calc(100% - 50px);
     overflow-y: auto;
     min-width: 320px;
-    max-height: 350px;
+    max-height: 65vh;
+    margin-top: 0.5em;
   }
   .gif-box {
     .gif-result-list {
-      padding-top: 1em;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      // TODO: Use this once support is more widespread
-      // grid-template-rows: masonry;
-      grid-gap: 0.6em;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      grid-auto-rows: 25px;
+      position: relative;
       .gif-imgwrap {
-        grid-row-end: span 3;
-        overflow: hidden;
-        background: var(--primary-very-low);
+        position: absolute;
         img {
-          max-width: 100%;
+          width: 100%;
+          height: auto;
+          cursor: pointer;
         }
       }
-      .tall-one {
-        grid-row-end: span 6;
-      }
-      .tall-two {
-        grid-row-end: span 4;
-      }
-    }
-    div[data-theme-discourse-gifs="container"],
-    div[data-theme-discourse-gifs="webp-container"] {
-      display: inline-block;
     }
     div.loading-container {
       display: block;
@@ -76,16 +63,11 @@ html:not(.discourse-gifs-with-img)
   }
 
   .gif-no-results {
-    width: 100%;
-    height: 210px;
-    box-sizing: border-box;
-    padding: 2em;
+    padding: 3em 1em;
+    font-size: var(--font-up-2);
+    color: var(--primary-low-mid);
     background: var(--primary-very-low);
-    font-size: var(--font-up-1);
-    color: var(--primary-medium);
     font-weight: bold;
-    display: flex;
-    align-items: center;
     text-align: center;
   }
 

@@ -1,13 +1,18 @@
 import Component from "@ember/component";
+import MiniMasonry from "../lib/minimasonry";
+import { next } from "@ember/runloop";
 
 export default Component.extend({
   tagName: "div",
   classNames: ["gif-result-list"],
   observer: null,
+  masonry: null,
 
   _setupInfiniteScrolling() {
     this.observer = new IntersectionObserver(() => {
-      if (this.content && this.content.length > 0) {
+      const scroller = document.querySelector(".gif-content");
+      // ensure we don't load more if we haven't scrolled at all
+      if (scroller?.scrollTop > 0 && this.content?.length > 0) {
         this.loadMore();
       }
     });
@@ -17,7 +22,27 @@ export default Component.extend({
   },
 
   didInsertElement() {
+    this._super(...arguments);
     this._setupInfiniteScrolling();
+
+    this.masonry = new MiniMasonry({
+      container: ".gif-result-list",
+      baseWidth: this.site.mobileView ? 145 : 200,
+      surroundingGutter: false,
+    });
+
+    this.rearrangeMasonry();
+  },
+
+  didUpdateAttrs() {
+    this._super(...arguments);
+    this.rearrangeMasonry();
+  },
+
+  rearrangeMasonry() {
+    next(() => {
+      this.masonry.layout();
+    });
   },
 
   willDestroyElement() {
