@@ -1,4 +1,9 @@
 .gif-modal .gif-content {
-  min-width: 650px;
-  max-height: 420px;
+  min-width: 650px; // 3 columns of gifs
+}
+
+@media screen and (min-width: 1200px) {
+  .gif-modal .gif-content {
+    min-width: 860px; // 4 columns of gifs
+  }
 }
