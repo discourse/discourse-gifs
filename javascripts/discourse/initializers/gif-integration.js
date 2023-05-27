@@ -34,9 +34,12 @@ export default {
           pluginId: "discourse-gifs",
 
           @action
-          showChatGifModal() {
+          showChatGifModal(context) {
             const insertGif = (content) => {
-              this.sendMessage(content).then(this.reset);
+              api.sendChatMessage(this.currentMessage.channel.id, content, {
+                threadId:
+                  context === "thread" ? this.currentMessage.thread.id : null,
+              });
             };
             showModal("gif").setProperties({
               customPickHandler: insertGif,
