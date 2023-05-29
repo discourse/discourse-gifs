@@ -35,8 +35,9 @@ export default {
 
           @action
           showChatGifModal(context) {
-            const insertGif = (content) => {
-              api.sendChatMessage(this.currentMessage.channel.id, content, {
+            const insertGif = (message) => {
+              api.sendChatMessage(this.currentMessage.channel.id, {
+                message,
                 threadId:
                   context === "thread" ? this.currentMessage.thread.id : null,
               });
