@@ -48,7 +48,7 @@ export default Controller.extend(ModalFunctionality, {
 
   @action
   refresh(query) {
-    this.set("query", query);
+    this.set("query", query.target.value);
     discourseDebounce(this, this.search, 700);
   },
 

@@ -10,13 +10,15 @@ export default {
     withPluginApi("0.1", (api) => {
       if (!api.container.lookup("site:main").mobileView) {
         api.onToolbarCreate((toolbar) => {
-          toolbar.addButton({
-            title: themePrefix("gif.composer_title"),
-            id: "gif_button",
-            group: "extras",
-            icon: "discourse-gifs-gif",
-            action: showGifModal,
-          });
+          if (toolbar.context.composerEvents) {
+            toolbar.addButton({
+              title: themePrefix("gif.composer_title"),
+              id: "gif_button",
+              group: "extras",
+              icon: "discourse-gifs-gif",
+              action: showGifModal,
+            });
+          }
         });
       }
 
