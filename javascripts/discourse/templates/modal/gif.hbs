@@ -1,11 +1,11 @@
 {{#d-modal-body id="gif-modal"}}
   <div class="gif-input">
-    {{input
+    <Input
       type="text"
       name="query"
-      autofocus="true"
-      key-up=(action "refresh")
-    }}
+      autofocus={{true}}
+      {{on "keyup" (action "refresh")}}
+    />
 
     {{#if loading}}
       {{loading-spinner size="small"}}
