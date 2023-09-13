@@ -1,13 +1,11 @@
-import Controller from "@ember/controller";
-import ModalFunctionality from "discourse/mixins/modal-functionality";
+import Component from "@ember/component";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
-
 import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
 
-export default Controller.extend(ModalFunctionality, {
+export default Component.extend({
   dialog: service(),
   customPickHandler: null,
   loading: false,
@@ -36,7 +34,7 @@ export default Controller.extend(ModalFunctionality, {
     } else {
       this.appEvents.trigger("composer:insert-text", markup);
     }
-    this.send("closeModal");
+    this.closeModal();
   },
 
   @action

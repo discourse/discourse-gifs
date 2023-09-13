@@ -1,0 +1,39 @@
+<DModal
+  @title={{theme-i18n "gif.modal_title"}}
+  @closeModal={{@closeModal}}
+  id="gif-modal"
+  class="gif-modal"
+>
+  <:body>
+    <div class="gif-input">
+      <Input
+        @type="text"
+        name="query"
+        autofocus={{true}}
+        {{on "keyup" (action "refresh")}}
+      />
+
+      {{#if loading}}
+        {{loading-spinner size="small"}}
+      {{/if}}
+    </div>
+
+    {{#if currentGifs}}
+      <div class="gif-content">
+        <div class="gif-box">
+          {{gif-result-list
+            content=currentGifs
+            pick=(action "pick")
+            loadMore=(action "loadMore")
+          }}
+        </div>
+      </div>
+    {{else}}
+      <div class="gif-no-results">{{theme-i18n "gif.no_results"}}</div>
+    {{/if}}
+  </:body>
+
+  <:footer>
+    <img src={{providerLogo}} />
+  </:footer>
+</DModal>
