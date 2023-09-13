@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import MiniMasonry from "../lib/minimasonry";
 import { next } from "@ember/runloop";
+import { action } from "@ember/object";
 
 export default Component.extend({
   tagName: "div",
@@ -47,11 +48,5 @@ export default Component.extend({
 
   willDestroyElement() {
     this.observer.disconnect();
-  },
-
-  actions: {
-    pick(gif) {
-      this.pick(gif);
-    },
   },
 });

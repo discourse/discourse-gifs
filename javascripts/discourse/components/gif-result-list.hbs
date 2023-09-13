@@ -1,7 +1,5 @@
-{{#each content as |result|}}
-  {{gif-result gif=result pick=(action "pick")}}
+{{#each this.content as |result|}}
+  <GifResult @gif={{result}} @pick={{this.pick}} />
 {{/each}}
 
-{{#conditional-loading-spinner
-  condition=loading
-}}{{/conditional-loading-spinner}}
+<ConditionalLoadingSpinner @condition={{this.loading}} />
