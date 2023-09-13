@@ -1,30 +1,20 @@
-import discourseComputed from "discourse-common/utils/decorators";
-import Component from "@ember/component";
+import Component from "@glimmer/component";
 import { htmlSafe } from "@ember/template";
+import { action } from "@ember/object";
 
-export default Component.extend({
-  tagName: "div",
-  classNames: ["gif-imgwrap"],
-  attributeBindings: ["role", "tabindex"],
-  role: "button",
-  tabindex: 0,
+export default class GifResult extends Component {
+  get style() {
+    const { width, height } = this.args.gif;
 
-  @discourseComputed("gif.width", "gif.height")
-  style(width, height) {
     if (width && height) {
       return htmlSafe(`--aspect-ratio: ${width / height};`);
     }
-  },
+  }
 
+  @action
   keyDown(event) {
     if (event.key === "Enter") {
-      this.pick(this.gif);
-      return false;
+      this.args.pick(this.args.gif);
     }
-  },
-
-  click() {
-    this.pick(this.gif);
-    return false;
-  },
-});
+  }
+}
