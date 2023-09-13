@@ -24,7 +24,7 @@ giphy_content_rating:
   default: r
   description:
     en: >
-      GIPHY: Content rating for search results. Find more info at 
+      GIPHY: Content rating for search results. Find more info at
       <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating">
         https://developers.giphy.com/docs/optional-settings#rating
       </a>.
@@ -103,7 +103,7 @@ tenor_file_detail:
   default: gif
   description:
     en: >
-      Tenor: Image format to use 
+      Tenor: Image format to use
       <ul>
         <li>gif = High-quality GIF format</li>
         <li>mediumgif = same height/width with small size reduction</li>
@@ -120,7 +120,7 @@ tenor_content_filter:
   default: high
   description:
     en: >
-      Tenor: Content safety level for Tenor results. Find more info in 
+      Tenor: Content safety level for Tenor results. Find more info in
       <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering">
         Tenor API Guides
       </a>.
@@ -134,7 +134,7 @@ tenor_country:
   default: "US"
   description:
     en: >
-      Tenor: Two-Letter Country of Origin for the request. Find your country code in 
+      Tenor: Two-Letter Country of Origin for the request. Find your country code in
       <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
         Wikipedia - ISO_3166-1
       </a>.
@@ -144,15 +144,15 @@ tenor_locale:
   description:
     en: >
       Tenor: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
-      Format must be in "xx_YY" where "xx" is the <b>required</b> 
+      Format must be in "xx_YY" where "xx" is the <b>required</b>
       <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
         language code
-      </a> 
-      and "_YY" is the <b>optional</b> 
+      </a>
+      and "_YY" is the <b>optional</b>
       <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
         country code
-      </a>. 
-      Find info on Tenor localization in 
+      </a>.
+      Find info on Tenor localization in
       <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">
         Tenor API Guides
       </a>.
