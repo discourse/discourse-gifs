@@ -1,5 +1,11 @@
-{{#each this.content as |result|}}
-  <GifResult @gif={{result}} @pick={{this.pick}} />
-{{/each}}
+<div
+  {{did-insert this.setup}}
+  {{did-update this.update @content}}
+  class="gif-result-list"
+>
+  {{#each @content as |result|}}
+    <GifResult @gif={{result}} @pick={{@pick}} />
+  {{/each}}
 
-<ConditionalLoadingSpinner @condition={{this.loading}} />
+  <ConditionalLoadingSpinner @condition={{this.loading}} />
+</div>
