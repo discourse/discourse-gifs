@@ -195,15 +195,6 @@ export default class Gif extends Component {
     }
   }
 
-  onShow() {
-    this.setProperties({
-      loading: false,
-      query: "",
-      offset: 0,
-      currentGifs: [],
-    });
-  }
-
   getEndpoint(query, offset) {
     if (settings.api_provider === "tenor") {
       let params = {
