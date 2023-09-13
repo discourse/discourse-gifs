@@ -8,7 +8,6 @@ import I18n from "I18n";
 export default class Gif extends Component {
   @service dialog;
 
-  customPickHandler;
   loading = false;
   currentGifs = [];
   query = "";
@@ -24,8 +23,8 @@ export default class Gif extends Component {
   pick(content) {
     let markup = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
 
-    if (this.customPickHandler) {
-      this.customPickHandler(markup);
+    if (this.model.customPickHandler) {
+      this.model.customPickHandler(markup);
     } else {
       this.appEvents.trigger("composer:insert-text", markup);
     }
