@@ -5,25 +5,20 @@ import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
 
-export default Component.extend({
-  dialog: service(),
-  customPickHandler: null,
-  loading: false,
-  currentGifs: null,
-  query: "",
-  next_key: "",
-  offset: 0,
+export default class Gif extends Component {
+  @service dialog;
 
-  init() {
-    this._super(...arguments);
-
-    this.set("currentGifs", []);
-  },
+  customPickHandler;
+  loading = false;
+  currentGifs = [];
+  query = "";
+  next_key = "";
+  offset = 0;
 
   @discourseComputed
   providerLogo() {
     return settings.theme_uploads[`${settings.api_provider}-logo`];
-  },
+  }
 
   @action
   pick(content) {
@@ -35,20 +30,20 @@ export default Component.extend({
       this.appEvents.trigger("composer:insert-text", markup);
     }
     this.closeModal();
-  },
+  }
 
   @action
   loadMore() {
     if (!this.loading) {
       this.search(false);
     }
-  },
+  }
 
   @action
   refresh(query) {
     this.set("query", query.target.value);
     discourseDebounce(this, this.search, 700);
-  },
+  }
 
   async search(clearResults = true) {
     if (clearResults) {
@@ -198,7 +193,7 @@ export default Component.extend({
         this.set("loading", false);
       }
     }
-  },
+  }
 
   onShow() {
     this.setProperties({
@@ -207,7 +202,7 @@ export default Component.extend({
       offset: 0,
       currentGifs: [],
     });
-  },
+  }
 
   getEndpoint(query, offset) {
     if (settings.api_provider === "tenor") {
@@ -248,5 +243,5 @@ export default Component.extend({
         })
       );
     }
-  },
-});
+  }
+}
