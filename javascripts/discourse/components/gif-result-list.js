@@ -1,13 +1,12 @@
 import Component from "@ember/component";
 import MiniMasonry from "../lib/minimasonry";
 import { next } from "@ember/runloop";
-import { action } from "@ember/object";
 
-export default Component.extend({
-  tagName: "div",
-  classNames: ["gif-result-list"],
-  observer: null,
-  masonry: null,
+export default class GifResultList extends Component {
+  tagName = "div";
+  classNames = ["gif-result-list"];
+  observer = null;
+  masonry = null;
 
   _setupInfiniteScrolling() {
     this.observer = new IntersectionObserver(() => {
@@ -20,7 +19,7 @@ export default Component.extend({
 
     let target = document.querySelector("div.gif-box div.loading-container");
     this.observer.observe(target);
-  },
+  }
 
   didInsertElement() {
     this._super(...arguments);
@@ -33,20 +32,20 @@ export default Component.extend({
     });
 
     this.rearrangeMasonry();
-  },
+  }
 
   didUpdateAttrs() {
     this._super(...arguments);
     this.rearrangeMasonry();
-  },
+  }
 
   rearrangeMasonry() {
     next(() => {
       this.masonry.layout();
     });
-  },
+  }
 
   willDestroyElement() {
     this.observer.disconnect();
-  },
-});
+  }
+}
