@@ -1,72 +1,62 @@
-import Controller from "@ember/controller";
-import ModalFunctionality from "discourse/mixins/modal-functionality";
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
-
-import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
 
-export default Controller.extend(ModalFunctionality, {
-  dialog: service(),
-  customPickHandler: null,
-  loading: false,
-  currentGifs: null,
-  query: "",
-  next_key: "",
-  offset: 0,
+export default class Gif extends Component {
+  @service appEvents;
+  @service dialog;
 
-  init() {
-    this._super(...arguments);
+  @tracked currentGifs = [];
+  @tracked loading = false;
+  @tracked offset = 0;
+  @tracked query = "";
 
-    this.set("currentGifs", []);
-  },
-
-  @discourseComputed
-  providerLogo() {
+  get providerLogo() {
     return settings.theme_uploads[`${settings.api_provider}-logo`];
-  },
+  }
 
   @action
   pick(content) {
     let markup = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
 
-    if (this.customPickHandler) {
-      this.customPickHandler(markup);
+    if (this.args.model?.customPickHandler) {
+      this.args.model.customPickHandler(markup);
     } else {
       this.appEvents.trigger("composer:insert-text", markup);
     }
-    this.send("closeModal");
-  },
+
+    this.args.closeModal();
+  }
 
   @action
   loadMore() {
     if (!this.loading) {
       this.search(false);
     }
-  },
+  }
 
   @action
-  refresh(query) {
-    this.set("query", query.target.value);
+  refresh(event) {
+    this.query = event.target.value;
     discourseDebounce(this, this.search, 700);
-  },
+  }
 
   async search(clearResults = true) {
     if (clearResults) {
-      this.set("currentGifs", []);
-      this.set("offset", 0);
+      this.currentGifs = [];
+      this.offset = 0;
     }
 
     // Check for minimum search query and if search result limit was set & reached
     if (
-      (this.query &&
-        this.query.length > 2 &&
-        !settings.limit_infinite_search_results) ||
+      (this.query.length > 2 && !settings.limit_infinite_search_results) ||
       (settings.limit_infinite_search_results &&
         this.currentGifs.length < settings.max_results_limit)
     ) {
-      this.set("loading", true);
+      this.loading = true;
 
       try {
         if (
@@ -102,6 +92,7 @@ export default Controller.extend(ModalFunctionality, {
             response.headers.get("content-type")?.includes("application/json")
           ) {
             const errorResponse = await response.json();
+
             // Check for API Key Errors first
             if (
               errorResponse.error.details.find(
@@ -183,33 +174,21 @@ export default Controller.extend(ModalFunctionality, {
         }
 
         // Handle offset differences between Giphy and Tenor
-        this.set(
-          "offset",
+        this.offset =
           settings.api_provider === "giphy"
             ? data.pagination.offset + data.pagination.count
             : data.next === ""
             ? 0
-            : data.next
-        );
+            : data.next;
+
         this.currentGifs.addObjects(images);
       } catch (error) {
-        this.dialog.alert({
-          message: error,
-        });
+        this.dialog.alert({ message: error });
       } finally {
-        this.set("loading", false);
+        this.loading = false;
       }
     }
-  },
-
-  onShow() {
-    this.setProperties({
-      loading: false,
-      query: "",
-      offset: 0,
-      currentGifs: [],
-    });
-  },
+  }
 
   getEndpoint(query, offset) {
     if (settings.api_provider === "tenor") {
@@ -235,12 +214,14 @@ export default Controller.extend(ModalFunctionality, {
           ? ",tinygif,preview"
           : ",preview";
 
-      return "https://tenor.googleapis.com/v2/search?" + $.param(params);
+      return (
+        "https://tenor.googleapis.com/v2/search?" + new URLSearchParams(params)
+      );
     } else {
       // GIPHY
       return (
         "https://api.giphy.com/v1/gifs/search?" +
-        $.param({
+        new URLSearchParams({
           limit: 24,
           q: query,
           offset,
@@ -250,5 +231,5 @@ export default Controller.extend(ModalFunctionality, {
         })
       );
     }
-  },
-});
+  }
+}

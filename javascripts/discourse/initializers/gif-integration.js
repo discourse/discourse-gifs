@@ -1,7 +1,6 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { showGifModal } from "../helpers/gif-modal";
-import showModal from "discourse/lib/show-modal";
 import { action } from "@ember/object";
+import GifModal from "../components/modal/gif";
 
 export default {
   name: "discourse-gifs",
@@ -16,7 +15,10 @@ export default {
               id: "gif_button",
               group: "extras",
               icon: "discourse-gifs-gif",
-              action: showGifModal,
+              action: () => {
+                const modal = api.container.lookup("service:modal");
+                modal.show(GifModal);
+              },
             });
           }
         });
@@ -37,15 +39,19 @@ export default {
 
           @action
           showChatGifModal(context) {
-            const insertGif = (message) => {
-              api.sendChatMessage(this.currentMessage.channel.id, {
-                message,
-                threadId:
-                  context === "thread" ? this.currentMessage.thread.id : null,
-              });
-            };
-            showModal("gif").setProperties({
-              customPickHandler: insertGif,
+            const modal = api.container.lookup("service:modal");
+            modal.show(GifModal, {
+              model: {
+                customPickHandler: (message) => {
+                  api.sendChatMessage(this.currentMessage.channel.id, {
+                    message,
+                    threadId:
+                      context === "thread"
+                        ? this.currentMessage.thread.id
+                        : null,
+                  });
+                },
+              },
             });
           },
         });
