@@ -1,21 +1,20 @@
-import Component from "@ember/component";
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
-import discourseComputed from "discourse-common/utils/decorators";
 import discourseDebounce from "discourse-common/lib/debounce";
 import I18n from "I18n";
 
 export default class Gif extends Component {
+  @service appEvents;
   @service dialog;
 
-  loading = false;
-  currentGifs = [];
-  query = "";
-  next_key = "";
-  offset = 0;
+  @tracked currentGifs = [];
+  @tracked loading = false;
+  @tracked offset = 0;
+  @tracked query = "";
 
-  @discourseComputed
-  providerLogo() {
+  get providerLogo() {
     return settings.theme_uploads[`${settings.api_provider}-logo`];
   }
 
@@ -23,12 +22,13 @@ export default class Gif extends Component {
   pick(content) {
     let markup = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
 
-    if (this.model.customPickHandler) {
-      this.model.customPickHandler(markup);
+    if (this.args.model?.customPickHandler) {
+      this.args.model.customPickHandler(markup);
     } else {
       this.appEvents.trigger("composer:insert-text", markup);
     }
-    this.closeModal();
+
+    this.args.closeModal();
   }
 
   @action
@@ -39,26 +39,24 @@ export default class Gif extends Component {
   }
 
   @action
-  refresh(query) {
-    this.set("query", query.target.value);
+  refresh(event) {
+    this.query = event.target.value;
     discourseDebounce(this, this.search, 700);
   }
 
   async search(clearResults = true) {
     if (clearResults) {
-      this.set("currentGifs", []);
-      this.set("offset", 0);
+      this.currentGifs = [];
+      this.offset = 0;
     }
 
     // Check for minimum search query and if search result limit was set & reached
     if (
-      (this.query &&
-        this.query.length > 2 &&
-        !settings.limit_infinite_search_results) ||
+      (this.query.length > 2 && !settings.limit_infinite_search_results) ||
       (settings.limit_infinite_search_results &&
         this.currentGifs.length < settings.max_results_limit)
     ) {
-      this.set("loading", true);
+      this.loading = true;
 
       try {
         if (
@@ -94,6 +92,7 @@ export default class Gif extends Component {
             response.headers.get("content-type")?.includes("application/json")
           ) {
             const errorResponse = await response.json();
+
             // Check for API Key Errors first
             if (
               errorResponse.error.details.find(
@@ -175,21 +174,18 @@ export default class Gif extends Component {
         }
 
         // Handle offset differences between Giphy and Tenor
-        this.set(
-          "offset",
+        this.offset =
           settings.api_provider === "giphy"
             ? data.pagination.offset + data.pagination.count
             : data.next === ""
             ? 0
-            : data.next
-        );
+            : data.next;
+
         this.currentGifs.addObjects(images);
       } catch (error) {
-        this.dialog.alert({
-          message: error,
-        });
+        this.dialog.alert({ message: error });
       } finally {
-        this.set("loading", false);
+        this.loading = false;
       }
     }
   }
