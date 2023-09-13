@@ -214,12 +214,14 @@ export default class Gif extends Component {
           ? ",tinygif,preview"
           : ",preview";
 
-      return "https://tenor.googleapis.com/v2/search?" + $.param(params);
+      return (
+        "https://tenor.googleapis.com/v2/search?" + new URLSearchParams(params)
+      );
     } else {
       // GIPHY
       return (
         "https://api.giphy.com/v1/gifs/search?" +
-        $.param({
+        new URLSearchParams({
           limit: 24,
           q: query,
           offset,
