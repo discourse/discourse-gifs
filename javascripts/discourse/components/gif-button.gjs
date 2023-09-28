@@ -5,13 +5,14 @@ import { on } from "@ember/modifier";
 import icon from "discourse-common/helpers/d-icon";
 import { themeI18n } from "discourse/helpers/theme-helpers";
 import GifModal from "../components/modal/gif";
+import i18n from "discourse-common/helpers/i18n";
 
 export default class GifButton extends Component {
   <template>
     <button
       type="button"
       class="btn btn-default no-text mobile-gif-insert"
-      aria-label={{themeI18n "gif.composer_title"}}
+      aria-label={{i18n (themePrefix "gif.composer_title")}}
       {{on "click" this.showGifModal}}
     >
       {{icon "discourse-gifs-gif"}}
