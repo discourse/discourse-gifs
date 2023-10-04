@@ -11,6 +11,7 @@ import ConditionalLoadingSpinner from "discourse/components/conditional-loading-
 export default class GifResultList extends Component {
   <template>
     <div
+      {{! template-lint-disable modifier-name-case }}
       {{didInsert this.setup}}
       {{didUpdate this.update @content}}
       class="gif-result-list"
