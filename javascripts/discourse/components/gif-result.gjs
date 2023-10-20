@@ -1,10 +1,25 @@
 import Component from "@glimmer/component";
-import { on } from "@ember/modifier";
 import { fn } from "@ember/helper";
-import { htmlSafe } from "@ember/template";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
+import { htmlSafe } from "@ember/template";
 
 export default class GifResult extends Component {
+  get style() {
+    const { width, height } = this.args.gif;
+
+    if (width && height) {
+      return htmlSafe(`--aspect-ratio: ${width / height};`);
+    }
+  }
+
+  @action
+  keyDown(event) {
+    if (event.key === "Enter") {
+      this.args.pick(this.args.gif);
+    }
+  }
+
   <template>
     <div
       {{on "click" (fn @pick @gif)}}
@@ -24,19 +39,4 @@ export default class GifResult extends Component {
       />
     </div>
   </template>
-
-  get style() {
-    const { width, height } = this.args.gif;
-
-    if (width && height) {
-      return htmlSafe(`--aspect-ratio: ${width / height};`);
-    }
-  }
-
-  @action
-  keyDown(event) {
-    if (event.key === "Enter") {
-      this.args.pick(this.args.gif);
-    }
-  }
 }

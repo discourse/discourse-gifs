@@ -5,8 +5,11 @@
   "author": "Discourse",
   "license": "MIT",
   "devDependencies": {
-    "eslint-config-discourse": "^4.0.0",
-    "minimasonry": "^1.3.2"
+    "@discourse/lint-configs": "^1.0.0",
+    "ember-template-lint": "^5.11.2",
+    "eslint": "^8.51.0",
+    "minimasonry": "^1.3.2",
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "copy-masonry": "cp node_modules/minimasonry/src/minimasonry.js javascripts/discourse/lib/minimasonry.js"

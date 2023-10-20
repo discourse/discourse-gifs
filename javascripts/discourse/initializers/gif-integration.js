@@ -1,5 +1,5 @@
-import { withPluginApi } from "discourse/lib/plugin-api";
 import { action } from "@ember/object";
+import { withPluginApi } from "discourse/lib/plugin-api";
 import GifModal from "../components/modal/gif";
 
 export default {
