@@ -1,10 +1,29 @@
 import Component from "@glimmer/component";
+import didInsert from "@ember/render-modifiers/modifiers/did-insert";
+import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { inject as service } from "@ember/service";
 import { action } from "@ember/object";
 import MiniMasonry from "../lib/minimasonry";
 import { schedule } from "@ember/runloop";
+import GifResult from "./gif-result";
+import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
 
 export default class GifResultList extends Component {
+  <template>
+    <div
+      {{! template-lint-disable modifier-name-case }}
+      {{didInsert this.setup}}
+      {{didUpdate this.update @content}}
+      class="gif-result-list"
+    >
+      {{#each @content as |result|}}
+        <GifResult @gif={{result}} @pick={{@pick}} />
+      {{/each}}
+
+      <ConditionalLoadingSpinner @condition={{this.loading}} />
+    </div>
+  </template>
+
   @service site;
 
   observer;
