@@ -7,7 +7,7 @@
   <:body>
     <div class="gif-input">
       <Input
-        {{on "keyup" this.refresh}}
+        {{on "input" this.refresh}}
         @type="text"
         name="query"
         autofocus={{true}}
