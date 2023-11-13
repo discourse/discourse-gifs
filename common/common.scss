@@ -18,6 +18,10 @@ html:not(.discourse-gifs-with-img)
 }
 
 .gif-modal {
+  .modal-inner-container {
+    --modal-max-width: 90vw; // overrides core
+  }
+
   .gif-input {
     background: var(--primary-very-low);
     padding: 0.5em;
@@ -67,7 +71,8 @@ html:not(.discourse-gifs-with-img)
     text-align: center;
   }
 
-  .d-modal__footer {
+  .d-modal__footer,
+  .modal-footer {
     display: flex;
     flex-flow: row-reverse;
     img {
