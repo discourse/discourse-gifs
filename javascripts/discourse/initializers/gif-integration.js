@@ -46,9 +46,7 @@ export default {
                   api.sendChatMessage(this.draft.channel.id, {
                     message,
                     threadId:
-                      context === "thread"
-                        ? this.draft.thread.id
-                        : null,
+                      context === "thread" ? this.draft.thread.id : null,
                   });
                 },
               },
