@@ -43,11 +43,11 @@ export default {
             modal.show(GifModal, {
               model: {
                 customPickHandler: (message) => {
-                  api.sendChatMessage(this.currentMessage.channel.id, {
+                  api.sendChatMessage(this.draft.channel.id, {
                     message,
                     threadId:
                       context === "thread"
-                        ? this.currentMessage.thread.id
+                        ? this.draft.thread.id
                         : null,
                   });
                 },
