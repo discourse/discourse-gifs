@@ -15,6 +15,7 @@ export default class GifResultList extends Component {
   masonry;
 
   willDestroy() {
+    super.willDestroy(...arguments);
     this.observer.disconnect();
   }
 
