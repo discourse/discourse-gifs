@@ -1,4 +1,5 @@
 import { action } from "@ember/object";
+import { inject as service } from "@ember/service";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import GifModal from "../components/modal/gif";
 
@@ -7,7 +8,7 @@ export default {
 
   initialize(container) {
     withPluginApi("0.1", (api) => {
-      if (!api.container.lookup("site:main").mobileView) {
+      if (!api.container.lookup("service:site").mobileView) {
         api.onToolbarCreate((toolbar) => {
           if (toolbar.context.composerEvents) {
             toolbar.addButton({
@@ -37,10 +38,11 @@ export default {
         api.modifyClass("component:chat-composer", {
           pluginId: "discourse-gifs",
 
+          modal: service(),
+
           @action
           showChatGifModal(context) {
-            const modal = api.container.lookup("service:modal");
-            modal.show(GifModal, {
+            this.modal.show(GifModal, {
               model: {
                 customPickHandler: (message) => {
                   api.sendChatMessage(this.draft.channel.id, {
