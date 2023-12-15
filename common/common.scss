@@ -18,8 +18,8 @@ html:not(.discourse-gifs-with-img)
 }
 
 .gif-modal {
-  .modal-inner-container {
-    --modal-max-width: 90vw; // overrides core
+  .d-modal__container {
+    --modal-max-width: 900px;
   }
 
   .gif-input {
