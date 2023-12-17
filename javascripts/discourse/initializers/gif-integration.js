@@ -38,8 +38,6 @@ export default {
         api.modifyClass("component:chat-composer", {
           pluginId: "discourse-gifs",
 
-          modal: service(),
-
           @action
           showChatGifModal(context) {
             this.modal.show(GifModal, {
