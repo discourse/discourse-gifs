@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 de:
+  gif:
+    modal_title: "GIFs suchen"
+    query: "Begriff"
+    insert: "Ausgewählte Bilder einfügen"
+    composer_title: "GIFs suchen"
+    no_results: "Gib ein Stichwort in das Eingabefeld oben ein, um nach GIFs zu suchen."
+    bad_api_key: "Ungültiger $api_provider API-Schlüssel. Website-Administratoren, bitte überprüft euren Schlüssel und/oder dein $api_provider Konto."
+    error_rate_limit: "Wir haben unser $api_provider API-Begrenzungen erreicht. Bitte warte und versuche es später noch einmal. Wenn das Problem weiterhin besteht, wende dich an deinen Website-Administrator."
+    error_search_too_long: "Bitte verkürze deine Suchanfrage auf weniger als 50 Zeichen und versuche es erneut."
