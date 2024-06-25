@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 he:
+  gif:
+    modal_title: "חיפוש הנפשות GIF"
+    query: "ביטוי"
+    insert: "הוספת התמונות הנבחרות"
+    composer_title: "חיפוש הנפשות GIF"
+    no_results: "נא למלא מילת מפתח בתיבת הקלט שלהלן כדי לחפש הנפשות GIF."
+    bad_api_key: "ה־API‏ של $api_provider שגוי. מנהלי האתר, נא לבדוק את המפתח שלכם ו/או את חשבון ה־$api_provider שלכם."
+    error_rate_limit: "הגענו לתקורת מגבלת קצב ה־API של $api_provider. נא להמתין ולנסות שוב מאוחר יותר. אם הבעיה נמשכת, נא ליצור קשר עם הנהלת האתר."
+    error_search_too_long: "נא לקצר את שאילתת החיפוש שלך לפחות מ־50 תווים ולנסות שוב."
