@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  gif:
+    modal_title: "GIF ara"
+    query: "Terim"
+    insert: "Seçili Görüntüleri ekle"
+    composer_title: "GIF ara"
+    no_results: "GIF aramak için yukarıdaki girdi kutusuna bir anahtar kelime girin."
+    bad_api_key: "Geçersiz $api_provider API Anahtarı. Site yöneticileri, lütfen anahtarınızı ve/veya $api_provider hesabınızı kontrol edin."
+    error_rate_limit: "$api_provider API Oran Sınırlarımıza ulaştık. Lütfen bekleyin ve daha sonra tekrar deneyin. Bu sorun devam ederse site yöneticinizle iletişime geçin."
+    error_search_too_long: "Lütfen arama sorgunuzu 50 karakterin altına kısaltın ve tekrar deneyin."

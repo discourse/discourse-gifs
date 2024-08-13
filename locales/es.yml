@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 es:
+  gif:
+    modal_title: "Buscar GIFs"
+    query: "Término"
+    insert: "Insertar imágenes seleccionadas"
+    composer_title: "Buscar GIFs"
+    no_results: "Introduce una palabra clave en el cuadro de entrada de arriba para buscar GIFs."
+    bad_api_key: "Clave de API de $api_provider no válida. Administradores del sitio, comprobad vuestra clave y/o vuestra cuenta de $api_provider."
+    error_rate_limit: "Hemos alcanzado nuestros límites de velocidad de la API de $api_provider. Espera y vuelve a intentarlo más tarde. Si este problema persiste, ponte en contacto con el administrador de tu sitio."
+    error_search_too_long: "Acorta la búsqueda a menos de 50 caracteres e inténtalo de nuevo."
