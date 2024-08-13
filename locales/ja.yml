@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 ja:
+  gif:
+    modal_title: "GIF 検索"
+    query: "用語"
+    insert: "選択した画像を挿入"
+    composer_title: "GIF 検索"
+    no_results: "GIF を検索するには、上の入力ボックスにキーワードを入力してください。"
+    bad_api_key: "無効な $api_provider API キーです。サイト管理者は、キーと $api_provider アカウントを確認してください。"
+    error_rate_limit: "$api_provider API レート制限に達しました。しばらくしてからもう一度お試しください。この問題が解決しない場合は、サイト管理者にお問い合わせください。"
+    error_search_too_long: "検索クエリを 50 文字以下に減らしてからもう一度お試しください。"

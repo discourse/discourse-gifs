@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 it:
+  gif:
+    modal_title: "Cerca GIF"
+    query: "Termine"
+    insert: "Inserisci immagini selezionate"
+    composer_title: "Cerca GIF"
+    no_results: "Inserisci una parola chiave nella casella di input in alto per cercare le GIF."
+    bad_api_key: "Chiave API $api_provider non valida. L'amministratore del sito deve controllare la chiave e/o l'account $api_provider."
+    error_rate_limit: "Abbiamo raggiunto i nostri limiti di velocità API per $api_provider. Attendi e riprova più tardi. Se il problema persiste, contatta l'amministratore del tuo sito."
+    error_search_too_long: "Accorcia la query di ricerca a meno di 50 caratteri e riprova."
