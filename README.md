@@ -6,4 +6,4 @@ To learn more, check out: https://meta.discourse.org/t/discourse-gifs-component/
 
 ### Developers
 
-This repository uses the Minimasonry library to lay out the GIFs when selecting. Use `yarn run copy-masonry` to update the package.
+This repository uses the Minimasonry library to lay out the GIFs when selecting. Use `pnpm run copy-masonry` to update the package.
