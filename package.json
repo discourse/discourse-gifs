@@ -8,5 +8,11 @@
   },
   "scripts": {
     "copy-masonry": "cp node_modules/minimasonry/src/minimasonry.js javascripts/discourse/lib/minimasonry.js"
+  },
+  "engines": {
+    "node": ">= 18",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm",
+    "pnpm": ">= 9"
   }
 }
