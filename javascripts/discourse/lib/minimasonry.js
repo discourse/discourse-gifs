@@ -1,3 +1,4 @@
+/* eslint-disable */
 var MiniMasonry = function(conf) {
     this._sizes             = [];
     this._columns           = [];
