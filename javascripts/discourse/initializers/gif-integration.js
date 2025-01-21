@@ -1,4 +1,5 @@
 import { action } from "@ember/object";
+import { service } from "@ember/service";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import GifModal from "../components/modal/gif";
 
@@ -34,24 +35,28 @@ export default {
           position: "dropdown",
         });
 
-        api.modifyClass("component:chat-composer", {
-          pluginId: "discourse-gifs",
+        api.modifyClass(
+          "component:chat-composer",
+          (Superclass) =>
+            class extends Superclass {
+              @service modal;
 
-          @action
-          showChatGifModal(context) {
-            this.modal.show(GifModal, {
-              model: {
-                customPickHandler: (message) => {
-                  api.sendChatMessage(this.draft.channel.id, {
-                    message,
-                    threadId:
-                      context === "thread" ? this.draft.thread.id : null,
-                  });
-                },
-              },
-            });
-          },
-        });
+              @action
+              showChatGifModal(context) {
+                this.modal.show(GifModal, {
+                  model: {
+                    customPickHandler: (message) => {
+                      api.sendChatMessage(this.draft.channel.id, {
+                        message,
+                        threadId:
+                          context === "thread" ? this.draft.thread.id : null,
+                      });
+                    },
+                  },
+                });
+              }
+            }
+        );
       }
     });
 
