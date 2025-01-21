@@ -1,7 +1,7 @@
 import { action } from "@ember/object";
 import { withPluginApi } from "discourse/lib/plugin-api";
-import ChatComposer from "discourse/plugins/chat/discourse/components/chat-composer";
 import GifModal from "../components/modal/gif";
+import { service } from "@ember/service";
 
 export default {
   name: "discourse-gifs",
@@ -36,7 +36,7 @@ export default {
         });
 
         api.modifyClass(
-          ChatComposer,
+          "component:chat-composer",
           (Superclass) =>
             class extends Superclass {
               @service modal;
