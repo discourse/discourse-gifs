@@ -37,8 +37,8 @@ export default {
 
         api.modifyClass(
           ChatComposer,
-          (Base) =>
-            class extends Base {
+          (Superclass) =>
+            class extends Superclass {
               @service modal;
 
               @action
