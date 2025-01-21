@@ -1,0 +1,16 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+nl:
+  gif:
+    modal_title: "GIF's zoeken"
+    query: "Term"
+    insert: "Geselecteerde afbeeldingen invoegen"
+    composer_title: "GIF's zoeken"
+    no_results: "Voer een trefwoord in het invoerveld hierboven in om GIF's te zoeken."
+    bad_api_key: "Ongeldige API-sleutel voor $api_provider. Sitebeheerders, controleer je sleutel en/of je $api_provider-account."
+    error_rate_limit: "We hebben onze API-snelheidslimiet voor $api_provider bereikt. Wacht even en probeer het later opnieuw. Als dit probleem zich blijft voordoen, neem dan contact op met je sitebeheerder."
+    error_search_too_long: "Kort je zoekopdracht in tot minder dan 50 tekens en probeer het opnieuw."

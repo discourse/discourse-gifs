@@ -1,0 +1,16 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+ru:
+  gif:
+    modal_title: "Поиск GIF-картинок"
+    query: "Поисковый запрос"
+    insert: "Вставляет выбранные изображения"
+    composer_title: "Поиск GIF-картинок"
+    no_results: "Вводит ключевое слово в поле ввода выше для поиска GIF-картинок."
+    bad_api_key: "Неверный ключ API $api_provider. Администраторы сайта, проверьте ваш ключ и/или аккаунт $api_provider."
+    error_rate_limit: "Мы достигли предела запросов к API $api_provider. Подождите и попробуйте снова через некоторое время. Если проблема повторяется, свяжитесь с администратором сайта."
+    error_search_too_long: "Сократите поисковый запрос до 50 символов и повторите попытку."

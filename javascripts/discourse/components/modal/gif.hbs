@@ -6,12 +6,7 @@
 >
   <:body>
     <div class="gif-input">
-      <Input
-        {{on "input" this.refresh}}
-        @type="text"
-        name="query"
-        autofocus={{true}}
-      />
+      <Input {{on "input" this.refresh}} @type="text" name="query" />
 
       {{#if this.loading}}
         {{loading-spinner size="small"}}

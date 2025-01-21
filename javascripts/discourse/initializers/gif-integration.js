@@ -1,5 +1,4 @@
 import { action } from "@ember/object";
-import { inject as service } from "@ember/service";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import ChatComposer from "discourse/plugins/chat/discourse/components/chat-composer";
 import GifModal from "../components/modal/gif";
@@ -62,7 +61,7 @@ export default {
     });
 
     // for old tenor gifs compat
-    const caps = container.lookup("capabilities:main");
+    const caps = container.lookup("service:capabilities");
     if (caps.isSafari || caps.isIOS) {
       document.documentElement.classList.add("discourse-gifs-with-img");
     }

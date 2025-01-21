@@ -1,0 +1,16 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+fr:
+  gif:
+    modal_title: "Rechercher des GIF"
+    query: "Terme"
+    insert: "Insérer les images sélectionnées"
+    composer_title: "Rechercher des GIF"
+    no_results: "Saisissez un mot-clé dans la zone de saisie ci-dessus pour rechercher des GIF."
+    bad_api_key: "Clé API $api_provider invalide. Administrateurs du site, veuillez vérifier votre clé et/ou votre compte $api_provider ."
+    error_rate_limit: "Nous avons atteint nos limites de débit avec l'API $api_provider. Veuillez patienter et réessayer plus tard. Si ce problème persiste, contactez l'administrateur de votre site."
+    error_search_too_long: "Veuillez réduire votre requête de recherche à moins de 50 caractères et réessayer."

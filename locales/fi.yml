@@ -1,0 +1,16 @@
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
+#
+# To work with us on translations, join this project:
+# https://translate.discourse.org/
+
+fi:
+  gif:
+    modal_title: "Hae GIF-kuvia"
+    query: "Termi"
+    insert: "Lisää valitut kuvat"
+    composer_title: "Hae GIF-kuvia"
+    no_results: "Hae GIF-kuvia kirjoittamalla avainsana yllä olevaan tekstiruutuun."
+    bad_api_key: "Virheellinen palvelun $api_provider API-avain. Sivuston ylläpitäjät, tarkistakaa avain ja/tai palvelun $api_provider tilisi."
+    error_rate_limit: "Olemme saavuttaneet palvelun $api_provider API-rajat. Odota ja yritä myöhemmin uudelleen. Jos ongelma jatkuu, ota yhteyttä sivuston ylläpitäjään."
+    error_search_too_long: "Lyhennä hakukyselysi alle 50 merkin pituiseksi ja yritä uudelleen."
