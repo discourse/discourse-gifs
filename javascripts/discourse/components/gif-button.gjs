@@ -2,8 +2,8 @@ import Component from "@glimmer/component";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
-import icon from "discourse-common/helpers/d-icon";
-import i18n from "discourse-common/helpers/i18n";
+import icon from "discourse/helpers/d-icon";
+import { i18n } from "discourse-i18n";
 import GifModal from "../components/modal/gif";
 
 export default class GifButton extends Component {
