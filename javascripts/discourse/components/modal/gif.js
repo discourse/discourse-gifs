@@ -2,8 +2,8 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
-import discourseDebounce from "discourse-common/lib/debounce";
-import I18n from "I18n";
+import discourseDebounce from "discourse/lib/debounce";
+import { i18n } from "discourse-i18n";
 
 export default class Gif extends Component {
   @service appEvents;
@@ -78,11 +78,11 @@ export default class Gif extends Component {
           // Only check for certain errors if setting is configured to do so.
           // This is to allow server admins time & the choice to update the custom messages. Existing Plugin users will have this setting disabled by default.
           if (response.status === 429) {
-            errorMsg = I18n.t(themePrefix("gif.error_rate_limit"));
+            errorMsg = i18n(themePrefix("gif.error_rate_limit"));
           } else if (response.status === 414) {
-            errorMsg = I18n.t(themePrefix("gif.error_search_too_long"));
+            errorMsg = i18n(themePrefix("gif.error_search_too_long"));
           } else if (response.status === 403 || response.status === 401) {
-            errorMsg = I18n.t(themePrefix("gif.bad_api_key"));
+            errorMsg = i18n(themePrefix("gif.bad_api_key"));
           }
 
           // Parse Error Messages from Tenor if one isn't set yet
@@ -99,7 +99,7 @@ export default class Gif extends Component {
                 (e) => e.reason === "API_KEY_INVALID"
               ) !== undefined
             ) {
-              errorMsg = I18n.t(themePrefix("gif.bad_api_key"));
+              errorMsg = i18n(themePrefix("gif.bad_api_key"));
             } else {
               // Map Error Message according to default Google API standards
               throw new Error(
