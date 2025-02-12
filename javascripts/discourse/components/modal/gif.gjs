@@ -25,7 +25,11 @@ export default class Gif extends Component {
 
   @action
   pick(content) {
-    let markup = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
+    let markup = [
+      "\n",
+      `![${content.title}|${content.width}x${content.height}](${content.original})`,
+      "\n",
+    ].join("");
 
     if (this.args.model?.customPickHandler) {
       this.args.model.customPickHandler(markup);
