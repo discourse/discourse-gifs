@@ -41,9 +41,9 @@ export default class Gif extends Component {
   }
 
   @action
-  loadMore() {
+  async loadMore() {
     if (!this.loading) {
-      this.search(false);
+      await this.search(false);
     }
   }
 
@@ -79,6 +79,10 @@ export default class Gif extends Component {
         }
 
         const response = await fetch(this.getEndpoint(this.query, this.offset));
+
+        if (this.isDestroying || this.isDestroyed) {
+          return;
+        }
 
         if (!response.ok) {
           // Use the same errorMsg variable to handle variable replacement at the end for API Provider Display Name $api_provider.
@@ -141,6 +145,10 @@ export default class Gif extends Component {
         }
 
         const data = await response.json();
+        if (this.isDestroying || this.isDestroyed) {
+          return;
+        }
+
         let images;
 
         if (settings.api_provider === "giphy") {
