@@ -1,9 +1,14 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { Input } from "@ember/component";
+import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import DModal from "discourse/components/d-modal";
+import loadingSpinner from "discourse/helpers/loading-spinner";
 import discourseDebounce from "discourse/lib/debounce";
 import { i18n } from "discourse-i18n";
+import GifResultList from "../gif-result-list";
 
 export default class Gif extends Component {
   @service appEvents;
@@ -20,7 +25,11 @@ export default class Gif extends Component {
 
   @action
   pick(content) {
-    let markup = `\n![${content.title}|${content.width}x${content.height}](${content.original})\n`;
+    let markup = [
+      "\n",
+      `![${content.title}|${content.width}x${content.height}](${content.original})`,
+      "\n",
+    ].join("");
 
     if (this.args.model?.customPickHandler) {
       this.args.model.customPickHandler(markup);
@@ -232,4 +241,43 @@ export default class Gif extends Component {
       );
     }
   }
+
+  <template>
+    <DModal
+      @title={{i18n (themePrefix "gif.modal_title")}}
+      @closeModal={{@closeModal}}
+      id="gif-modal"
+      class="gif-modal"
+    >
+      <:body>
+        <div class="gif-input">
+          <Input {{on "input" this.refresh}} @type="text" name="query" />
+
+          {{#if this.loading}}
+            {{loadingSpinner size="small"}}
+          {{/if}}
+        </div>
+
+        {{#if this.currentGifs}}
+          <div class="gif-content">
+            <div class="gif-box">
+              <GifResultList
+                @content={{this.currentGifs}}
+                @pick={{this.pick}}
+                @loadMore={{this.loadMore}}
+              />
+            </div>
+          </div>
+        {{else}}
+          <div class="gif-no-results">{{i18n
+              (themePrefix "gif.no_results")
+            }}</div>
+        {{/if}}
+      </:body>
+
+      <:footer>
+        <img src={{this.providerLogo}} />
+      </:footer>
+    </DModal>
+  </template>
 }
