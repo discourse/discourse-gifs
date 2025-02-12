@@ -269,7 +269,9 @@ export default class Gif extends Component {
             </div>
           </div>
         {{else}}
-          <div class="gif-no-results">{{i18n (themePrefix "gif.no_results")}}</div>
+          <div class="gif-no-results">{{i18n
+              (themePrefix "gif.no_results")
+            }}</div>
         {{/if}}
       </:body>
 
