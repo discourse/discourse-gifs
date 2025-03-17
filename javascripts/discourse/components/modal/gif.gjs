@@ -195,8 +195,8 @@ export default class Gif extends Component {
           settings.api_provider === "giphy"
             ? data.pagination.offset + data.pagination.count
             : data.next === ""
-            ? 0
-            : data.next;
+              ? 0
+              : data.next;
 
         this.currentGifs.addObjects(images);
       } catch (error) {

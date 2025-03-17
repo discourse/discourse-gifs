@@ -12,6 +12,7 @@ html:not(.discourse-gifs-with-img)
   .submit-panel .mobile-gif-insert {
     margin-right: 0.25rem;
   }
+
   &.show-preview .submit-panel .mobile-gif-insert {
     display: none;
   }
@@ -26,11 +27,13 @@ html:not(.discourse-gifs-with-img)
     background: var(--primary-very-low);
     padding: 0.5em;
     position: relative;
+
     > input {
       width: 100%;
       margin-right: 1em;
       margin-bottom: 0;
     }
+
     .spinner {
       position: absolute;
       right: 1.2em;
@@ -44,11 +47,14 @@ html:not(.discourse-gifs-with-img)
     max-height: 65vh;
     margin-top: 0.5em;
   }
+
   .gif-box {
     .gif-result-list {
       position: relative;
+
       .gif-imgwrap {
         position: absolute;
+
         img {
           width: 100%;
           height: auto;
@@ -56,6 +62,7 @@ html:not(.discourse-gifs-with-img)
         }
       }
     }
+
     div.loading-container {
       display: block;
       height: 10px;
@@ -75,6 +82,7 @@ html:not(.discourse-gifs-with-img)
   .modal-footer {
     display: flex;
     flex-flow: row-reverse;
+
     img {
       height: 30px;
     }
