@@ -16,5 +16,13 @@
     "yarn": "please-use-pnpm",
     "pnpm": "9.x"
   },
-  "packageManager": "pnpm@9.15.5"
+  "packageManager": "pnpm@9.15.5",
+  "dependencies": {
+    "@embroider/addon-dev": "^8.0.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "babel-plugin-ember-template-compilation": "^2.4.1",
+    "decorator-transforms": "^2.3.0",
+    "ember-source": "5.12.0",
+    "rollup": "^4.40.2"
+  }
 }

@@ -1,7 +1,7 @@
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { withPluginApi } from "discourse/lib/plugin-api";
-import GifModal from "../components/modal/gif";
+import GifModal from "../components/modal/gif.gjs";
 
 export default {
   name: "discourse-gifs",

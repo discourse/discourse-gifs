@@ -8,8 +8,11 @@ import DModal from "discourse/components/d-modal";
 import loadingSpinner from "discourse/helpers/loading-spinner";
 import discourseDebounce from "discourse/lib/debounce";
 import { i18n } from "discourse-i18n";
-import GifResultList from "../gif-result-list";
+import GifResultList from "../gif-result-list.gjs";
 
+const themePrefix = (path) => {
+  return `discourse-gifs/${path}`;
+};
 export default class Gif extends Component {
   @service appEvents;
   @service dialog;

@@ -6,7 +6,7 @@ import { schedule } from "@ember/runloop";
 import { service } from "@ember/service";
 import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
 import MiniMasonry from "../lib/minimasonry";
-import GifResult from "./gif-result";
+import GifResult from "./gif-result.gjs";
 
 export default class GifResultList extends Component {
   @service site;
