@@ -7,23 +7,22 @@ export default {
   name: "discourse-gifs",
 
   initialize(container) {
-    withPluginApi("0.1", (api) => {
-      if (!api.container.lookup("service:site").mobileView) {
-        api.onToolbarCreate((toolbar) => {
-          if (toolbar.context.composerEvents) {
-            toolbar.addButton({
-              title: themePrefix("gif.composer_title"),
-              id: "gif_button",
-              group: "extras",
-              icon: "discourse-gifs-gif",
-              action: () => {
-                const modal = api.container.lookup("service:modal");
-                modal.show(GifModal);
-              },
-            });
-          }
-        });
-      }
+    withPluginApi((api) => {
+      api.onToolbarCreate((toolbar) => {
+        if (toolbar.context.composerEvents) {
+          toolbar.addButton({
+            title: themePrefix("gif.composer_title"),
+            id: "gif_button",
+            group: "extras",
+            icon: "discourse-gifs-gif",
+            condition: () => !api.container.lookup("service:site").mobileView,
+            action: () => {
+              const modal = api.container.lookup("service:modal");
+              modal.show(GifModal);
+            },
+          });
+        }
+      });
 
       const chat = api.container.lookup("service:chat");
       if (chat) {
