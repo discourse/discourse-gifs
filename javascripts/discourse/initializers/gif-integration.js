@@ -36,23 +36,29 @@ export default {
 
         api.modifyClass(
           "component:chat-composer",
-          (Superclass) =>
-            class extends Superclass {
+          (ChatComposer) =>
+            class extends ChatComposer {
               @service modal;
 
               @action
-              showChatGifModal(context) {
-                this.modal.show(GifModal, {
+              async showChatGifModal(context) {
+                await this.modal.show(GifModal, {
                   model: {
                     customPickHandler: (message) => {
                       api.sendChatMessage(this.draft.channel.id, {
                         message,
                         threadId:
                           context === "thread" ? this.draft.thread.id : null,
+                        inReplyToId:
+                          context === "channel"
+                            ? this.draft.inReplyTo?.id
+                            : null,
                       });
                     },
                   },
                 });
+
+                this.draft.channel.resetDraft(this.currentUser);
               }
             }
         );
