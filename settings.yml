@@ -19,6 +19,23 @@ giphy_file_format:
   choices:
     - webp
     - gif
+giphy_size_variant:
+  type: enum
+  default: downsized_medium
+  description:
+    en: >
+      GIPHY: Size variant to use. Choose based on your site's upload limit.
+      <ul>
+        <li>downsized = Under 2MB</li>
+        <li>downsized_medium = Under 5MB (recommended for most sites)</li>
+        <li>downsized_large = Under 8MB</li>
+        <li>original = Full size with no limit</li>
+      <ul>
+  choices:
+    - original
+    - downsized_large
+    - downsized_medium
+    - downsized
 giphy_content_rating:
   type: enum
   default: r
@@ -100,15 +117,15 @@ tenor_client_key:
     en: "Tenor: (optional) client-specified string that represents the integration"
 tenor_file_detail:
   type: enum
-  default: gif
+  default: mediumgif
   description:
     en: >
       Tenor: Image format to use
       <ul>
-        <li>gif = High-quality GIF format</li>
-        <li>mediumgif = same height/width with small size reduction</li>
-        <li>tinygif = up to 220px wide</li>
-        <li>nanogif = up to 90 pixels tall</li>
+        <li>gif = Full size, highest quality (largest files)</li>
+        <li>mediumgif = Full size with compression to reduce file size (recommended for most sites)</li>
+        <li>tinygif = Scaled down to 220px wide (smaller files)</li>
+        <li>nanogif = Scaled down to 90px tall (smallest files)</li>
       <ul>
   choices:
     - gif
