@@ -162,7 +162,8 @@ export default class Gif extends Component {
                 settings.giphy_file_format === "webp"
                   ? gif.images.fixed_width.webp
                   : gif.images.fixed_width.url,
-              original: isWebp && sizeVariant.webp ? sizeVariant.webp : sizeVariant.url,
+              original:
+                isWebp && sizeVariant.webp ? sizeVariant.webp : sizeVariant.url,
               width: parseInt(sizeVariant.width, 10),
               height: parseInt(sizeVariant.height, 10),
             };
