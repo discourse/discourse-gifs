@@ -152,20 +152,22 @@ export default class Gif extends Component {
         let images;
 
         if (settings.api_provider === "giphy") {
-          // Giphy
-          images = data.data.map((gif) => ({
-            title: gif.title,
-            preview:
-              settings.giphy_file_format === "webp"
-                ? gif.images.fixed_width.webp
-                : gif.images.fixed_width.url,
-            original:
-              settings.giphy_file_format === "webp"
-                ? gif.images.original.webp
-                : gif.images.original.url,
-            width: gif.images.original.width,
-            height: gif.images.original.height,
-          }));
+          images = data.data.map((gif) => {
+            const sizeVariant = gif.images[settings.giphy_size_variant];
+            const isWebp = settings.giphy_file_format === "webp";
+
+            return {
+              title: gif.title,
+              preview:
+                settings.giphy_file_format === "webp"
+                  ? gif.images.fixed_width.webp
+                  : gif.images.fixed_width.url,
+              original:
+                isWebp && sizeVariant.webp ? sizeVariant.webp : sizeVariant.url,
+              width: parseInt(sizeVariant.width, 10),
+              height: parseInt(sizeVariant.height, 10),
+            };
+          });
         } else {
           // Tenor
           images = data.results.map((gif) => {

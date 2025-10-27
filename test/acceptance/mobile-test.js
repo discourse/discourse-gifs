@@ -9,6 +9,7 @@ acceptance("Discourse Gifs | mobile", function (needs) {
 
   test("works", async function (assert) {
     settings.giphy_api_key = "foobar";
+    settings.giphy_size_variant = "original";
     pretender.get("https://api.giphy.com/v1/gifs/search", (request) => {
       assert.strictEqual(request.queryParams.api_key, "foobar");
       assert.strictEqual(request.queryParams.q, "cat");
