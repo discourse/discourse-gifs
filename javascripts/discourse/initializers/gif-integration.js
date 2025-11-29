@@ -1,5 +1,3 @@
-import { action } from "@ember/object";
-import { service } from "@ember/service";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import GifModal from "../components/modal/gif";
 
@@ -25,43 +23,33 @@ export default {
       });
 
       const chat = api.container.lookup("service:chat");
+      const currentUser = api.container.lookup("service:current-user");
+
       if (chat) {
-        api.registerChatComposerButton?.({
+        const modal = api.container.lookup("service:modal");
+        api.registerChatComposerButton({
           translatedLabel: themePrefix("gif.composer_title"),
           id: "gif_button",
           icon: "discourse-gifs-gif",
-          action: "showChatGifModal",
           position: "dropdown",
+          async action(context) {
+            await modal.show(GifModal, {
+              model: {
+                customPickHandler: (message) => {
+                  api.sendChatMessage(this.draft.channel.id, {
+                    message,
+                    threadId:
+                      context === "thread" ? this.draft.thread.id : null,
+                    inReplyToId:
+                      context === "channel" ? this.draft.inReplyTo?.id : null,
+                  });
+                },
+              },
+            });
+
+            this.draft.channel.resetDraft(currentUser);
+          },
         });
-
-        api.modifyClass(
-          "component:chat-composer",
-          (ChatComposer) =>
-            class extends ChatComposer {
-              @service modal;
-
-              @action
-              async showChatGifModal(context) {
-                await this.modal.show(GifModal, {
-                  model: {
-                    customPickHandler: (message) => {
-                      api.sendChatMessage(this.draft.channel.id, {
-                        message,
-                        threadId:
-                          context === "thread" ? this.draft.thread.id : null,
-                        inReplyToId:
-                          context === "channel"
-                            ? this.draft.inReplyTo?.id
-                            : null,
-                      });
-                    },
-                  },
-                });
-
-                this.draft.channel.resetDraft(this.currentUser);
-              }
-            }
-        );
       }
     });
 
