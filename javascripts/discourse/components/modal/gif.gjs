@@ -6,7 +6,9 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import DModal from "discourse/components/d-modal";
 import loadingSpinner from "discourse/helpers/loading-spinner";
+import { addUniqueValuesToArray } from "discourse/lib/array-tools";
 import discourseDebounce from "discourse/lib/debounce";
+import { trackedArray } from "discourse/lib/tracked-tools";
 import { i18n } from "discourse-i18n";
 import GifResultList from "../gif-result-list";
 
@@ -14,10 +16,10 @@ export default class Gif extends Component {
   @service appEvents;
   @service dialog;
 
-  @tracked currentGifs = [];
   @tracked loading = false;
   @tracked offset = 0;
   @tracked query = "";
+  @trackedArray currentGifs = [];
 
   get providerLogo() {
     return settings.theme_uploads[`${settings.api_provider}-logo`];
@@ -200,7 +202,7 @@ export default class Gif extends Component {
               ? 0
               : data.next;
 
-        this.currentGifs.addObjects(images);
+        addUniqueValuesToArray(this.currentGifs, images);
       } catch (error) {
         this.dialog.alert({ message: error });
       } finally {
