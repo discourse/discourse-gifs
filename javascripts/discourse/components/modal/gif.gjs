@@ -276,6 +276,7 @@ export default class Gif extends Component {
               <GifResultList
                 @content={{this.currentGifs}}
                 @pick={{this.pick}}
+                @loading={{this.loading}}
                 @loadMore={{this.loadMore}}
               />
             </div>
