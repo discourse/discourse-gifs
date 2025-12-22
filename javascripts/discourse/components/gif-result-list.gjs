@@ -49,14 +49,14 @@ export default class GifResultList extends Component {
   <template>
     <div
       {{didInsert this.setup}}
-      {{didUpdate this.update @content}}
+      {{didUpdate this.update @content.length}}
       class="gif-result-list"
     >
-      {{#each @content as |result|}}
+      {{#each @content key="preview" as |result|}}
         <GifResult @gif={{result}} @pick={{@pick}} />
       {{/each}}
 
-      <ConditionalLoadingSpinner @condition={{this.loading}} />
+      <ConditionalLoadingSpinner @condition={{@loading}} />
     </div>
   </template>
 }
