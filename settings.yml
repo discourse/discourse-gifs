@@ -6,6 +6,7 @@ api_provider:
   choices:
     - giphy
     - tenor
+    - klipy
 giphy_api_key:
   type: string
   default: ""
@@ -172,4 +173,50 @@ tenor_locale:
       Find info on Tenor localization in
       <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">
         Tenor API Guides
+      </a>.
+klipy_api_key:
+  type: string
+  default: ""
+  description:
+    en: "Klipy: API Key. Get one from your Klipy account."
+klipy_file_detail:
+  type: enum
+  default: webp
+  description:
+    en: "Klipy: Image format to use. WebP has smaller files that load quicker while GIF provides compatibility with older browsers."
+  choices:
+    - webp
+    - gif
+klipy_content_filter:
+  type: "enum"
+  default: high
+  description:
+    en: "Klipy: Content safety level for results."
+  choices:
+    - high
+    - medium
+    - low
+    - "off"
+klipy_country:
+  type: string
+  default: "US"
+  description:
+    en: >
+      Klipy: Two-Letter Country of Origin for the request. Find your country code in
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+        Wikipedia - ISO_3166-1
+      </a>.
+klipy_locale:
+  type: string
+  default: "en_US"
+  description:
+    en: >
+      Klipy: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
+      Format must be in "xx_YY" where "xx" is the <b>required</b>
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
+        language code
+      </a>
+      and "_YY" is the <b>optional</b>
+      <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+        country code
       </a>.

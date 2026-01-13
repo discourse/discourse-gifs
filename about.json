@@ -9,6 +9,7 @@
   "assets": {
     "icons-sprite": "/assets/gif.svg",
     "giphy-logo": "/assets/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif",
-    "tenor-logo": "/assets/PB_tenor_logo_white_horizontal.png"
+    "tenor-logo": "/assets/PB_tenor_logo_white_horizontal.png",
+    "klipy-logo": "/assets/klipy-logo.png"
   }
 }
