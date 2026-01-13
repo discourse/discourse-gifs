@@ -73,7 +73,9 @@ export default class Gif extends Component {
         if (
           (settings.api_provider === "tenor" &&
             settings.tenor_api_key === "") ||
-          (settings.api_provider === "giphy" && settings.giphy_api_key === "")
+          (settings.api_provider === "giphy" &&
+            settings.giphy_api_key === "") ||
+          (settings.api_provider === "klipy" && settings.klipy_api_key === "")
         ) {
           throw new Error(`${settings.api_provider.toUpperCase()} API key is not set. Site Admins, \
             please visit the "Discourse Gifs" theme-component topic on Discourse Meta \
@@ -100,10 +102,11 @@ export default class Gif extends Component {
             errorMsg = i18n(themePrefix("gif.bad_api_key"));
           }
 
-          // Parse Error Messages from Tenor if one isn't set yet
+          // Parse Error Messages from Tenor/Klipy if one isn't set yet
           if (
             !errorMsg &&
-            settings.api_provider === "tenor" &&
+            (settings.api_provider === "tenor" ||
+              settings.api_provider === "klipy") &&
             response.headers.get("content-type")?.includes("application/json")
           ) {
             const errorResponse = await response.json();
@@ -170,16 +173,30 @@ export default class Gif extends Component {
               height: parseInt(sizeVariant.height, 10),
             };
           });
+        } else if (settings.api_provider === "klipy") {
+          // Klipy: uses same URL for preview and original
+          const fileDetail = settings.klipy_file_detail;
+          images = data.results.map((gif) => {
+            const media_format = gif.media_formats[fileDetail];
+
+            return {
+              title: gif.title,
+              preview: media_format.url,
+              original: media_format.url,
+              width: media_format.dims[0],
+              height: media_format.dims[1],
+            };
+          });
         } else {
           // Tenor
+          const fileDetail = settings.tenor_file_detail;
           images = data.results.map((gif) => {
-            // Use tinygif as default for previews and "preview" as a backup
             const hasTinyGif = "tinygif" in gif.media_formats;
 
             // Use user-defined file format for attached GIFS and "preview" as a backup
             const media_format =
-              settings.tenor_file_detail in gif.media_formats
-                ? gif.media_formats[`${settings.tenor_file_detail}`]
+              fileDetail in gif.media_formats
+                ? gif.media_formats[fileDetail]
                 : gif.media_formats.preview;
 
             return {
@@ -212,32 +229,46 @@ export default class Gif extends Component {
   }
 
   getEndpoint(query, offset) {
-    if (settings.api_provider === "tenor") {
+    if (
+      settings.api_provider === "tenor" ||
+      settings.api_provider === "klipy"
+    ) {
+      const isKlipy = settings.api_provider === "klipy";
+      const apiKey = isKlipy ? settings.klipy_api_key : settings.tenor_api_key;
+      const fileDetail = isKlipy
+        ? settings.klipy_file_detail
+        : settings.tenor_file_detail;
+
       let params = {
-        key: settings.tenor_api_key,
+        key: apiKey,
         q: query,
-        country: settings.tenor_country,
-        locale: settings.tenor_locale,
-        contentfilter: settings.tenor_content_filter,
-        media_filter: settings.tenor_file_detail,
+        country: isKlipy ? settings.klipy_country : settings.tenor_country,
+        locale: isKlipy ? settings.klipy_locale : settings.tenor_locale,
+        contentfilter: isKlipy
+          ? settings.klipy_content_filter
+          : settings.tenor_content_filter,
+        media_filter: fileDetail,
         limit: 24,
         pos: offset,
       };
 
-      // Optional Parameter
-      if (settings.tenor_client_key !== "") {
+      // Tenor-specific: client_key parameter
+      if (!isKlipy && settings.tenor_client_key !== "") {
         params.client_key = settings.tenor_client_key;
       }
 
-      // Include tinygif for preview and "preview" for backup.
-      params.media_filter +=
-        settings.tenor_file_detail !== "tinygif"
-          ? ",tinygif,preview"
-          : ",preview";
+      // Tenor: include tinygif for preview and "preview" for backup
+      // Klipy: no preview formats needed, uses the main format directly
+      if (!isKlipy) {
+        params.media_filter +=
+          fileDetail !== "tinygif" ? ",tinygif,preview" : ",preview";
+      }
 
-      return (
-        "https://tenor.googleapis.com/v2/search?" + new URLSearchParams(params)
-      );
+      const baseUrl = isKlipy
+        ? "https://api.klipy.com/v2/search"
+        : "https://tenor.googleapis.com/v2/search";
+
+      return baseUrl + "?" + new URLSearchParams(params);
     } else {
       // GIPHY
       return (
