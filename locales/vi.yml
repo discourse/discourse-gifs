@@ -5,3 +5,12 @@
 # https://translate.discourse.org/
 
 vi:
+  gif:
+    modal_title: "Tìm kiếm hình GIF"
+    query: "Thuật ngữ"
+    insert: "Chèn các hình đã chọn"
+    composer_title: "Tìm kiếm hình GIF"
+    no_results: "Nhập từ khóa vào ô tìm kiếm phía trên để tìm ảnh GIF."
+    bad_api_key: "Khóa API $api_provider không hợp lệ. Quản trị viên trang web, vui lòng kiểm tra khóa của bạn và/hoặc tài khoản $api_provider của bạn."
+    error_rate_limit: "Đã đạt đến giới hạn số lần truy cập API $api_provider . Vui lòng chờ và thử lại sau. Nếu sự cố này vẫn tiếp diễn, vui lòng liên hệ với quản trị viên trang web của bạn."
+    error_search_too_long: "Vui lòng rút ngắn từ khóa tìm kiếm của bạn xuống dưới 50 ký tự và thử lại."
