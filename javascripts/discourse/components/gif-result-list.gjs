@@ -5,7 +5,7 @@ import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { schedule } from "@ember/runloop";
 import { service } from "@ember/service";
 import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
-import MiniMasonry from "../lib/minimasonry";
+import MiniMasonry from "../../vendor/minimasonry";
 import GifResult from "./gif-result";
 
 export default class GifResultList extends Component {
