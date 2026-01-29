@@ -294,7 +294,12 @@ export default class Gif extends Component {
     >
       <:body>
         <div class="gif-input">
-          <Input {{on "input" this.refresh}} @type="text" name="query" />
+          <Input
+            {{on "input" this.refresh}}
+            @type="text"
+            name="query"
+            autofocus
+          />
 
           {{#if this.loading}}
             {{loadingSpinner size="small"}}
