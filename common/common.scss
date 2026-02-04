@@ -61,12 +61,46 @@ html:not(.discourse-gifs-with-img)
           cursor: pointer;
         }
       }
+
+      .gif-category-item {
+        .gif-category-label {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 0.5em;
+          background: linear-gradient(transparent, rgb(0, 0, 0, 0.7));
+          color: white;
+          font-weight: bold;
+          font-size: var(--font-down-1);
+          text-align: center;
+          cursor: pointer;
+        }
+
+        img {
+          object-fit: cover;
+        }
+      }
     }
 
     div.loading-container {
       display: block;
       height: 10px;
     }
+  }
+
+  .gif-categories-header {
+    margin: 0.5em 0;
+    font-size: var(--font-0);
+    color: var(--primary-medium);
+    font-weight: normal;
+  }
+
+  .gif-loading-categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
   }
 
   .gif-no-results {
