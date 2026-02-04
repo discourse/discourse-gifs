@@ -3,6 +3,7 @@ import { fn } from "@ember/helper";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { htmlSafe } from "@ember/template";
+import concatClass from "discourse/helpers/concat-class";
 
 export default class GifResult extends Component {
   get style() {
@@ -26,7 +27,10 @@ export default class GifResult extends Component {
       {{on "keydown" this.keyDown}}
       role="button"
       tabindex="0"
-      class="gif-imgwrap"
+      class={{concatClass
+        "gif-imgwrap"
+        (if @gif.isCategory "gif-category-item")
+      }}
     >
       <img
         class="gif-img"
@@ -37,6 +41,9 @@ export default class GifResult extends Component {
         width={{@gif.width}}
         height={{@gif.height}}
       />
+      {{#if @gif.isCategory}}
+        <span class="gif-category-label">{{@gif.title}}</span>
+      {{/if}}
     </div>
   </template>
 }

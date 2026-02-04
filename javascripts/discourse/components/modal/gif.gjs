@@ -4,6 +4,7 @@ import { Input } from "@ember/component";
 import { on } from "@ember/modifier";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
+import { modifier } from "ember-modifier";
 import DModal from "discourse/components/d-modal";
 import loadingSpinner from "discourse/helpers/loading-spinner";
 import { addUniqueValuesToArray } from "discourse/lib/array-tools";
@@ -16,13 +17,27 @@ export default class Gif extends Component {
   @service appEvents;
   @service dialog;
 
+  @tracked categories = [];
   @tracked loading = false;
+  @tracked loadingCategories = false;
   @tracked offset = 0;
   @tracked query = "";
   @trackedArray currentGifs = [];
 
+  onModalInsert = modifier(() => {
+    this.fetchCategories();
+  });
+
   get providerLogo() {
     return settings.theme_uploads[`${settings.api_provider}-logo`];
+  }
+
+  get showingCategories() {
+    return (
+      settings.api_provider === "klipy" &&
+      this.query.length < 3 &&
+      this.categories.length > 0
+    );
   }
 
   @action
@@ -55,15 +70,99 @@ export default class Gif extends Component {
     discourseDebounce(this, this.search, 700);
   }
 
-  async search(clearResults = true) {
+  @action
+  selectCategory(category) {
+    this.query = category.searchterm;
+    this.search(true, true);
+  }
+
+  async fetchCategories() {
+    if (settings.api_provider !== "klipy" || settings.klipy_api_key === "") {
+      return;
+    }
+
+    this.loadingCategories = true;
+
+    try {
+      const params = {
+        key: settings.klipy_api_key,
+        country: settings.klipy_country,
+        locale: settings.klipy_locale,
+        type: "featured",
+        contentfilter: settings.klipy_content_filter,
+      };
+
+      const response = await fetch(
+        "https://api.klipy.com/v2/categories?" + new URLSearchParams(params)
+      );
+
+      if (this.isDestroying || this.isDestroyed) {
+        return;
+      }
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+
+      if (this.isDestroying || this.isDestroyed) {
+        return;
+      }
+
+      const tags = data.tags || [];
+      this.categories = await this.loadCategoryDimensions(tags);
+    } catch {
+      // Silently fail - user can still search manually
+    } finally {
+      this.loadingCategories = false;
+    }
+  }
+
+  async loadCategoryDimensions(tags) {
+    const loadImage = (tag) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          resolve({
+            title: tag.name,
+            preview: tag.image,
+            original: tag.image,
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+            isCategory: true,
+            searchterm: tag.searchterm,
+          });
+        };
+        img.onerror = () => {
+          resolve({
+            title: tag.name,
+            preview: tag.image,
+            original: tag.image,
+            width: 200,
+            height: 150,
+            isCategory: true,
+            searchterm: tag.searchterm,
+          });
+        };
+        img.src = tag.image;
+      });
+    };
+
+    return Promise.all(tags.map(loadImage));
+  }
+
+  async search(clearResults = true, skipLengthCheck = false) {
     if (clearResults) {
       this.currentGifs = [];
       this.offset = 0;
     }
 
+    const meetsLengthRequirement = skipLengthCheck || this.query.length > 2;
+
     // Check for minimum search query and if search result limit was set & reached
     if (
-      (this.query.length > 2 && !settings.limit_infinite_search_results) ||
+      (meetsLengthRequirement && !settings.limit_infinite_search_results) ||
       (settings.limit_infinite_search_results &&
         this.currentGifs.length < settings.max_results_limit)
     ) {
@@ -287,6 +386,7 @@ export default class Gif extends Component {
 
   <template>
     <DModal
+      {{this.onModalInsert}}
       @title={{i18n (themePrefix "gif.modal_title")}}
       @closeModal={{@closeModal}}
       id="gif-modal"
@@ -297,6 +397,7 @@ export default class Gif extends Component {
           <Input
             {{on "input" this.refresh}}
             @type="text"
+            @value={{this.query}}
             name="query"
             autofocus
           />
@@ -306,7 +407,7 @@ export default class Gif extends Component {
           {{/if}}
         </div>
 
-        {{#if this.currentGifs}}
+        {{#if this.currentGifs.length}}
           <div class="gif-content">
             <div class="gif-box">
               <GifResultList
@@ -316,6 +417,24 @@ export default class Gif extends Component {
                 @loadMore={{this.loadMore}}
               />
             </div>
+          </div>
+        {{else if this.showingCategories}}
+          <div class="gif-content">
+            <h3 class="gif-categories-header">{{i18n
+                (themePrefix "gif.browse_categories")
+              }}</h3>
+            <div class="gif-box">
+              <GifResultList
+                @content={{this.categories}}
+                @pick={{this.selectCategory}}
+                @loading={{false}}
+                @loadMore={{this.loadMore}}
+              />
+            </div>
+          </div>
+        {{else if this.loadingCategories}}
+          <div class="gif-loading-categories">
+            {{loadingSpinner size="medium"}}
           </div>
         {{else}}
           <div class="gif-no-results">{{i18n

@@ -25,7 +25,7 @@ export default class GifResultList extends Component {
       const scroller = document.querySelector(".gif-content");
       // ensure we don't load more if we haven't scrolled at all
       if (scroller?.scrollTop > 0 && this.args.content?.length > 0) {
-        this.args.loadMore();
+        this.args.loadMore?.();
       }
     });
 
