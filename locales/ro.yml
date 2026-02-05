@@ -5,3 +5,6 @@
 # https://translate.discourse.org/
 
 ro:
+  gif:
+    categories_error: "Nu am putut încărca categoriile."
+    browse_categories: "Răsfoiește după categorie"
