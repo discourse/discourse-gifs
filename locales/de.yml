@@ -14,3 +14,5 @@ de:
     bad_api_key: "Ungültiger API-Schlüssel für $api_provider. Website-Administratoren, bitte überprüft euren Schlüssel und/oder euer Konto bei $api_provider."
     error_rate_limit: "Wir haben unsere API-Rate-Limits für $api_provider erreicht. Bitte warte und versuche es später noch einmal. Falls das Problem weiterhin besteht, wende dich an deinen Website-Administrator."
     error_search_too_long: "Bitte verkürze deine Suchanfrage auf weniger als 50 Zeichen und versuche es erneut."
+    categories_error: "Kategorien konnten nicht geladen werden."
+    browse_categories: "Nach Kategorien durchsuchen"
