@@ -14,3 +14,5 @@ ja:
     bad_api_key: "無効な $api_provider API キーです。サイト管理者は、キーと $api_provider アカウントを確認してください。"
     error_rate_limit: "$api_provider API レート制限に達しました。しばらくしてからもう一度お試しください。この問題が解決しない場合は、サイト管理者にお問い合わせください。"
     error_search_too_long: "検索クエリを 50 文字以下に減らしてからもう一度お試しください。"
+    categories_error: "カテゴリを読み込めませんでした。"
+    browse_categories: "カテゴリ別に閲覧"

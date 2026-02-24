@@ -14,3 +14,5 @@ zh_CN:
     bad_api_key: "$api_provider API 密钥无效。网站管理员，请检查您的密钥和/或您的 $api_provider 帐户。"
     error_rate_limit: "我们已达到 $api_provider API 频率上限。请稍候并重试。如果此问题一直存在，请联系网站管理员。"
     error_search_too_long: "请将搜索查询词缩短至 50 个字符以内，然后重试。"
+    categories_error: "无法加载类别。"
+    browse_categories: "按类别浏览"
