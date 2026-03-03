@@ -14,3 +14,5 @@ tr_TR:
     bad_api_key: "Geçersiz $api_provider API Anahtarı. Site yöneticileri, lütfen anahtarınızı ve/veya $api_provider hesabınızı kontrol edin."
     error_rate_limit: "$api_provider API Oran Sınırlarımıza ulaştık. Lütfen bekleyin ve daha sonra tekrar deneyin. Bu sorun devam ederse site yöneticinizle iletişime geçin."
     error_search_too_long: "Lütfen arama sorgunuzu 50 karakterin altına kısaltın ve tekrar deneyin."
+    categories_error: "Kategoriler yüklenemedi."
+    browse_categories: "Kategoriye göre göz at"
