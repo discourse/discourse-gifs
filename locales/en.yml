@@ -10,3 +10,82 @@ en:
     error_search_too_long: "Please shorten your search query to under 50 characters and try again."
     categories_error: "Could not load categories."
     browse_categories: "Browse by category"
+  theme_metadata:
+    settings:
+      api_provider: "Which GIF provider should we use?"
+      giphy_api_key: "GIPHY: API key"
+      giphy_file_format: "GIPHY: Image format to use. WEBP has smaller files that load quicker while GIF provides compatibility with old browsers."
+      giphy_size_variant: >
+        GIPHY: Size variant to use. Choose based on your site's upload limit.
+          <ul>
+          <li>downsized = Under 2MB</li>
+          <li>downsized_medium = Under 5MB (recommended for most sites)</li>
+          <li>downsized_large = Under 8MB</li>
+          <li>original = Full size with no limit</li>
+        <ul>
+      giphy_content_rating: >
+        GIPHY: Content rating for search results. Find more info at
+        <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating">
+          https://developers.giphy.com/docs/optional-settings#rating
+        </a>.
+      giphy_locale: "GIPHY: Language to use on the search. Used to cater search to regional content. Set to your default forum locale."
+      limit_infinite_search_results: "Limit the number of GIF results returned as the user scrolls infinitely to prevent API Rate Limiting."
+      max_results_limit: 'Tenor & GIPHY: When "limit infinite search results" is enabled, we will search until we get this number of maximum GIF results. Each API call retrieves 24 results, <i>e.g. 240 Max Limit: 240 / 24 = 10 API Calls</i>.'
+      tenor_api_key: >
+        Tenor: V2 API Key. Instructions to get one can be found in
+          <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'>
+            Discourse Meta - Discourse Gifs
+          </a>.
+        <br/><br/>
+        <b>Attention: Legacy Tenor V1 API users - please generate a new V2 API Key</b>
+      tenor_client_key: "Tenor: (optional) client-specified string that represents the integration"
+      tenor_file_detail: >
+        Tenor: Image format to use
+        <ul>
+          <li>gif = Full size, highest quality (largest files)</li>
+          <li>mediumgif = Full size with compression to reduce file size (recommended for most sites)</li>
+          <li>tinygif = Scaled down to 220px wide (smaller files)</li>
+          <li>nanogif = Scaled down to 90px tall (smallest files)</li>
+        <ul>
+      tenor_content_filter: >
+        Tenor: Content safety level for Tenor results. Find more info in
+        <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering">
+          Tenor API Guides
+        </a>.
+      tenor_country: >
+        Tenor: Two-Letter Country of Origin for the request. Find your country code in
+        <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+          Wikipedia - ISO_3166-1
+        </a>.
+      tenor_locale: >
+        Tenor: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
+        Format must be in "xx_YY" where "xx" is the <b>required</b>
+        <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
+          language code
+        </a>
+        and "_YY" is the <b>optional</b>
+        <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+          country code
+        </a>.
+        Find info on Tenor localization in
+        <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">
+          Tenor API Guides
+        </a>.
+      klipy_api_key: "Klipy: API Key. Get one from your Klipy account."
+      klipy_file_detail: "Klipy: Image format to use. WebP has smaller files that load quicker while GIF provides compatibility with older browsers."
+      klipy_content_filter: "Klipy: Content safety level for results."
+      klipy_country: >
+        Klipy: Two-Letter Country of Origin for the request. Find your country code in
+        <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+          Wikipedia - ISO_3166-1
+        </a>.
+      klipy_locale: >
+        Klipy: Language to use on the search. Country code (optional) can be provided to differentiate between dialects.<br/><br/>
+        Format must be in "xx_YY" where "xx" is the <b>required</b>
+        <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
+          language code
+        </a>
+        and "_YY" is the <b>optional</b>
+        <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">
+          country code
+        </a>.
