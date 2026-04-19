@@ -16,3 +16,33 @@ tr_TR:
     error_search_too_long: "Lütfen arama sorgunuzu 50 karakterin altına kısaltın ve tekrar deneyin."
     categories_error: "Kategoriler yüklenemedi."
     browse_categories: "Kategoriye göre göz at"
+  theme_metadata:
+    settings:
+      api_provider: "Hangi GIF sağlayıcısını kullanmalıyız?"
+      giphy_api_key: "GIPHY: API anahtarı"
+      giphy_file_format: "GIPHY: Kullanılacak resim formatı. WEBP, daha hızlı yüklenen daha küçük dosya boyutlarına sahipken, GIF eski tarayıcılarla uyumluluk sağlar."
+      giphy_size_variant: >
+        GIPHY: Kullanılacak boyut seçeneği. Sitenizin yükleme sınırına göre seçim yapın. <ul> <li>downsized = 2 MB'nin altında</li> <li>downsized_medium = 5 MB'nin altında (çoğu site için önerilir)</li> <li>downsized_large = 8 MB'nin altında</li> <li>original = Sınırsız tam boyut</li> <ul>
+      giphy_content_rating: >
+        GIPHY: Arama sonuçları için içerik derecelendirmesi. Daha fazla bilgi için <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating"> https://developers.giphy.com/docs/optional-settings#rating </a> adresini ziyaret edin.
+      giphy_locale: "GIPHY: Aramada kullanılacak dil. Arama sonuçlarını bölgesel içeriğe göre uyarlamak için kullanılır. Varsayılan forum dil ayarınıza göre belirlenir."
+      limit_infinite_search_results: "API hız sınırlamasını önlemek için, kullanıcı sonsuz kaydırma yaparken döndürülen GIF sonuçlarının sayısını sınırlayın."
+      max_results_limit: 'Tenor & GIPHY: "Sonsuz arama sonuçlarını sınırla" seçeneği etkinleştirildiğinde, belirtilen maksimum GIF sonucu sayısına ulaşana kadar arama yaparız. Her API çağrısı 24 sonuç getirir, <i>örneğin 240 Maksimum Sınır: 240 / 24 = 10 API Çağrısı</i>.'
+      tenor_api_key: >
+        Tenor: V2 API Anahtarı. Anahtar alma talimatları <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'> Discourse Meta - Discourse Gifs </a> adresinde bulunabilir. <br/><br/> <b>Dikkat: Eski Tenor V1 API kullanıcıları - lütfen yeni bir V2 API Anahtarı oluşturun</b>
+      tenor_client_key: "Tenor: (isteğe bağlı) entegrasyonu temsil eden, müşteri tarafından belirlenen bir dize"
+      tenor_file_detail: >
+        Tenor: Kullanılacak resim formatı <ul> <li>gif = Tam boyut, en yüksek kalite (en büyük dosyalar)</li> <li>mediumgif = Dosya boyutunu küçültmek için sıkıştırılmış tam boyut (çoğu site için önerilir)</li> <li>tinygif = 220 piksel genişliğe küçültülmüş (daha küçük dosyalar)</li> <li>nanogif = 90 piksel yüksekliğe küçültülmüş (en küçük dosyalar)</li> <ul>
+      tenor_content_filter: >
+        Tenor: Tenor sonuçları için içerik güvenliği seviyesi. Daha fazla bilgi için <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering"> Tenor API Kılavuzları </a>'na bakın.
+      tenor_country: >
+        Tenor: İsteğin iki harfli menşe ülkesi kodu. Ülke kodunuzu <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">Wikipedia - ISO_3166-1 </a> sayfasında bulabilirsiniz.
+      tenor_locale: >
+        Tenor: Aramada kullanılacak dil. Lehçeleri birbirinden ayırmak için ülke kodu (isteğe bağlı) belirtilebilir. <br/><br/> Biçim "xx_YY" şeklinde olmalıdır; burada "xx", <b>gerekli</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> dil kodudur </a> ve "_YY" ise <b>isteğe bağlı</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> ülke kodudur </a>. Tenor yerelleştirme hakkında bilgi için <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization"> Tenor API Kılavuzları </a>'na bakın.
+      klipy_api_key: "Klipy: API Anahtarı. Klipy hesabınızdan bir tane alın."
+      klipy_file_detail: "Klipy: Kullanılacak resim formatı. WebP, daha küçük dosya boyutuna sahip olduğu için daha hızlı yüklenirken, GIF eski tarayıcılarla uyumluluk sağlar."
+      klipy_content_filter: "Klipy: Sonuçlar için içerik güvenliği seviyesi."
+      klipy_country: >
+        Klipy: İsteğin iki harfli menşe ülkesi kodu. Ülke kodunuzu <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">Wikipedia - ISO_3166-1 </a> sayfasında bulabilirsiniz.
+      klipy_locale: >
+        Klipy: Aramada kullanılacak dil. Lehçeleri ayırt etmek için ülke kodu (isteğe bağlı) girilebilir. <br/><br/> Biçim "xx_YY" şeklinde olmalıdır; burada "xx", <b>gerekli</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> dil kodudur </a> ve "_YY" ise <b>isteğe bağlı</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> ülke kodudur </a>.
