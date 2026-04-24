@@ -16,3 +16,10 @@ de:
     error_search_too_long: "Bitte verkürze deine Suchanfrage auf weniger als 50 Zeichen und versuche es erneut."
     categories_error: "Kategorien konnten nicht geladen werden."
     browse_categories: "Nach Kategorien durchsuchen"
+  theme_metadata:
+    settings:
+      api_provider: "Welchen GIF-Anbieter sollten wir verwenden?"
+      giphy_api_key: "GIPHY: API-Schlüssel"
+      giphy_file_format: "GIPHY: Zu verwendendes Bildformat. WEBP hat kleinere Dateien, die schneller geladen werden, während GIF Kompatibilität mit alten Browsern bietet."
+      giphy_size_variant: >
+        GIPHY: Die zu verwendende Größenvariante. Wähle je nach Upload-Limit deiner Website. <ul> <li>downsized = unter 2 MB</li> <li>downsized_medium = unter 5 MB (empfohlen für die meisten Websites)</li> <li>downsized_large = unter 8 MB</li> <li>original = volle Größe ohne Limit</li> <ul>
