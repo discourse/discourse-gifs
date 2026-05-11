@@ -428,7 +428,6 @@ export default class Gif extends Component {
                 @content={{this.categories}}
                 @pick={{this.selectCategory}}
                 @loading={{false}}
-                @loadMore={{this.loadMore}}
               />
             </div>
           </div>
