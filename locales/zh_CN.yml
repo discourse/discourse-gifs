@@ -16,3 +16,33 @@ zh_CN:
     error_search_too_long: "请将搜索查询词缩短至 50 个字符以内，然后重试。"
     categories_error: "无法加载类别。"
     browse_categories: "按类别浏览"
+  theme_metadata:
+    settings:
+      api_provider: "我们应该使用哪款 GIF 提供程序？"
+      giphy_api_key: "GIPHY：API 密钥"
+      giphy_file_format: "GIPHY：要使用的图片格式。WebP 的文件更小，加载速度更快，而 GIF 则与旧版浏览器兼容。"
+      giphy_size_variant: >
+        GIPHY：要使用的大小变量。根据网站的上传限制进行选择。<ul> <li>downsized = 小于 2MB</li> <li>downsized_medium = 小于 5MB （推荐用于大多数网站）</li> <li>downsized_large = 小于 8MB</li> <li>original = 全尺寸，无限制</li> <ul>
+      giphy_content_rating: >
+        GIPHY：搜索结果的内容评级。有关更多信息，请访问 <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating"> https://developers.giphy.com/docs/optional-settings#rating </a>。
+      giphy_locale: "GIPHY：搜索时使用的语言。用于满足搜索特定区域内容的需求。请设置为您默认的论坛语言区域。"
+      limit_infinite_search_results: "限制用户无限滚动时返回的 GIF 结果数量，以防止 API 速率限制。"
+      max_results_limit: 'Tenor 和 GIPHY：启用“限制无限搜索结果”后，我们将一直搜索，直至达到 GIF 结果的最大数量。每次 API 调用检索 24 个结果，<i>例如，最大限值为 240 时：240 / 24 = 10 次 API 调用</i>。'
+      tenor_api_key: >
+        Tenor：V2 API 密钥。有关如何获取的说明，请参阅 <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'> Discourse Meta - Discourse Gifs</a>。<br/><br/> <b>注意：旧版 Tenor V1 API 用户 - 请生成新的 V2 API 密钥</b>
+      tenor_client_key: "Tenor：（可选）客户端指定的字符串，用于表示集成"
+      tenor_file_detail: >
+        Tenor：要使用的图片格式 <ul> <li>gif = 全尺寸，最高质量（文件最大）</li> <li>mediumgif = 全尺寸，但经过压缩，以减小文件大小（推荐用于大多数网站）</li> <li>tinygif = 缩小至 220px 宽（文件更小）</li> <li>nanogif = 缩小至 90px 高（文件最小）</li> <ul>
+      tenor_content_filter: >
+        Tenor：Tenor 结果的内容安全级别。有关更多信息，请参阅 <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering">Tenor API 指南</a>。
+      tenor_country: >
+        Tenor：两个字母的请求来源国家/地区。请在<a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">维基百科 - ISO_3166-1</a> 中查找您的国家/地区代码。
+      tenor_locale: >
+        Tenor：搜索时使用的语言。可以提供国家/地区代码（可选）以区分方言。<br/><br/>格式必须为“xx_YY”，其中“xx”为<b>必填的</b><a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">语言代码</a>，“_YY”为<b>可选的</b><a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">国家/地区代码</a>。有关 Tenor 本地化的信息，请参阅 <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">Tenor API 指南</a>。
+      klipy_api_key: "Klipy：API 密钥。请从您的 Klipy 帐户中获取。"
+      klipy_file_detail: "Klipy：要使用的图片格式。WebP 的文件更小，加载速度更快，而 GIF 则与旧版浏览器兼容。"
+      klipy_content_filter: "Klipy：结果的内容安全级别。"
+      klipy_country: >
+        Klipy：两个字母的请求来源国家/地区。请在<a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">维基百科 - ISO_3166-1</a> 中查找您的国家/地区代码。
+      klipy_locale: >
+        Klipy：搜索时使用的语言。可以提供国家/地区代码（可选）以区分方言。<br/><br/>格式必须为“xx_YY”，其中“xx”为<b>必填的</b><a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">语言代码</a>，“_YY”为<b>可选的</b><a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">国家/地区代码</a>。
