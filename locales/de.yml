@@ -23,3 +23,26 @@ de:
       giphy_file_format: "GIPHY: Zu verwendendes Bildformat. WEBP hat kleinere Dateien, die schneller geladen werden, während GIF Kompatibilität mit alten Browsern bietet."
       giphy_size_variant: >
         GIPHY: Die zu verwendende Größenvariante. Wähle je nach Upload-Limit deiner Website. <ul> <li>downsized = unter 2 MB</li> <li>downsized_medium = unter 5 MB (empfohlen für die meisten Websites)</li> <li>downsized_large = unter 8 MB</li> <li>original = volle Größe ohne Limit</li> <ul>
+      giphy_content_rating: >
+        GIPHY: Inhaltsbewertung für Suchergebnisse. Mehr Informationen findest du unter <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating"> https://developers.giphy.com/docs/optional-settings#rating. </a>
+      giphy_locale: "GIPHY: Sprache, die für die Suche verwendet wird. Dient zur Anpassung der Suche an regionale Inhalte. Nutze die Standardsprache des Forums."
+      limit_infinite_search_results: "Begrenze die Anzahl der GIF-Ergebnisse, die zurückgegeben werden, wenn der Benutzer unendlich scrollt, um eine API-Ratenbegrenzung zu verhindern."
+      max_results_limit: 'Tenor & GIPHY: Wenn "limit infinite search results" aktiviert ist, wird gesucht bis die hier konfigurierte, maximale Anzahl an GIF-Ergebnissen erreicht ist. Jeder API-Aufruf ruft 24 Ergebnisse ab, <i>z. B. konfiguriertes Maximum: 240; 240 / 24 = 10 API-Aufrufe</i>.'
+      tenor_api_key: >
+        Tenor: V2 API Key. Eine Anleitung, wie du ihn bekommst, findest du unter <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'> Discourse Meta - Discourse Gifs </a>. <br/><br/> <b>Achtung! Benutzer der veralteten Tenor V1 API generiert bitte einen neuen V2 API Key</b>
+      tenor_client_key: "Tenor: (optional) Client-spezifizierter String, der die Integration repräsentiert"
+      tenor_file_detail: >
+        Tenor: Zu verwendendes Bildformat <ul> <li>gif = Volle Größe, höchste Qualität (größte Dateien)</li> <li>mediumgif = Volle Größe mit Komprimierung zur Verringerung der Dateigröße (für die meisten Websites empfohlen)</li> <li>tinygif = Verkleinert auf 220px Breite (kleinere Dateien)</li> <li>nanogif = Verkleinert auf 90px Höhe (kleinste Dateien)</li> <ul>
+      tenor_content_filter: >
+        Tenor: Inhaltssicherheit für Tenor-Ergebnisse. Weitere Informationen findest du in der <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering"> Tenor API Dokumentation</a>.
+      tenor_country: >
+        Tenor: Herkunftsland repräsentiert durch zwei Buchstaben für die Anfrage. Finde deinen Ländercode unter <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> Wikipedia - ISO_3166-1 </a>.
+      tenor_locale: >
+        Tenor: Sprache, die für die Suche verwendet werden soll. Der Ländercode (optional) kann angegeben werden, um zwischen Dialekten zu unterscheiden.<br/><br/> Das Format muss in "xx_YY" angegeben werden, wobei "xx" der <b>erforderliche</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> Sprachcode </a> und "_YY" der <b>optionale</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> Ländercode </a> ist. Weitere Informationen zur Tenor-Lokalisierung findest du in der <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization"> Tenor API Dokumentation</a>.
+      klipy_api_key: "Klipy: API-Schlüssel. Erhalte einen in deinem Klipy-Konto."
+      klipy_file_detail: "Klipy: Zu verwendendes Bildformat. WEBP hat kleinere Dateien, die schneller geladen werden, während GIF Kompatibilität mit älteren Browsern bietet."
+      klipy_content_filter: "Klipy: Inhaltssicherheit für Ergebnisse."
+      klipy_country: >
+        Klipy: Herkunftsland repräsentiert durch zwei Buchstaben für die Anfrage. Finde deinen Ländercode unter <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> Wikipedia - ISO_3166-1 </a>.
+      klipy_locale: >
+        Klipy: Sprache, die für die Suche verwendet werden soll. Der Ländercode (optional) kann angegeben werden, um zwischen Dialekten zu unterscheiden.<br/><br/> Das Format muss in "xx_YY" angegeben werden, wobei "xx" der <b>erforderliche</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> Sprachcode </a> und "_YY" der <b>optionale</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> Ländercode </a> ist.
