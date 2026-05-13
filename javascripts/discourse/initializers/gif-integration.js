@@ -6,6 +6,13 @@ export default {
 
   initialize(container) {
     withPluginApi((api) => {
+      const siteSettings = api.container.lookup("service:site-settings");
+
+      if (siteSettings.enable_gifs) {
+        // return early if core implementation is enabled
+        return;
+      }
+
       api.onToolbarCreate((toolbar) => {
         if (toolbar.context.composerEvents) {
           toolbar.addButton({
