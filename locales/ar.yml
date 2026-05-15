@@ -16,3 +16,33 @@ ar:
     error_search_too_long: "يرجى اختصار استعلام البحث الخاص بك إلى أقل من 50 حرفًا ثم إعادة المحاولة."
     categories_error: "تعذر تحميل الفئات."
     browse_categories: "تصفُّح حسب الفئة"
+  theme_metadata:
+    settings:
+      api_provider: "أي مزود لصور GIF يجب أن نستخدم؟"
+      giphy_api_key: "GIPHY: مفتاح API"
+      giphy_file_format: "GIPHY: تنسيق الصورة المُستخدم. يتميز تنسيق WEBP بحجم ملفاته الصغير وسرعة تحميلها، بينما يوفر GIF التوافق مع المتصفحات القديمة."
+      giphy_size_variant: >
+        GIPHY: اختر حجم الصورة المناسب. اختر بناءً على حد التحميل المسموح به لموقعك. <ul> <li>مُصغّر = أقل من 2 ميجابايت</li> <li>مُصغّر متوسط = أقل من 5 ميجابايت (موصى به لمعظم المواقع)</li> <li>مُصغّر كبير = أقل من 8 ميجابايت</li> <li>أصلي = الحجم الكامل بدون قيود</li> <ul>
+      giphy_content_rating: >
+        GIPHY: تقييم المحتوى لنتائج البحث. للمزيد من المعلومات، يرجى زيارة الرابط التالي: <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating"> https://developers.giphy.com/docs/optional-settings#rating </a>.
+      giphy_locale: "GIPHY: اللغة المستخدمة في البحث. تُستخدم لتخصيص عملية البحث وفقًا للمحتوى الإقليمي. اضبطها على لغة المنتدى الافتراضية."
+      limit_infinite_search_results: "تقييد عدد نتائج صور GIF التي يتم إرجاعها في أثناء قيام المستخدم بالتمرير بلا حدود لمنع تقييد معدل استخدام واجهة API."
+      max_results_limit: 'Tenor وGIPHY: عند تفعيل خيار "تقييد نتائج البحث غير المحدودة"، سنجري البحث حتى نحصل على هذا العدد الأقصى من نتائج صور GIF. كل استدعاء لواجهة API يسترجع 24 نتيجة، <i>مثال: 240. الحد الأقصى: 240 / 24 = 10 استدعاءات لواجهة API</i>.'
+      tenor_api_key: >
+        Tenor: مفتاح API الإصدار 2. يمكن العثور على إرشادات الحصول على واحد في <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'> Discourse Meta - Discourse Gifs </a>. <br/><br/> <b>تنبيه: مستخدمو Tenor واجهة API الإصدار 1 القديمة - يرجى إنشاء مفتاح API الإصدار 2 جديد</b>
+      tenor_client_key: "Tenor: سلسلة (اختيارية) محددة من قبل العميل تمثل التكامل"
+      tenor_file_detail: >
+        Tenor: تنسيق الصورة المراد استخدامه <ul> <li>gif = الحجم الكامل، أعلى جودة (أكبر الملفات)</li> <li>mediumgif = الحجم الكامل مع ضغط لتقليل حجم الملف (موصى به لمعظم المواقع)</li> <li>tinygif = تم تصغيره إلى عرض 220 بكسل (أصغر الملفات)</li> <li>nanogif = تم تصغيره إلى ارتفاع 90 بكسل (أصغر الملفات)</li> <ul>
+      tenor_content_filter: >
+        Tenor: مستوى أمان المحتوى لنتائج Tenor. اعثر على مزيد من المعلومات في <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering"> أدلة واجهة Tenor API</a>.
+      tenor_country: >
+        Tenor: بلد المنشأ المكون من حرفين للطلب. ابحث عن رمز بلدك في <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> ويكيبيديا - ISO_3166-1 </a>.
+      tenor_locale: >
+        Klipy: اللغة المستخدمة في البحث. يمكن توفير رمز البلد (اختياري) للتمييز بين اللهجات.<br/><br/> يجب أن يكون التنسيق في "xx_yy" حيث يرمز "xx" إلى رمز اللغة <b>المطلوب</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> </a> و "‎_YY" هو رمز البلد <b>الاختياري</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> </a>. يمكن العثور على معلومات أكثر حول توطين Tenor في <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization"> أدلة واجهة Tenor API </a>.
+      klipy_api_key: "Klipy: مفتاح API. احصل على واحد من حسابك في Klipy."
+      klipy_file_detail: "Klipy: تنسيق الصورة المُستخدم. يتميز تنسيق WebP بحجم ملفاته الصغير وسرعة تحميلها، بينما يوفر Klipy التوافق مع المتصفحات القديمة."
+      klipy_content_filter: "Klipy: مستوى أمان المحتوى للحصول على النتائج."
+      klipy_country: >
+        Klipy: بلد المنشأ المكون من حرفين للطلب. ابحث عن رمز بلدك في <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> ويكيبيديا - ISO_3166-1 </a>.
+      klipy_locale: >
+        Klipy: اللغة المستخدمة في البحث. يمكن توفير رمز البلد (اختياري) للتمييز بين اللهجات.<br/><br/> يجب أن يكون التنسيق في "xx_yy" حيث يرمز "xx" إلى رمز اللغة <b>المطلوب</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> </a> و "‎_YY" هو رمز البلد <b>الاختياري</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> </a>.
