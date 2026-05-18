@@ -14,3 +14,35 @@ nl:
     bad_api_key: "Ongeldige API-sleutel voor $api_provider. Sitebeheerders, controleer je sleutel en/of je $api_provider-account."
     error_rate_limit: "We hebben onze API-snelheidslimiet voor $api_provider bereikt. Wacht even en probeer het later opnieuw. Als dit probleem zich blijft voordoen, neem dan contact op met je sitebeheerder."
     error_search_too_long: "Kort je zoekopdracht in tot minder dan 50 tekens en probeer het opnieuw."
+    categories_error: "Kan categorieën niet laden."
+    browse_categories: "Bladeren op categorie"
+  theme_metadata:
+    settings:
+      api_provider: "Welke GIF-provider moeten we gebruiken?"
+      giphy_api_key: "GIPHY: API-sleutel"
+      giphy_file_format: "GIPHY: te gebruiken afbeeldingsindeling. WebP heeft kleinere bestanden die sneller laden, terwijl GIF compatibiliteit biedt met oude browsers."
+      giphy_size_variant: >
+        GIPHY: groottevariant om te gebruiken. Kies op basis van de uploadlimiet van je site. <ul> <li>downsized = minder dan 2 MB</li> <li>downsized_medium = minder dan 5 MB (aanbevolen voor de meeste sites)</li> <li>downsized_large = minder dan 8 MB</li> <li>original = volledige grootte zonder limiet</li> <ul>
+      giphy_content_rating: >
+        GIPHY: contentbeoordeling voor zoekresultaten. Meer informatie vind je op <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating"> https://developers.giphy.com/docs/optional-settings#rating </a>.
+      giphy_locale: "GIPHY: taal voor de zoekopdracht. Wordt gebruikt om de zoekopdracht aan te passen aan regionale content. Stel in op je standaard forumtaal."
+      limit_infinite_search_results: "Beperk het aantal GIF-resultaten dat wordt geretourneerd als de gebruiker oneindig scrolt om API-snelheidsbeperking te voorkomen."
+      max_results_limit: 'Tenor en GIPHY: Als "oneindige zoekresultaten beperken" is ingeschakeld, zoeken we tot we dit aantal maximale GIF-resultaten krijgen. Elke API-aanroep levert 24 resultaten op, <i>bijvoorbeeld Max. limiet 240: 240 / 24 = 10 API-aanroepen</i>.'
+      tenor_api_key: >
+        Tenor: V2 API-sleutel. Instructies om er een te krijgen kun je vinden in <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'> Discourse Meta - Discourse Gifs </a>. <br/><br/> <b>Let op: oude Tenor V1 API-gebruikers - genereer een nieuwe V2 API-sleutel</b>
+      tenor_client_key: "Tenor: (optioneel) door de client gespecificeerde tekenreeks die de integratie weergeeft"
+      tenor_file_detail: >
+        Tenor: te gebruiken afbeeldingsindeling <ul> <li>gif = volledige grootte, hoogste kwaliteit (grootste bestanden)</li> <li>mediumgif = volledige grootte met compressie om de bestandsgrootte te verkleinen (aanbevolen voor de meeste sites)</li> <li>tinygif = verkleind tot 220 px breed (kleinere bestanden)</li> <li>nanogif = verkleind tot 90 px hoog (kleinste bestanden)</li> <ul>
+      tenor_content_filter: >
+        Tenor: contentveiligheidsniveau voor Tenor-resultaten. Meer informatie vind je in <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering"> Tenor API-gidsen </a>.
+      tenor_country: >
+        Tenor: land van herkomst met twee letters voor het verzoek. Je vind je landcode in <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> Wikipedia - ISO_3166-1 </a>.
+      tenor_locale: >
+        Tenor: taal die moet worden gebruikt bij het zoeken. Landcode (optioneel) kan worden opgegeven om onderscheid te maken tussen dialecten.<br/><br/> De indeling moet in "xx_YY" zijn, waarbij "xx" de <b>verplichte</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> taalcode </a> en "_YY" de <b>optionele</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> landcode </a> is. Je vind meer informatie over Tenor-lokalisatie in <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization"> Tenor API-gidsen </a>.
+      klipy_api_key: "Klipy: API-sleutel. Krijg er een via je Klipy-account."
+      klipy_file_detail: "Klipy: te gebruiken afbeeldingsindeling. WebP heeft kleinere bestanden die sneller laden, terwijl GIF compatibiliteit biedt met oudere browsers."
+      klipy_content_filter: "Klipy: contentveiligheidsniveau voor resultaten."
+      klipy_country: >
+        Klipy: land van herkomst met twee letters voor het verzoek. Je vind je landcode in <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> Wikipedia - ISO_3166-1 </a>.
+      klipy_locale: >
+        Klipy: taal die moet worden gebruikt bij het zoeken. Landcode (optioneel) kan worden opgegeven om onderscheid te maken tussen dialecten.<br/><br/> De indeling moet in "xx_YY" zijn, waarbij "xx" de <b>verplichte</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"> taalcode </a> en "_YY" de <b>optionele</b> <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes"> landcode </a> is.
