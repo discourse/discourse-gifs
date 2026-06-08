@@ -8,16 +8,6 @@ html:not(.discourse-gifs-with-img)
   display: none;
 }
 
-#reply-control {
-  .submit-panel .mobile-gif-insert {
-    margin-right: 0.25rem;
-  }
-
-  &.show-preview .submit-panel .mobile-gif-insert {
-    display: none;
-  }
-}
-
 .gif-modal {
   .d-modal__container {
     --modal-max-width: 920px;

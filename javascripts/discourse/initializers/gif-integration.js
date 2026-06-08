@@ -20,7 +20,6 @@ export default {
             id: "gif_button",
             group: "extras",
             icon: "discourse-gifs-gif",
-            condition: () => api.container.lookup("service:site").desktopView,
             action: () => {
               const modal = api.container.lookup("service:modal");
               modal.show(GifModal);
