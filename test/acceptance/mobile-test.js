@@ -42,7 +42,7 @@ acceptance("Discourse Gifs | mobile", function (needs) {
     await visit("/");
     await click("#create-topic");
 
-    await click(".mobile-gif-insert");
+    await click(".gif_button");
     assert.dom(".gif-modal").exists();
 
     await fillIn(".gif-input input", "cat");
