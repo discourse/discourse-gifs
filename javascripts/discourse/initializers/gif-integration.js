@@ -1,3 +1,5 @@
+import { addGlobalNotice } from "discourse/components/global-notice";
+import getURL from "discourse/lib/get-url";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import GifModal from "../components/modal/gif";
 
@@ -9,6 +11,23 @@ export default {
       const siteSettings = api.container.lookup("service:site-settings");
 
       if (siteSettings.enable_gifs) {
+        if (api.getCurrentUser()?.admin) {
+          const themeId = themePrefix("id").match(
+            /theme_translations\.(\d+)\./
+          )[1];
+          const themeURL = getURL(`/admin/customize/themes/${themeId}`);
+
+          addGlobalNotice(
+            `<b>Admin notice:</b> you're using the <em>discourse-gifs</em> theme component. GIF support is now built into Discourse core (the <em>enable gifs</em> site setting is enabled). You should <a href="${themeURL}">remove this theme component</a>.`,
+            "discourse-gifs-theme",
+            {
+              dismissable: true,
+              level: "warn",
+              dismissDuration: moment.duration("1", "day"),
+            }
+          );
+        }
+
         // return early if core implementation is enabled
         return;
       }
