@@ -18,12 +18,12 @@ export default {
           const themeURL = getURL(`/admin/customize/themes/${themeId}`);
 
           addGlobalNotice(
-            `<b>Admin notice:</b> you're using the <em>discourse-gifs</em> theme component. GIF support is now built into Discourse core (the <em>enable gifs</em> site setting is enabled). You should <a href="${themeURL}">remove this theme component</a>.`,
+            `<b>Admin notice:</b> you're using the <em>discourse-gifs</em> theme component. GIF support is now built into Discourse core (the <em>enable gifs</em> site setting is enabled). You should <a href="${themeURL}">remove this theme component</a> and see <a href="https://meta.discourse.org/t/gifs-are-moving-to-discourse-core/404829">the announcement</a> on how to replace it.`,
             "discourse-gifs-theme",
             {
               dismissable: true,
               level: "warn",
-              dismissDuration: moment.duration("1", "day"),
+              dismissDuration: moment.duration("1", "hour"),
             }
           );
         }
