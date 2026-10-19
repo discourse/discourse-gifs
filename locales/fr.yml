@@ -11,6 +11,38 @@ fr:
     insert: "Insérer les images sélectionnées"
     composer_title: "Rechercher des GIF"
     no_results: "Saisissez un mot-clé dans la zone de saisie ci-dessus pour rechercher des GIF."
-    bad_api_key: "Clé API $api_provider invalide. Administrateurs du site, veuillez vérifier votre clé et/ou votre compte $api_provider ."
+    bad_api_key: "Clé API $api_provider invalide. Administrateurs du site, veuillez vérifier votre clé et/ou votre compte $api_provider."
     error_rate_limit: "Nous avons atteint nos limites de débit avec l'API $api_provider. Veuillez patienter et réessayer plus tard. Si ce problème persiste, contactez l'administrateur de votre site."
-    error_search_too_long: "Veuillez réduire votre requête de recherche à moins de 50 caractères et réessayer."
+    error_search_too_long: "Veuillez réduire votre requête de recherche à moins de 50 caractères et réessayer."
+    categories_error: "Impossible de charger les catégories."
+    browse_categories: "Parcourir par catégorie"
+  theme_metadata:
+    settings:
+      api_provider: "Quel fournisseur de GIF souhaitez-vous utiliser ?"
+      giphy_api_key: "GIPHY : clé API"
+      giphy_file_format: "GIPHY : format d'image à utiliser. Le format WebP produit des fichiers plus petits, qui se chargent plus rapidement, tandis que le GIF est compatible avec les anciens navigateurs."
+      giphy_size_variant: >
+        GIPHY : taille des images à utiliser. Faites votre choix en fonction de la limite de téléversement de votre site. <ul> <li>downsized = moins de 2 Mo</li> <li>downsized_medium = moins de 5 Mo (recommandé pour la plupart des sites)</li> <li>downsized_large = moins de 8 Mo</li> <li>original = taille d'origine, sans limite</li> <ul>
+      giphy_content_rating: >
+        GIPHY : classification du contenu des résultats de recherche. Pour en savoir plus, consultez <a target="_blank" rel="noreferrer noopener" href="https://developers.giphy.com/docs/optional-settings#rating"> https://developers.giphy.com/docs/optional-settings#rating </a>.
+      giphy_locale: "GIPHY : langue à utiliser pour la recherche. Permet d'adapter les résultats à la région. Choisissez la langue par défaut de votre forum."
+      limit_infinite_search_results: "Limiter le nombre de GIF renvoyés lors du défilement continu pour éviter de dépasser les limites de requêtes de l'API."
+      max_results_limit: 'Tenor et GIPHY : lorsque « Limiter les résultats de recherche en défilement continu » est activé, la recherche s''arrête une fois ce nombre maximal de GIF atteint. Chaque appel API renvoie 24 résultats, <i>p. ex. pour une limite de 240 résultats : 240/24 = 10 appels API</i>.'
+      tenor_api_key: >
+        Tenor : clé API V2. Les instructions pour en obtenir une figurent dans <a target="_blank" rel="noreferrer noopener" href='https://meta.discourse.org/t/discourse-gifs-component/158738'>Discourse Meta - Discourse Gifs</a>. <br/><br/> <b>Attention : utilisateurs de l'ancienne API Tenor V1, générez une nouvelle clé API V2</b>
+      tenor_client_key: "Tenor : chaîne facultative définie par le client pour identifier l'intégration"
+      tenor_file_detail: >
+        Tenor : format d'image à utiliser <ul> <li>gif = taille d'origine, qualité maximale (fichiers les plus volumineux)</li> <li>mediumgif = taille d'origine avec compression (recommandé pour la plupart des sites)</li> <li>tinygif = largeur réduite à 220 px (fichiers plus petits)</li> <li>nanogif = hauteur réduite à 90 px (fichiers les plus petits)</li> <ul>
+      tenor_content_filter: >
+        Tenor : niveau de filtrage du contenu des résultats. Pour en savoir plus, consultez <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/content-filtering">les guides de l'API Tenor</a>.
+      tenor_country: >
+        Tenor : code pays à deux lettres de la requête. Vous trouverez le code de votre pays dans <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">Wikipédia - ISO_3166-1</a>.
+      tenor_locale: >
+        Tenor : langue à utiliser pour la recherche. Un code pays facultatif permet de distinguer les variantes régionales.<br/><br/> Le format doit être « xx_YY », où « xx » est le <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">code de langue</a> <b>obligatoire</b> et « _YY » le <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">code pays</a> <b>facultatif</b>. Consultez les <a target="_blank" rel="noreferrer noopener" href="https://developers.google.com/tenor/guides/localization">guides de localisation de l'API Tenor</a>.
+      klipy_api_key: "Klipy : clé API. Vous pouvez l'obtenir depuis votre compte Klipy."
+      klipy_file_detail: "Klipy : format d'image à utiliser. WebP produit des fichiers plus petits, qui se chargent plus rapidement, tandis que le GIF est compatible avec les anciens navigateurs."
+      klipy_content_filter: "Klipy : niveau de filtrage du contenu des résultats."
+      klipy_country: >
+        Klipy : code pays à deux lettres de la requête. Vous trouverez le code de votre pays dans <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">Wikipédia - ISO_3166-1</a>.
+      klipy_locale: >
+        Klipy : langue à utiliser pour la recherche. Un code pays facultatif permet de distinguer les variantes régionales.<br/><br/> Le format doit être « xx_YY », où « xx » est le <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">code de langue</a> <b>obligatoire</b> et « _YY » le <a target="_blank" rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes">code pays</a> <b>facultatif</b>.
